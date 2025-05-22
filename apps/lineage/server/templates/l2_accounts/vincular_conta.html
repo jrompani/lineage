@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">{% trans "Vincular Conta do Jogo (Lineage 2)" %}</h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label class="form-label">{% trans "Login da Conta Lineage" %}</label>
+        <input type="text" class="form-control" value="{{ request.user.username }}" readonly disabled>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">{% trans "Senha da Conta Lineage" %}</label>
+        <input type="password" name="senha" class="form-control" placeholder="{% trans 'Digite a senha do jogo' %}" required>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary btn-lg">
+          {% trans "Vincular Conta" %}
+        </button>
+      </div>
+    </form>
+
+    <div class="text-center mt-4">
+      <small class="text-muted d-block">
+        {% trans "Certifique-se de que a conta ainda não está vinculada a outro usuário." %}
+      </small>
+      <a href="{% url 'server:request_link_by_email' %}" class="d-block mt-2">
+        {% trans "Esqueceu sua senha? Vincular conta via e-mail." %}
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

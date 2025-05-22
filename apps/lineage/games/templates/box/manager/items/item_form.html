@@ -1,0 +1,21 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>
+    {% if form.instance.pk %}
+      {% trans "Editar" %}
+    {% else %}
+      {% trans "Novo" %}
+    {% endif %}
+    {% trans "Item" %}
+  </h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">{% trans "Salvar" %}</button>
+    <a href="{% url 'games:item_list' %}" class="btn btn-secondary">{% trans "Cancelar" %}</a>
+  </form>
+</div>
+{% endblock %}

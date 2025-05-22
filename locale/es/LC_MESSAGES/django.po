@@ -1,0 +1,5768 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-05-22 01:10-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+
+msgid "Dashboard Contábil"
+msgstr "Contabilidad de tablero"
+
+msgid "Saldo de Usuários"
+msgstr "Balance de usuarios"
+
+msgid "Ver Relatório"
+msgstr "Ver informe"
+
+msgid "Fluxo de Caixa Diário"
+msgstr "Flujo de efectivo diario"
+
+msgid "Pedidos e Pagamentos"
+msgstr "Pedidos e Pagamentos"
+
+msgid "Reconciliação de Carteiras"
+msgstr "Reconciliación de las billeteras"
+
+msgid "Voltar para o Admin"
+msgstr "Volver al administrador"
+
+msgid "Relatório de Fluxo de Caixa"
+msgstr "Informe de flujo de caja"
+
+msgid "Data"
+msgstr "Datos"
+
+msgid "Entradas"
+msgstr "Entradas"
+
+msgid "Saídas"
+msgstr "Salidas"
+
+msgid "Saldo do Dia"
+msgstr "Equilibrio del día"
+
+msgid "Voltar para o Dashboard"
+msgstr "Voltar para o Dashboard"
+
+msgid "Relatório de Pedidos e Pagamentos"
+msgstr "Informe de pedidos y pagos"
+
+msgid "ID Pedido"
+msgstr "ID Pedido"
+
+msgid "Usuário"
+msgstr "Usuario"
+
+msgid "Valor Pago"
+msgstr "Valor Pago"
+
+msgid "Moedas"
+msgstr "Monedas"
+
+msgid "Status Pedido"
+msgstr "Status Pedido"
+
+msgid "Status Pagamento"
+msgstr "Estado de pago"
+
+msgid "Método"
+msgstr "Método"
+
+msgid "CONFIRMADO"
+msgstr "CONFIRMADO"
+
+msgid "PENDENTE"
+msgstr "Pendiente"
+
+msgid "confirmed"
+msgstr "confirmado"
+
+msgid "pending"
+msgstr "pendiente"
+
+msgid "Saldo na Wallet"
+msgstr "Saldo na Wallet"
+
+msgid "Saldo Calculado"
+msgstr "Saldo Calculado"
+
+msgid "Diferença"
+msgstr "Diferencia"
+
+msgid "Relatório de Saldo dos Usuários"
+msgstr "Informe de balance de usuario"
+
+msgid "Item ID"
+msgstr "ID de artículo"
+
+msgid "Item Name"
+msgstr "Nombre del artículo"
+
+msgid "Item Enchant"
+msgstr "Artículo encantado"
+
+msgid "Quantity"
+msgstr "Cantidad"
+
+msgid "Seller"
+msgstr "Vendedor"
+
+msgid "Starting Bid"
+msgstr "Oferta inicial"
+
+msgid "Current Bid"
+msgstr "Oferta actual"
+
+msgid "Highest Bidder"
+msgstr "Postor más alto"
+
+msgid "End Time"
+msgstr "Tiempo de finalización"
+
+msgid "Character Name"
+msgstr "Nombre del personaje"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Auction"
+msgstr "Subasta"
+
+msgid "Auctions"
+msgstr "Subastas"
+
+msgid "Bidder"
+msgstr "Licitador"
+
+msgid "Amount"
+msgstr "Cantidad"
+
+msgid "Created At"
+msgstr "Creado a"
+
+msgid "Bid"
+msgstr "Licitación"
+
+msgid "Bids"
+msgstr "Ofertas"
+
+msgid "Você não pode dar lances no seu próprio leilão."
+msgstr "No puede ofertar en su propia subasta."
+
+msgid "Leilão encerrado."
+msgstr "Subasta cerrada."
+
+msgid "O lance deve ser maior que o valor inicial."
+msgstr "La oferta debe ser mayor que el valor inicial."
+
+msgid "O lance deve ser maior que o lance atual."
+msgstr "La oferta debe ser mayor que la oferta actual."
+
+msgid "Saldo insuficiente."
+msgstr "Saldo insuficiente."
+
+#, python-format
+msgid "Devolução de lance no leilão #%d"
+msgstr "Retorno de la oferta en la subasta #%D"
+
+msgid "Leilão"
+msgstr "Subasta"
+
+#, python-format
+msgid "Lance no leilão #%d"
+msgstr "Oferta en la subasta #%D"
+
+msgid "Leilão ainda está ativo."
+msgstr "La subasta sigue activa."
+
+#, python-format
+msgid "Venda no leilão #%d"
+msgstr "Venta en subasta #%D"
+
+msgid "Não foi possível determinar o lance vencedor."
+msgstr "No fue posible determinar la oferta ganadora."
+
+#, python-format
+msgid "Erro ao encerrar leilão %(id)s: %(erro)s"
+msgstr "Error al subastarse %(id)s s: %(erro)s s"
+
+#, python-format
+msgid "%(qtd)d leilões encerrados automaticamente."
+msgstr "%(qtd)d D Lecciones adjuntas automáticamente."
+
+msgid "Criar Leilão"
+msgstr "Subasta"
+
+msgid "Personagem"
+msgstr "Personaje"
+
+msgid "Selecione o personagem"
+msgstr "Seleccione el personaje"
+
+msgid "Item"
+msgstr "Artículo"
+
+msgid "Selecione o item"
+msgstr "Seleccione el artículo"
+
+msgid "Quantidade"
+msgstr "Cantidad"
+
+msgid "Lance Inicial (R$)"
+msgstr "Lance Inicial (R$)"
+
+msgid "Duração (horas)"
+msgstr "Duración (horas)"
+
+msgid "Dar Lance"
+msgstr "Dar Lance"
+
+msgid "Voltar"
+msgstr "Volver"
+
+msgid "Lance atual:"
+msgstr "Oferta actual:"
+
+msgid "Tempo restante:"
+msgstr "Tempo restante:"
+
+msgid "Selecione o Personagem"
+msgstr "Seleccione el personaje"
+
+msgid "Escolha um personagem"
+msgstr "Elige un personaje"
+
+msgid "Seu lance"
+msgstr "Tu oferta"
+
+msgid "Confirmar Lance"
+msgstr "Confirmar Lance"
+
+msgid "Leilões"
+msgstr "Subastas"
+
+msgid "Leilões Ativos"
+msgstr "Subastas activas"
+
+msgid "Nenhum leilão ativo no momento."
+msgstr "No hay subasta activa en este momento."
+
+msgid "Leilões Pendentes de Entrega"
+msgstr "Subastas de entrega pendientes"
+
+msgid "Nenhum leilão pendente de entrega."
+msgstr "No hay subasta pendiente de entrega."
+
+msgid "Leilões Finalizados"
+msgstr "Subastas terminadas"
+
+msgid "Nenhum leilão finalizado."
+msgstr "No hay subasta terminada."
+
+msgid "Leilões Cancelados"
+msgstr "Subastas canceladas"
+
+msgid "Nenhum leilão cancelado."
+msgstr "No hay subasta cancelada."
+
+msgid "Vendedor:"
+msgstr "Vendedor:"
+
+msgid "Lance Atual:"
+msgstr "Oferta actual:"
+
+msgid "Restante:"
+msgstr "Restante:"
+
+msgid "Cancelar"
+msgstr "Cancelar"
+
+msgid "Finalizar"
+msgstr "Finalizar"
+
+msgid "Finalizar Entrega"
+msgstr "Finalizar Entrega"
+
+msgid "Você precisa informar um valor para o lance."
+msgstr "Debe ingresar un valor para la oferta."
+
+msgid "Você precisa informar o nome do personagem."
+msgstr "Debe informar el nombre del personaje."
+
+msgid "Este personagem não pertence a você."
+msgstr "Este personaje no te pertenece."
+
+msgid "Lance efetuado com sucesso!"
+msgstr "¡Bid hecha con éxito!"
+
+msgid "Não foi possível carregar seus personagens agora."
+msgstr "No era posible llevar a tus personajes ahora."
+
+msgid "Quantidade insuficiente no inventário."
+msgstr "Cantidad insuficiente en inventario."
+
+msgid "Leilão criado com sucesso!"
+msgstr "¡Subasta creada con éxito!"
+
+msgid "Item não encontrado no inventário."
+msgstr "El artículo no se encuentra en el inventario."
+
+msgid "Você não tem permissão para encerrar este leilão."
+msgstr "No se le permite terminar esta subasta."
+
+msgid "Leilão encerrado com sucesso."
+msgstr "Subasta subastada con éxito."
+
+msgid "Você não tem permissão para cancelar este leilão."
+msgstr "No se le permite cancelar esta subasta."
+
+msgid "Não é possível cancelar um leilão que já terminou."
+msgstr "No es posible cancelar una subasta que haya terminado."
+
+msgid "Leilão cancelado e recursos devolvidos com sucesso."
+msgstr "Subasta cancelada y características devueltas exitosas."
+
+msgid "Itens Permitidos"
+msgstr "Artículos permitidos"
+
+msgid "Nome da Caixa"
+msgstr "Cajero"
+
+msgid "Preço (R$)"
+msgstr "Precio (r $)"
+
+msgid "Quantidade de Boosters"
+msgstr "Abucheadores"
+
+msgid "Chance Comum (%)"
+msgstr "Oportunidad común (%)"
+
+msgid "Chance Rara (%)"
+msgstr "Chance Rara (%)"
+
+msgid "Chance Épica (%)"
+msgstr "Chance Épica (%)"
+
+msgid "Chance Lendária (%)"
+msgstr "Oportunidad legendaria (%)"
+
+msgid "Máximo de Itens Épicos"
+msgstr "Elementos épicos máximos"
+
+msgid "Máximo de Itens Lendários"
+msgstr "Artículos legendarios máximos"
+
+msgid "A soma das chances deve ser exatamente 100%. Soma atual: {}"
+msgstr ""
+"La suma de las posibilidades debe ser exactamente 100%. Suma actual: {}"
+
+msgid "Tipo de Caixa"
+msgstr "Tipo de efectivo"
+
+msgid "Nome do Item"
+msgstr "Nombre del artículo"
+
+msgid "Enchant"
+msgstr "Encantar"
+
+msgid "ID do Item"
+msgstr "ID Do Artículo"
+
+msgid "Imagem"
+msgstr "Imagen"
+
+msgid "Descrição"
+msgstr "Descripción"
+
+msgid "Raridade"
+msgstr "Rareza"
+
+msgid "Pode ser populado em caixas"
+msgstr "Se puede poblar en cajas"
+
+msgid "Prize Name"
+msgstr "Nombre de premio"
+
+msgid "Image"
+msgstr "Imagen"
+
+msgid "Quanto maior o peso, maior a chance de ser sorteado."
+msgstr ""
+"Cuanto mayor sea el peso, mayores son las posibilidades de ser dibujados."
+
+msgid "Weight"
+msgstr "Peso"
+
+msgid "Enchant Level"
+msgstr "Nivel encantador"
+
+msgid "Rarity"
+msgstr "Rareza"
+
+msgid "Prize"
+msgstr "Premio"
+
+msgid "Prizes"
+msgstr "Premio"
+
+msgid "User"
+msgstr "Usuario"
+
+msgid "Spin History"
+msgstr "Historia de giro"
+
+msgid "Spin Histories"
+msgstr "Historias giratorias"
+
+msgid "Bag"
+msgstr "Bolsa"
+
+msgid "Bags"
+msgstr "Bolsas"
+
+msgid "Added At"
+msgstr "Agregado en"
+
+msgid "Bag Item"
+msgstr "Artículo de la bolsa"
+
+msgid "Bag Items"
+msgstr "Artículo de bolsas"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Can Be Populated"
+msgstr "Se puede poblar"
+
+msgid "Items"
+msgstr "Elementos"
+
+msgid "Box Type Name"
+msgstr "Nombre de tipo de caja"
+
+msgid "Price"
+msgstr "Precio"
+
+msgid "Boosters Amount"
+msgstr "Cantidad de refuerzo"
+
+msgid "Chance of Common"
+msgstr "Posibilidad de común"
+
+msgid "Chance of Rare"
+msgstr "Posibilidad de raro"
+
+msgid "Chance of Epic"
+msgstr "Posibilidad de épica"
+
+msgid "Chance of Legendary"
+msgstr "Posibilidad de legendario"
+
+msgid "Max Epic Items"
+msgstr "Artículos épicos máximos"
+
+msgid "Max Legendary Items"
+msgstr "Artículos legendarios máximos"
+
+msgid "Box Type"
+msgstr "Tipo de caja"
+
+msgid "Box Types"
+msgstr "Tipos de caja"
+
+msgid "Opened"
+msgstr "Abierto"
+
+msgid "Box"
+msgstr "Caja"
+
+msgid "Boxes"
+msgstr "Cajas"
+
+msgid "Probability"
+msgstr "Probabilidad"
+
+msgid "Box Item"
+msgstr "Artículo de caja"
+
+msgid "Box Items"
+msgstr "Artículo de caja"
+
+msgid "Obtained At"
+msgstr "Obtenido en"
+
+msgid "Box Item History"
+msgstr "Historial de artículos de la caja"
+
+msgid "Box Item Histories"
+msgstr "Historia de artículos de caja"
+
+msgid "Por Nível"
+msgstr "Por nivel"
+
+msgid "Por Conquista"
+msgstr "Por Conquista"
+
+msgid "Por Quantidade de Conquistas"
+msgstr "Por cantidad de logros"
+
+msgid "Tipo de Recompensa"
+msgstr "Tipo de Recompensa"
+
+msgid "Referência"
+msgstr "Referencia"
+
+msgid "Recompensa"
+msgstr "Recompensa"
+
+msgid "Recompensas"
+msgstr "Recompensas"
+
+msgid "Reward"
+msgstr "Premio"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Received Reward"
+msgstr "Recompensa recibida"
+
+msgid "Received Rewards"
+msgstr "Recompensas recibidas"
+
+msgid "Level"
+msgstr "Nivel"
+
+msgid "Fragments"
+msgstr "Fragmentos"
+
+msgid "Economy Weapon"
+msgstr "Arma económica"
+
+msgid "Economy Weapons"
+msgstr "Armas económicas"
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Required Weapon Level"
+msgstr "Nivel de arma requerido"
+
+msgid "Fragment Reward"
+msgstr "Recompensa de fragmento"
+
+msgid "Respawn Time (seconds)"
+msgstr "Tiempo de reaparición (segundos)"
+
+msgid "Last Defeated At"
+msgstr "Última derrota en"
+
+msgid "Attack"
+msgstr "Ataque"
+
+msgid "Defense"
+msgstr "Defensa"
+
+msgid "HP"
+msgstr "HP"
+
+msgid "Monster"
+msgstr "Monstruo"
+
+msgid "Monsters"
+msgstr "Monstruos"
+
+msgid "Reward Item"
+msgstr "Artículo de recompensa"
+
+msgid "Reward Items"
+msgstr "Artículos de recompensa"
+
+msgid "Start Date"
+msgstr "Fecha de inicio"
+
+msgid "End Date"
+msgstr "Fecha final"
+
+msgid "Is Active"
+msgstr "Es activo"
+
+msgid "Premium Price"
+msgstr "Precio premium"
+
+msgid "Season"
+msgstr "Estación"
+
+msgid "Required XP"
+msgstr "Requerido XP"
+
+msgid "Battle Pass Level"
+msgstr "Nivel de pase de batalla"
+
+msgid "Battle Pass Levels"
+msgstr "Niveles de pase de batalla"
+
+msgid "Is Premium"
+msgstr "Es premium"
+
+msgid "Item Amount"
+msgstr "Cantidad de artículo"
+
+msgid "Battle Pass Reward"
+msgstr "Recompensa de pase de batalla"
+
+msgid "Battle Pass Rewards"
+msgstr "Battle Pass recompensas"
+
+msgid "Premium"
+msgstr "De primera calidad"
+
+msgid "Free"
+msgstr "Gratis"
+
+msgid "XP"
+msgstr "XP"
+
+msgid "Claimed Rewards"
+msgstr "Recompensas reclamadas"
+
+msgid "Has Premium"
+msgstr "Tiene prima"
+
+msgid "User Battle Pass Progress"
+msgstr "Progreso de pase de batalla de usuarios"
+
+msgid "User Battle Pass Progresses"
+msgstr "Progresa el pase de batalla de usuarios"
+
+msgid "XP Amount"
+msgstr "Cantidad XP"
+
+msgid "Max Exchanges"
+msgstr "Intercambios máximos"
+
+msgid "0 = sem limite"
+msgstr "0 = Sin límite"
+
+msgid "Current Exchanges"
+msgstr "Intercambios actuales"
+
+msgid "Battle Pass Item Exchange"
+msgstr "Battle Pass Intercambio de elementos"
+
+msgid "Battle Pass Item Exchanges"
+msgstr "Intercambios de elementos de pase de batalla"
+
+msgid "Esta troca não está mais disponível."
+msgstr "Este intercambio ya no está disponible."
+
+msgid "Você não possui quantidade suficiente deste item."
+msgstr "No tienes suficiente de este artículo."
+
+msgid "Troca realizada com sucesso! Você recebeu {} XP."
+msgstr "¡Intercambio exitoso! Recibiste {} xp."
+
+msgid "Você não possui uma bag."
+msgstr "No tienes una bolsa."
+
+msgid "Você não possui este item."
+msgstr "No tienes este artículo."
+
+msgid "Você não possui progresso no Battle Pass atual."
+msgstr "No tienes progreso en el actual Pase de batalla."
+
+msgid "Nível"
+msgstr "Nivel"
+
+msgid "Nível Máximo Atingido!"
+msgstr "¡El nivel máximo alcanzado!"
+
+msgid "Trocar Itens por XP"
+msgstr "Cambiar elementos para XP"
+
+msgid "Comprar Premium"
+msgstr "Comprar Premium"
+
+msgid "Resgatado"
+msgstr "Rescatado"
+
+msgid "Resgatar"
+msgstr "Rescate"
+
+msgid "Confirmar Compra do Passe de Batalha Premium"
+msgstr "Confirme la compra del pase de batalla premium"
+
+msgid "Temporada"
+msgstr "Temporada"
+
+msgid "Preço"
+msgstr "Precio"
+
+msgid "moedas"
+msgstr "monedas"
+
+msgid "Saldo atual"
+msgstr "Saldo actual"
+
+msgid "Confirmar Compra"
+msgstr "Confirmar Compra"
+
+msgid "XP por item"
+msgstr "XP por item"
+
+msgid "Quantidade disponível"
+msgstr "Cantidad disponible"
+
+msgid "Trocas restantes"
+msgstr "Restante"
+
+msgid "Quantidade para trocar"
+msgstr "Cantidad para cambiar"
+
+msgid "XP total"
+msgstr "Total de XP"
+
+msgid "Trocar por XP"
+msgstr "Trocar por XP"
+
+msgid "Você não possui este item"
+msgstr "No tienes este artículo"
+
+msgid "Limite de trocas atingido"
+msgstr "Límite de intercambio alcanzado"
+
+msgid "Você já atingiu o nível máximo do Battle Pass!"
+msgstr "¡Ya has alcanzado el nivel máximo de pase de batalla!"
+
+msgid "Não há itens disponíveis para troca no momento."
+msgstr "No hay artículos disponibles para el intercambio en este momento."
+
+msgid "Passe de Batalha Indisponível"
+msgstr "Batalla no disponible"
+
+msgid "No momento, nenhuma temporada do Passe de Batalha está ativa."
+msgstr "En este momento, ninguna temporada del Pase de batalla está activa."
+
+msgid ""
+"Fique ligado! Em breve uma nova temporada estará disponível com recompensas "
+"exclusivas."
+msgstr ""
+"¡Manténganse al tanto! Pronto habrá una nueva temporada disponible con "
+"recompensas exclusivas."
+
+msgid "Voltar para a página inicial"
+msgstr "Voltar para a página inicial"
+
+msgid "Tipos de Caixa Disponíveis"
+msgstr "Tipos de efectivo disponibles"
+
+msgid "Seu Saldo:"
+msgstr "Tu equilibrio:"
+
+msgid "Boosters"
+msgstr "Refuerzos"
+
+msgid "Comum"
+msgstr "Común"
+
+msgid "Rara"
+msgstr "Rara"
+
+msgid "Épica"
+msgstr "Épica"
+
+msgid "Lendária"
+msgstr "Legendario"
+
+msgid "Caixa já comprada!"
+msgstr "¡El cajero ya compró!"
+
+msgid "Boosters restantes"
+msgstr "Boosters restantes"
+
+msgid "Abrir Caixa"
+msgstr "Cajero"
+
+msgid "Comprar e Abrir Caixa"
+msgstr "Comprar y abrir cajero"
+
+msgid "Ver Itens"
+msgstr "Ver artículos"
+
+msgid "Nenhum tipo de caixa disponível no momento."
+msgstr "No hay caja disponible en este momento."
+
+msgid "Você tem certeza de que deseja comprar e abrir esta caixa?"
+msgstr "¿Estás seguro de que quieres comprar y abrir esta caja?"
+
+msgid "Comprar Fichas"
+msgstr "Comprar Fichas"
+
+msgid ""
+"Escolha a quantidade de fichas que deseja comprar. Valor: R$0,10 por ficha."
+msgstr ""
+"Elija la cantidad de chips que desea comprar. Valor: R $ 0.10 por archivo."
+
+msgid "Itens da Caixa, que podem vir!"
+msgstr "¡Artículos de caja que pueden venir!"
+
+msgid "Fechar"
+msgstr "Para cerrar"
+
+msgid "Editar Caixa"
+msgstr "Editar Caixa"
+
+msgid "Criar Nova Caixa"
+msgstr "Crear caja nueva"
+
+msgid "Salvar"
+msgstr "Salvar"
+
+msgid "Confirmar Exclusão"
+msgstr "Confirmar la exclusión"
+
+msgid "Tem certeza que deseja excluir a caixa "
+msgstr "Estás seguro de que quieres eliminar la caja"
+
+msgid "Confirmar"
+msgstr "Confirmar"
+
+msgid "Caixas Criadas"
+msgstr "Cajas creadas"
+
+msgid "Nova Caixa"
+msgstr "Caja nueva"
+
+msgid "ID"
+msgstr "IDENTIFICACIÓN"
+
+msgid "Tipo"
+msgstr "Tipo"
+
+msgid "Aberta?"
+msgstr "¿Abierto?"
+
+msgid "Ações"
+msgstr "Comportamiento"
+
+msgid "Editar"
+msgstr "Editar"
+
+msgid "Excluir"
+msgstr "Excluir"
+
+msgid "Nenhuma caixa encontrada."
+msgstr "No se encontró caja."
+
+msgid "Voltar ao Dashboard"
+msgstr "Volver al tablero"
+
+msgid "Tem certeza que deseja excluir o tipo de caixa"
+msgstr "Estás seguro de que quieres eliminar el tipo de cajero"
+
+msgid "Editar Tipo de Caixa"
+msgstr "Editar Tipo de Caixa"
+
+msgid "Criar Novo Tipo de Caixa"
+msgstr "Crear un nuevo tipo de cajero"
+
+msgid "Salvar Alterações"
+msgstr "Guardar cambios"
+
+msgid "Criar Tipo de Caixa"
+msgstr "Tipo de efectivo"
+
+msgid "Tipos de Caixa"
+msgstr "Tipos de efectivo"
+
+msgid "Novo Tipo de Caixa"
+msgstr "Nuevo tipo de cajero"
+
+msgid "Nome"
+msgstr "Nombre"
+
+msgid "Deletar"
+msgstr "Borrar"
+
+msgid "Nenhum tipo de caixa encontrado."
+msgstr "No se encontró caja."
+
+msgid "Painel de Gerenciamento de Caixas"
+msgstr "Panel de gestión de cajas"
+
+msgid "Tipos de Caixas"
+msgstr "Tipos de Caixas"
+
+msgid "Ver Tipos de Caixa"
+msgstr "Ver tipos de efectivo"
+
+msgid "Ver Caixas"
+msgstr "Ver cajas"
+
+msgid "Itens Cadastrados"
+msgstr "Artículos registrados"
+
+msgid "Adicione um novo tipo de caixa com raridades e preços definidos."
+msgstr "Agregue un nuevo tipo de efectivo con rarezas y precios definidos."
+
+msgid "Criar Caixa"
+msgstr "Cajero"
+
+msgid "Associe caixas aos usuários com base nos tipos existentes."
+msgstr "Asociar cajas con usuarios según los tipos existentes."
+
+msgid "Cadastrar Item"
+msgstr "Registrar un artículo"
+
+msgid "Cadastre novos itens disponíveis para as caixas."
+msgstr "Registre nuevos artículos disponibles para las cajas."
+
+msgid "Novo Item"
+msgstr "Nuevo artículo"
+
+msgid "Novo"
+msgstr "Nuevo"
+
+msgid "Nenhum item encontrado."
+msgstr "No se encuentra el artículo."
+
+msgid "Suas Caixas"
+msgstr "Tus cajas"
+
+msgid "Abaixo estão todas as caixas que você comprou e ainda não abriu."
+msgstr ""
+"A continuación se muestran todas las cajas que compró y aún no ha abierto."
+
+msgid "Ação"
+msgstr "Acción"
+
+msgid "Abrir"
+msgstr "Abrir"
+
+msgid "Aberta"
+msgstr "Abierto"
+
+msgid "Você ainda não possui nenhuma caixa para abrir."
+msgstr "Todavía no tienes caja para abrir."
+
+msgid "Você ganhou um item!"
+msgstr "¡Ganaste un artículo!"
+
+msgid "O item foi adicionado à sua"
+msgstr "El artículo fue agregado a su"
+
+msgid "com sucesso!"
+msgstr "¡Exitosamente!"
+
+msgid "Minha Arma"
+msgstr "Mi arma"
+
+msgid "Fragmentos"
+msgstr "Fragmentos"
+
+msgid "Fichas restantes"
+msgstr "Fichas restantes"
+
+msgid "Comprar"
+msgstr "Comprar"
+
+msgid "Monstros disponíveis"
+msgstr "Monstruos disponibles"
+
+msgid "Requer arma"
+msgstr "Requiere arma"
+
+msgid "fragmentos"
+msgstr "fragmentos"
+
+msgid "Força"
+msgstr "Fortaleza"
+
+msgid "Defesa"
+msgstr "Defensa"
+
+msgid "Velocidade"
+msgstr "Velocidad"
+
+msgid "Respawn em"
+msgstr "Reaparecer"
+
+msgid "Atacar"
+msgstr "Atacar"
+
+msgid "Encantar Arma"
+msgstr "Encantar Arma"
+
+msgid "Gasta 10 fragmentos para tentar aumentar o nível da arma."
+msgstr "Gasta 10 fragmentos para tratar de aumentar el nivel de armas."
+
+msgid "Tentar Encantar"
+msgstr "Tentar Encantar"
+
+msgid "Minha Bag"
+msgstr "Mi bolso"
+
+msgid "Mover todos para inventário"
+msgstr "Mover todo para el inventario"
+
+msgid "Encantamento"
+msgstr "Encantamiento"
+
+msgid "Mover para inventário"
+msgstr "Inventario"
+
+msgid "Nenhum item na bag."
+msgstr "No hay artículo en la bolsa."
+
+msgid "Você ainda não possui uma bag."
+msgstr "Todavía no tienes una bolsa."
+
+#, python-brace-format
+msgid "🎁 Você recebeu: {item} +{enchant} x{qty}!"
+msgstr "🎁 ¡Recibió: {item} +{enchant} x {qty}!"
+
+msgid "Recompensa resgatada com sucesso!"
+msgstr "¡Recompensa rescatada con éxito!"
+
+msgid "Recompensa resgatada, mas não há item associado."
+msgstr "Recompensa recompensada, pero no hay un artículo asociado."
+
+msgid "Você já resgatou esta recompensa."
+msgstr "Ya has rescatado esta recompensa."
+
+msgid "Você precisa do Passe Premium para resgatar esta recompensa."
+msgstr "Necesita el pase premium para canjear esta recompensa."
+
+msgid "Você ainda não atingiu o nível necessário para esta recompensa."
+msgstr "Todavía no ha alcanzado el nivel requerido para esta recompensa."
+
+msgid "Nenhuma temporada ativa no momento."
+msgstr "No hay temporada activa en este momento."
+
+msgid "Você já possui o Passe de Batalha Premium."
+msgstr "Ya tienes el pase de batalla premium."
+
+msgid "Carteira não encontrada."
+msgstr "Billetera no encontrada."
+
+msgid "Saldo insuficiente para adquirir o Passe Premium."
+msgstr "Saldo insuficiente para adquirir o Passe Premium."
+
+msgid "Passe de Batalha Premium ativado com sucesso!"
+msgstr "Premium Battle pasó con éxito activado con éxito!"
+
+msgid "Erro na transação: "
+msgstr "Error de transacción:"
+
+msgid "Não há temporada ativa no momento."
+msgstr "No hay temporada activa en este momento."
+
+msgid "Quantidade inválida."
+msgstr "Cantidad inválida."
+
+msgid "Você não tem fichas suficientes."
+msgstr "No tienes suficientes chips."
+
+msgid "Nenhum prêmio disponível."
+msgstr "No hay premio disponible."
+
+msgid "Você não ganhou nenhum prêmio."
+msgstr "No has ganado ningún premio."
+
+msgid "Esta caixa não existe. Você pode comprá-la abaixo."
+msgstr "Esta caja no existe. Puedes comprarlo a continuación."
+
+msgid "Essa caixa não pertence a você. Compre uma nova do mesmo tipo."
+msgstr "Esta caja no te pertenece. Compre uno nuevo del mismo tipo."
+
+msgid "Você não tem fichas suficientes para abrir a caixa."
+msgstr "No tienes suficientes chips para abrir la caja."
+
+msgid "Tipo de caixa não encontrado."
+msgstr "Tipo de efectivo no encontrado."
+
+msgid "Não há itens cadastrados para abrir caixas."
+msgstr "No hay artículos registrados para abrir cajas."
+
+msgid "Essa caixa não contém itens disponíveis para a abertura."
+msgstr "Esta caja no contiene elementos disponibles para la apertura."
+
+msgid "Saldo insuficiente para comprar a caixa."
+msgstr "Saldo insuficiente para comprar a caixa."
+
+msgid "Quantidade insuficiente na Bag."
+msgstr "Cantidad insuficiente en la bolsa."
+
+msgid "Item transferido com sucesso."
+msgstr "Artículo transferido con éxito."
+
+msgid "Item não encontrado na Bag."
+msgstr "Artículo no encontrado en la bolsa."
+
+msgid "Todos os itens foram transferidos para o inventário."
+msgstr "Todos los artículos fueron transferidos al inventario."
+
+msgid "Account Name"
+msgstr "Nombre de cuenta"
+
+msgid "Inventory"
+msgstr "Inventario"
+
+msgid "Inventories"
+msgstr "Inventarios"
+
+msgid "Inventory Item"
+msgstr "Artículo de inventario"
+
+msgid "Inventory Items"
+msgstr "Artículos de inventario"
+
+msgid "ID of the blocked item"
+msgstr "ID del artículo bloqueado"
+
+msgid "Reason for blocking (optional)"
+msgstr "Razón para el bloqueo (opcional)"
+
+msgid "Reason"
+msgstr "Razón"
+
+msgid "Blocked Item for Withdrawal"
+msgstr "Artículo bloqueado para retiro"
+
+msgid "Blocked Items for Withdrawal"
+msgstr "Artículos bloqueados para retiro"
+
+msgid "No specific reason"
+msgstr "Sin razón específica"
+
+msgid "Custom Item"
+msgstr "Artículo personalizado"
+
+msgid "Custom Items"
+msgstr "Artículos personalizados"
+
+msgid "Action"
+msgstr "Acción"
+
+msgid "Origin character or user"
+msgstr "Personaje de origen o usuario"
+
+msgid "Origin"
+msgstr "Origen"
+
+msgid "Destination character or user"
+msgstr "Personaje de destino o usuario"
+
+msgid "Destination"
+msgstr "Destino"
+
+msgid "Timestamp"
+msgstr "Marca de tiempo"
+
+msgid "Inventory Log"
+msgstr "Registro de inventario"
+
+msgid "Inventory Logs"
+msgstr "Registros de inventario"
+
+msgid "Devolver Item"
+msgstr "Devolver Item"
+
+msgid "Disponível"
+msgstr "Disponible"
+
+msgid "Senha"
+msgstr "Contraseña"
+
+msgid "Confirmar Devolução"
+msgstr "Confirmar la devolución"
+
+msgid "Meu Inventário"
+msgstr "Mi inventario"
+
+msgid "Adicionar Item"
+msgstr "Agregar elemento"
+
+msgid "Inventário Global"
+msgstr "Inventario global"
+
+msgid "Online"
+msgstr "En línea"
+
+msgid "Offline"
+msgstr "Desconectado"
+
+msgid "Itens"
+msgstr "Elementos"
+
+msgid "Devolver"
+msgstr "Devolver"
+
+msgid "Trocar"
+msgstr "Reemplazar"
+
+msgid "Enviar para Bag"
+msgstr "Enviar para Bag"
+
+msgid "Nenhum item no inventário."
+msgstr "No hay artículo en el inventario."
+
+msgid "Quantidade Total"
+msgstr "Cantidad total"
+
+msgid "Retirar Item do Servidor"
+msgstr "Retirar Item do Servidor"
+
+msgid "Selecione um personagem"
+msgstr "Seleccione un personaje"
+
+msgid "Inventário de"
+msgstr "Inventario de"
+
+msgid "Localização"
+msgstr "Ubicación"
+
+msgid "Anterior"
+msgstr "Anterior"
+
+msgid "Próxima"
+msgstr "Próxima"
+
+msgid "Item Selecionado"
+msgstr "Artículo seleccionado"
+
+msgid "Sua senha"
+msgstr "Tu contraseña"
+
+msgid "Retirar"
+msgstr "Retirar"
+
+msgid "Nenhum item encontrado no inventário deste personagem."
+msgstr "Ningún elemento encontrado en el inventario de este personaje."
+
+msgid "Voltar para o Inventário"
+msgstr "Volver al inventario"
+
+msgid "Transferir para Bag"
+msgstr "Transferir para Bag"
+
+msgid "Trocar Item entre Jogadores"
+msgstr "Cambiar el elemento entre los jugadores"
+
+msgid "Personagem Origem"
+msgstr "Personaje de origen"
+
+msgid "Personagem Destino"
+msgstr "Personaje de destino"
+
+msgid "Amount Paid"
+msgstr "Monto pagado"
+
+msgid "Coins Generated"
+msgstr "Monedas generadas"
+
+msgid "Payment Method"
+msgstr "Método de pago"
+
+msgid "Purchase of coins via ADMINISTRATOR"
+msgstr "Compra de monedas a través del administrador"
+
+msgid "Payment System"
+msgstr "Sistema de pago"
+
+msgid "Wallet"
+msgstr "Billetera"
+
+msgid "Payment Request"
+msgstr "Solicitud de pago"
+
+msgid "Payment Requests"
+msgstr "Solicitudes de pago"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Transaction Code"
+msgstr "Código de transacción"
+
+msgid "Linked Payment Request"
+msgstr "Solicitud de pago vinculada"
+
+msgid "Payment"
+msgstr "Pago"
+
+msgid "Payments"
+msgstr "Pagos"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Data ID"
+msgstr "ID de datos"
+
+msgid "Payload"
+msgstr "Carga útil"
+
+msgid "Received At"
+msgstr "Recibido en"
+
+msgid "Webhook Log"
+msgstr "Registro de webhook"
+
+msgid "Webhook Logs"
+msgstr "Registros de webhook"
+
+msgid "Pagamento Não Concluído"
+msgstr "Pago no completado"
+
+msgid "Pagamento não realizado"
+msgstr "Pago"
+
+msgid "Algo deu errado ou o pagamento foi cancelado."
+msgstr "Algo salió mal o el pago fue cancelado."
+
+msgid "Tente novamente em alguns instantes."
+msgstr "Inténtalo de nuevo en un momento."
+
+msgid "Voltar para a Carteira"
+msgstr "Regresa a la billetera"
+
+msgid "Tentar Novamente"
+msgstr "Intentar otra vez"
+
+msgid "Pagamento Aprovado"
+msgstr "Pago aprobado"
+
+msgid "Pagamento aprovado!"
+msgstr "¡Pago aprobado!"
+
+msgid "Obrigado por sua compra."
+msgstr "Gracias por su compra."
+
+msgid "Seu pagamento foi processado com sucesso."
+msgstr "Su pago fue procesado con éxito."
+
+msgid "Ir para a Carteira"
+msgstr "Ir para a Carteira"
+
+msgid "Detalhes do Pedido"
+msgstr "Detalles del pedido"
+
+msgid "ID do Pedido:"
+msgstr "ID de pedido:"
+
+msgid "Valor Pago:"
+msgstr "Valor Pago:"
+
+msgid "Moedas Geradas:"
+msgstr "Monedas generadas:"
+
+msgid "Status:"
+msgstr "Estado:"
+
+msgid "Método:"
+msgstr "Método:"
+
+msgid "Data de Criação:"
+msgstr "Fecha de creación:"
+
+msgid "Confirmar e Ir para o Pagamento"
+msgstr "Confirmar e Ir para o Pagamento"
+
+msgid "Voltar para Pedidos Pendentes"
+msgstr "Voltar para Pedidos Pendentes"
+
+msgid "Meus Pedidos Pendentes"
+msgstr "Meus Pedidos Pendentes"
+
+msgid "Pedido"
+msgstr "Pedido"
+
+msgid "Valor:"
+msgstr "Valor:"
+
+msgid "Criado em:"
+msgstr "Creado en:"
+
+msgid "Detalhes"
+msgstr "Detalles"
+
+msgid "Você não possui pedidos pendentes."
+msgstr "No tienes órdenes pendientes."
+
+msgid "Criar Novo Pedido"
+msgstr "Crear nueva solicitud"
+
+msgid "Comprar Moedas"
+msgstr "Monedas"
+
+msgid "Valor em Reais (R$)"
+msgstr "Valor en reais (r $)"
+
+msgid "Digite o valor que deseja comprar"
+msgstr "Ingrese el valor que desea comprar"
+
+msgid "Escolha o Meio de Pagamento"
+msgstr "Elija el método de pago"
+
+msgid "Mercado Pago"
+msgstr "Mercado Pago"
+
+msgid "Stripe"
+msgstr "Raya"
+
+msgid "Gerar Pedido"
+msgstr "Generar orden"
+
+msgid "Pagamento Recusado ou Falhou"
+msgstr "Pago rechazado o fallido"
+
+msgid ""
+"Algo deu errado com o processamento do seu pagamento. Você pode tentar "
+"novamente."
+msgstr ""
+"Algo salió mal con el procesamiento de su pago. Puedes intentarlo de nuevo."
+
+msgid "Ver Pedidos Pendentes"
+msgstr "Ver Pedidos Pendentes"
+
+msgid "Pagamento Aprovado!"
+msgstr "¡Pago aprobado!"
+
+msgid "Suas moedas foram creditadas com sucesso na sua carteira."
+msgstr "Sus monedas fueron acreditadas con éxito a su billetera."
+
+msgid "Relatório de Compras"
+msgstr "Informe de compras"
+
+msgid "Total de Compras"
+msgstr "Total de Compras"
+
+msgid "Total Gasto"
+msgstr "Total Gasto"
+
+msgid "Carrinhos Abandonados"
+msgstr "Cochecitos abandonados"
+
+msgid "Receita da Última Semana"
+msgstr "Receita da Última Semana"
+
+msgid "Itens Mais Vendidos"
+msgstr "Mejores artículos de venta"
+
+msgid "unidades"
+msgstr "unidades"
+
+msgid "Pacotes Populares"
+msgstr "Paquetes populares"
+
+msgid "pacotes"
+msgstr "paquetes"
+
+msgid "Promoções Utilizadas"
+msgstr "Promociones utilizadas"
+
+msgid "vezes"
+msgstr "veces"
+
+msgid "Relatório de Leilões"
+msgstr "Informe de subasta"
+
+msgid "Status dos Leilões"
+msgstr "Estatus de subasta"
+
+msgid "Resumo dos Status dos Leilões"
+msgstr "Resumen del estado de la subasta"
+
+msgid "Pendentes"
+msgstr "Pendiente"
+
+msgid "Finalizados"
+msgstr "Finalizados"
+
+msgid "Expirados"
+msgstr "Expirados"
+
+msgid "Cancelados"
+msgstr "Cancelados"
+
+msgid "Lance Inicial"
+msgstr "Lance Inicial"
+
+msgid "Maior Lance"
+msgstr "Oferta más grande"
+
+msgid "Tempo Restante"
+msgstr "Tempo Restante"
+
+msgid "restante"
+msgstr "restante"
+
+msgid "Histórico de Lances"
+msgstr "Histórico de Lances"
+
+msgid "Jogador"
+msgstr "Jugador"
+
+msgid "Valor do Lance"
+msgstr "Valor do Lance"
+
+msgid "Data do Lance"
+msgstr "Datos do lance"
+
+msgid "Nenhum lance registrado."
+msgstr "No hay ofertas registradas."
+
+msgid "Leilões Mais Populares"
+msgstr "Subastas más populares"
+
+msgid "Total de Lances"
+msgstr "Total de Lances"
+
+msgid "Nenhum leilão popular no momento."
+msgstr "No hay una subasta popular en este momento."
+
+msgid "Relatório de Movimentações de Itens"
+msgstr "Informe de movimientos de elementos"
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Retirados"
+msgstr "Retirados"
+
+msgid "Inseridos"
+msgstr "Insertado"
+
+msgid "Trocados"
+msgstr "Cambió"
+
+msgid "Recebidos"
+msgstr "Recibió"
+
+msgid "Bag para Inventário"
+msgstr "Bolsa de inventario"
+
+msgid "Itens Mais Trocados"
+msgstr "Los artículos más cambiados"
+
+msgid "Total Trocado"
+msgstr "Total intercambiado"
+
+msgid "Nenhum item trocado."
+msgstr "No hay artículo intercambiado."
+
+msgid "Itens Mais Movimentados"
+msgstr "Artículos más activos"
+
+msgid "Total Movimentado"
+msgstr "Totalmente ocupado"
+
+msgid "Nenhum item movimentado."
+msgstr "No hay artículo ocupado."
+
+msgid "Voltar para Dashboard"
+msgstr "Voltar para Dashboard"
+
+msgid "Movimentação de Itens nos Últimos Dias"
+msgstr "Movimiento de elementos en los últimos días"
+
+msgid "Players Online"
+msgstr "Jugadores en línea"
+
+msgid "Top PvP"
+msgstr "PVP superior"
+
+msgid "Top PK"
+msgstr "PK superior"
+
+msgid "Top Clan"
+msgstr "Clan superior"
+
+msgid "Top Rich"
+msgstr "Rico"
+
+msgid "Top Online"
+msgstr "Superior en línea"
+
+msgid "Top Level"
+msgstr "Nivel superior"
+
+msgid "Olympiad Ranking"
+msgstr "Ranking de olímpica"
+
+msgid "Olympiad All Heroes"
+msgstr "Olimpiada Todos los héroes"
+
+msgid "Olympiad Current Heroes"
+msgstr "Olympíada de héroes actuales"
+
+msgid "Grand Boss Status"
+msgstr "Estado del gran jefe"
+
+msgid "Raid Boss Status"
+msgstr "Estado del jefe de ataques"
+
+msgid "Siege"
+msgstr "Cerco"
+
+msgid "Siege Participants"
+msgstr "Participantes de asedio"
+
+msgid "Boss Jewel Locations"
+msgstr "Ubicaciones de Boss Jewel"
+
+msgid "API Endpoint Toggle"
+msgstr "API Punto final Toggle"
+
+msgid "API Endpoint Toggles"
+msgstr "El punto final de la API se alza"
+
+msgid "API Endpoint Configuration"
+msgstr "Configuración de punto final de API"
+
+msgid "Server Name"
+msgstr "Nombre del servidor"
+
+msgid "Onde Lendas Nascem, Heróis Lutam e a Glória É Eterna."
+msgstr "Donde nacen las leyendas, los héroes luchan y la gloria es eterna."
+
+msgid "Server Description"
+msgstr "Descripción del servidor"
+
+msgid "Patch Link"
+msgstr "Enlace de parche"
+
+msgid "Client Link"
+msgstr "Enlace del cliente"
+
+msgid "Discord Link"
+msgstr "Enlace de discordia"
+
+msgid "Trailer Video ID"
+msgstr "ID de video de trailer"
+
+msgid "jogadores online Agora"
+msgstr "Jugadores en línea ahora"
+
+msgid "Players Online Text"
+msgstr "Texto en línea de jugadores"
+
+msgid "Banner Image"
+msgstr "Imagen de banner"
+
+msgid "Index Configuration"
+msgstr "Configuración de índice"
+
+msgid "Only one server configuration is allowed."
+msgstr "Solo se permite una configuración de servidor."
+
+msgid "Português"
+msgstr "portugués"
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Español"
+msgstr "Español"
+
+msgid "Configuration"
+msgstr "Configuración"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Index Configuration Translation"
+msgstr "Traducción de configuración del índice"
+
+msgid "Index Configuration Translations"
+msgstr "Traducciones de configuración del índice"
+
+msgid "Change Nickname"
+msgstr "Cambio de apodo"
+
+msgid "Change Gender"
+msgstr "Cambiar de género"
+
+msgid "Service"
+msgstr "Servicio"
+
+msgid "Service Price"
+msgstr "Precio de servicio"
+
+msgid "Service Prices"
+msgstr "Precios de servicio"
+
+msgid "ID of the item used for Adena exchange"
+msgstr "ID del artículo utilizado para Adena Exchange"
+
+msgid "Adena Value"
+msgstr "El mismo valor"
+
+msgid "Amount of Adena each item represents"
+msgstr "Cantidad de adena cada artículo representa"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Mark as active to be used in calculation"
+msgstr "Marca como activa para ser utilizada en el cálculo"
+
+msgid "Active Adena Exchange Item"
+msgstr "Artículo de intercambio de Adena activo"
+
+msgid "Active Adena Exchange Items"
+msgstr "Elementos de intercambio de adena activos"
+
+msgid "Inactive"
+msgstr "Inactivo"
+
+msgid "Public Name"
+msgstr "Nombre público"
+
+msgid "Twitch Link"
+msgstr "Enlace de contracción"
+
+msgid "YouTube Link"
+msgstr "Enlace de youtube"
+
+msgid "Pending"
+msgstr "Pendiente"
+
+msgid "Approved"
+msgstr "Aprobado"
+
+msgid "Rejected"
+msgstr "Rechazado"
+
+msgid "Expired"
+msgstr "Venció"
+
+msgid "Supporter"
+msgstr "Seguidor"
+
+msgid "Supporters"
+msgstr "Seguidores"
+
+msgid "Shop Purchase"
+msgstr "Compra de la tienda"
+
+msgid "Payment Date"
+msgstr "Fecha de pago"
+
+msgid "Paid"
+msgstr "Pagado"
+
+msgid "Commission"
+msgstr "Comisión"
+
+msgid "Commissions"
+msgstr "Comisiones"
+
+msgid "Commission from"
+msgstr "Entregar de"
+
+msgid "Editar Imagem do Apoiador"
+msgstr "Editar imagen de seguidores"
+
+msgid "Editar Imagem"
+msgstr "Editar imagen"
+
+msgid "Apoio Expirado"
+msgstr "Soporte expirado"
+
+msgid "Seu cupom de apoiador expirou."
+msgstr "Su cupón partidario expiró."
+
+msgid ""
+"Para continuar como apoiador e receber um novo cupom de desconto, você pode "
+"reenviar sua solicitação agora mesmo."
+msgstr ""
+"Para continuar como seguidor y recibir un nuevo cupón de descuento, puede "
+"reenviar su solicitud en este momento."
+
+msgid "Enviar Nova Solicitação"
+msgstr "Enviar una nueva solicitud"
+
+msgid "Solicitar Acesso como Apoiador"
+msgstr "Solicitar acceso como seguidor"
+
+msgid "Torne-se um Apoiador"
+msgstr "Convertirse en un partidario"
+
+msgid ""
+"Preencha o formulário abaixo. Após a análise, você poderá acessar benefícios"
+" exclusivos, gerar códigos promocionais e acompanhar seu desempenho!"
+msgstr ""
+"Complete el siguiente formulario. Después del análisis, puede acceder a "
+"beneficios exclusivos, generar códigos promocionales y rastrear su "
+"rendimiento."
+
+msgid "Nome Público"
+msgstr "Nome Público"
+
+msgid "Link do Twitch"
+msgstr "Enlace do twitch"
+
+msgid "Link do YouTube"
+msgstr "Enlace Do YouTube"
+
+msgid "Imagem / Avatar"
+msgstr "Imagen / avatar"
+
+msgid "Enviar Solicitação"
+msgstr "Entregar"
+
+msgid "Seja um Apoiador"
+msgstr "Ser partidario"
+
+msgid "Você ainda não é um apoiador"
+msgstr "Todavía no eres un seguidor"
+
+msgid ""
+"Este painel é exclusivo para streamers e parceiros do nosso servidor. Como "
+"apoiador, você poderá gerar códigos promocionais, ter seu próprio painel e "
+"ganhar recompensas por cada indicação."
+msgstr ""
+"Este panel es exclusivo de los streamers y socios de nuestro servidor. Como "
+"seguidor, puede generar códigos promocionales, tener su propio panel y "
+"obtener recompensas para cada indicación."
+
+msgid "Solicitar Acesso"
+msgstr "Solicitar acceso"
+
+msgid ""
+"Já é apoiador? Entre em contato com a staff caso enfrente problemas de "
+"acesso."
+msgstr ""
+"¿Ya es un seguidor? Póngase en contacto con el personal si enfrenta "
+"problemas de acceso."
+
+msgid "Painel do Apoiador"
+msgstr "Panel de seguidores"
+
+msgid "Sem imagem"
+msgstr "Sin imágenes"
+
+msgid "Seu Cupom Ativo"
+msgstr "Tu cupón activo"
+
+msgid "Código"
+msgstr "Código"
+
+msgid "Desconto"
+msgstr "Descuento"
+
+msgid "Válido até"
+msgstr "Válido até"
+
+msgid "Ainda não há cupom ativo."
+msgstr "Todavía no hay cupón activo."
+
+msgid "Total de Vendas"
+msgstr "Total de Vendas"
+
+msgid "Usuários Impactados"
+msgstr "Usuarios impactados"
+
+msgid "Solicitar Comissão"
+msgstr "Comisión de solicitud"
+
+msgid "Nenhuma compra registrada ainda."
+msgstr "No hay compra registrada todavía."
+
+msgid "Painel de Staff"
+msgstr "Paño de personal"
+
+msgid "Pedidos Pendentes de Apoiadores"
+msgstr "Solicitudes pendientes de los seguidores"
+
+msgid "Data de Solicitação"
+msgstr "Fecha de solicitud"
+
+msgid "Sem descrição"
+msgstr "Descrito"
+
+msgid "Detalhes do Apoiador"
+msgstr "Detalles del seguidor"
+
+msgid "Link Twitch"
+msgstr "Twitch de enlace"
+
+msgid "Nenhum link fornecido"
+msgstr "Sin enlace suministrado"
+
+msgid "Link YouTube"
+msgstr "Enlace youtube"
+
+msgid "Imagem do Apoiador"
+msgstr "Imagen de seguidores"
+
+msgid "Nenhuma imagem fornecida."
+msgstr "No se proporciona imagen."
+
+msgid "Digite a porcentagem de desconto"
+msgstr "Ingrese el porcentaje de descuento"
+
+msgid "Aceitar"
+msgstr "Para aceptar"
+
+msgid "Rejeitar"
+msgstr "Rechazar"
+
+msgid "Não há pedidos pendentes no momento."
+msgstr "No hay órdenes pendientes en este momento."
+
+msgid "Solicitação em Análise"
+msgstr "Solicitud de análisis"
+
+msgid ""
+"Sua solicitação para se tornar um apoiador está sendo analisada por nossa "
+"equipe."
+msgstr ""
+"Su solicitud de convertirse en un seguidor está siendo analizado por nuestro"
+" equipo."
+
+msgid "Você receberá uma resposta em breve. Obrigado pelo interesse!"
+msgstr "Recibirá una respuesta pronto. ¡Gracias por el interés!"
+
+msgid "Voltar para o Painel"
+msgstr "Regresar al panel"
+
+msgid "Solicitação Rejeitada"
+msgstr "Solicitud rechazada"
+
+msgid ""
+"Infelizmente, sua solicitação para se tornar um apoiador foi recusada no "
+"momento."
+msgstr ""
+"Desafortunadamente, su solicitud de convertirse en partidario ha sido "
+"rechazada en este momento."
+
+msgid ""
+"Caso ache que houve um engano ou queira mais informações, entre em contato "
+"com a staff."
+msgstr ""
+"Si cree que hubo un error o desea más información, comuníquese con el "
+"personal."
+
+msgid ""
+"Informe o valor que deseja solicitar como comissão. Ele deve ser compatível "
+"com o valor disponível."
+msgstr ""
+"Ingrese el monto que desea solicitar como comisión. Debe ser compatible con "
+"el valor disponible."
+
+msgid "Valor disponível para saque:"
+msgstr "Valor disponible para retiro:"
+
+msgid "Valor da Comissão"
+msgstr "Valor de la comisión"
+
+msgid "Informações da Conta"
+msgstr "Información de la cuenta"
+
+msgid "Login:"
+msgstr "Acceso:"
+
+msgid "Email:"
+msgstr "Correo electrónico:"
+
+msgid "Criada em:"
+msgstr "Creado en:"
+
+msgid "Não disponível"
+msgstr "Indisponible"
+
+msgid "Último IP:"
+msgstr "Último IP:"
+
+msgid "Total de Personagens:"
+msgstr "Personajes totales:"
+
+msgid "Logo Lineage 2"
+msgstr "LOGO LINEAGE 2"
+
+msgid "Seus Personagens"
+msgstr "Tus personajes"
+
+msgid "Título:"
+msgstr "Título:"
+
+msgid "Nível:"
+msgstr "Nivel:"
+
+msgid "Classe Base:"
+msgstr "Clase básica:"
+
+msgid "Online:"
+msgstr "En línea:"
+
+msgid "Alterar Sexo"
+msgstr "Alterar Sexo"
+
+msgid "Destravar"
+msgstr "Descubrir"
+
+msgid "Alterar Nickname"
+msgstr "Alterar Nickname"
+
+msgid "Nenhum personagem encontrado."
+msgstr "No se encontró ningún personaje."
+
+msgid "Serviços da Conta"
+msgstr "Servicios de cuenta"
+
+msgid "Alterar Senha"
+msgstr "Cambiar la contraseña"
+
+msgid "Vincular Conta Lineage via E-mail"
+msgstr "Vincular Conta Lineage via E-mail"
+
+msgid ""
+"Se você não lembra sua senha do jogo, informe o e-mail cadastrado na conta "
+"Lineage."
+msgstr ""
+"Si no recuerda la contraseña de su juego, ingrese el correo electrónico "
+"registrado en la cuenta de linaje."
+
+msgid ""
+"Você receberá um link para confirmar a vinculação com seu usuário atual."
+msgstr "Recibirá un enlace para confirmar el enlace con su usuario actual."
+
+msgid "E-mail da Conta Lineage"
+msgstr "Correo electrónico del linaje del conteo"
+
+msgid "exemplo@dominio.com"
+msgstr "exemplo@dominio.com"
+
+msgid "Enviar Link de Vinculação"
+msgstr "Enviar enlace de enlace"
+
+msgid "Criar Conta L2"
+msgstr "Crear cuenta L2"
+
+msgid "Login"
+msgstr "Acceso"
+
+msgid "E-mail"
+msgstr "Correo electrónico"
+
+msgid "Confirmar Senha"
+msgstr "Confirmar Contraseña"
+
+msgid "Criar Conta"
+msgstr "Crear una cuenta"
+
+msgid "Conta criada com sucesso!"
+msgstr "Cuenta creada con éxito!"
+
+msgid "Seu registro foi concluído com sucesso."
+msgstr "Su registro se completó con éxito."
+
+msgid ""
+"Pode levar até 5 minutos para a conta estar disponível no jogo e no painel."
+msgstr ""
+"Puede tomar hasta 5 minutos para estar disponibles en el juego y el panel."
+
+msgid "Ir para o painel"
+msgstr "Ir al panel"
+
+msgid "Nova Senha"
+msgstr "Nueva contraseña"
+
+msgid "Confirmar Nova Senha"
+msgstr "Confirmar una nueva contraseña"
+
+msgid "Salvar Senha"
+msgstr "Guardar contraseña"
+
+msgid "Vincular Conta do Jogo (Lineage 2)"
+msgstr "Enlace la cuenta del juego (linaje 2)"
+
+msgid "Login da Conta Lineage"
+msgstr "Iniciar sesión de linaje"
+
+msgid "Senha da Conta Lineage"
+msgstr "Contraseña de cuenta de linaje"
+
+msgid "Digite a senha do jogo"
+msgstr "Ingrese la contraseña del juego"
+
+msgid "Vincular Conta"
+msgstr "Vincular Conta"
+
+msgid "Certifique-se de que a conta ainda não está vinculada a outro usuário."
+msgstr "Asegúrese de que la cuenta aún no esté vinculada a otro usuario."
+
+msgid "Esqueceu sua senha? Vincular conta via e-mail."
+msgstr "¿Olvidaste tu contraseña? Cuenta de enlace por correo electrónico."
+
+msgid "Configurações de Endpoints da API"
+msgstr "Configuración de punto final de API"
+
+msgid "Personagem:"
+msgstr "Personaje:"
+
+msgid "Preço do serviço:"
+msgstr "Precio de servicio:"
+
+msgid "Novo Nickname"
+msgstr "Novo"
+
+msgid "Novo Sexo"
+msgstr "Nuevo sexo"
+
+msgid "Masculino"
+msgstr "Masculino"
+
+msgid "Feminino"
+msgstr "Femenino"
+
+msgid "Configurar Preços de Serviços"
+msgstr "Configurar precios de servicio"
+
+msgid "Preço para Alteração de Nickname"
+msgstr "Precio para el cambio de apodo"
+
+msgid "Insira o valor"
+msgstr "Ingrese el valor"
+
+msgid "Preço para Alteração de Sexo"
+msgstr "Precio para el cambio de sexo"
+
+msgid "Salvar Configurações"
+msgstr "Guardar configuración"
+
+msgid "Desbugar Personagem"
+msgstr "Desatraillar"
+
+msgid "Count"
+msgstr "Contar"
+
+msgid "Character"
+msgstr "Personaje"
+
+msgid "Clan"
+msgstr "Clan"
+
+msgid "Nenhuma localização de Boss Jewel encontrada."
+msgstr "No se encontró la ubicación de Jein Jewel."
+
+msgid "Respawn"
+msgstr "Reaparición"
+
+msgid "Nenhum boss encontrado."
+msgstr "No se encontró ningún jefe."
+
+msgid "Todos os Heróis Olimpíada"
+msgstr "Todos los héroes de los Juegos Olímpicos"
+
+msgid "Aliança"
+msgstr "Alianza"
+
+msgid "Classe"
+msgstr "Clase"
+
+msgid "Contagem de Jogos"
+msgstr "Recuento de juegos"
+
+msgid "Nenhum dado encontrado."
+msgstr "No se encontraron datos."
+
+msgid "Heróis Atuais Olimpíada"
+msgstr "Olímpicos de héroes actuales"
+
+msgid "Ranking Olimpíada"
+msgstr "Ranking en olímpicos"
+
+msgid "Castle & Siege Ranking"
+msgstr "Castillo y clasificación de asedio"
+
+msgid "Informações atualizadas sobre as guerras dos castelos."
+msgstr "Información actualizada sobre las Guerras de Castles."
+
+msgid "Castle"
+msgstr "Castillo"
+
+msgid "Clan Proprietário"
+msgstr "Dueño del clan"
+
+msgid "Líder"
+msgstr "Líder"
+
+msgid "Taxa"
+msgstr "Taxones"
+
+msgid "Próxima Guerra"
+msgstr "Próxima Guerra"
+
+msgid "Atacantes"
+msgstr "Atacantes"
+
+msgid "Defensores"
+msgstr "Defensores"
+
+msgid "Ranking Adena"
+msgstr "Anillo adensa"
+
+msgid "Adenas"
+msgstr "Adenas"
+
+msgid "Tempo Online"
+msgstr "Tiempo en línea"
+
+msgid "Ranking Clans"
+msgstr "Clanes de clasificación"
+
+msgid "Ally"
+msgstr "Aliado"
+
+msgid "Reputação"
+msgstr "Reputación"
+
+msgid "Membros"
+msgstr "Miembros"
+
+msgid "Ranking Nível"
+msgstr "Clasificación de nivel"
+
+msgid "PvPs"
+msgstr "PVPS"
+
+msgid "PKs"
+msgstr "Pks"
+
+msgid "Top Tempo Online"
+msgstr "Tempo superior en línea"
+
+msgid "PvP"
+msgstr "PVP"
+
+msgid "PK"
+msgstr "PAQUETE"
+
+msgid "Ranking PK"
+msgstr "Ranking PK"
+
+msgid "Ranking PvP"
+msgstr "Ranking PvP"
+
+msgid "Preço do serviço não configurado."
+msgstr "Precio de servicio no configurado."
+
+msgid ""
+"Nickname inválido. Use de 2 a 16 caracteres latinos ou de 3 a 16 caracteres "
+"cirílicos."
+msgstr ""
+"Nickname inválido. Use de 2 a 16 caracteres latinos ou de 3 a 16 caracteres "
+"cirílicos."
+
+msgid "Saldo insuficiente na carteira."
+msgstr "Saldo insuficiente na carteira."
+
+msgid "Nickname alterado com sucesso!"
+msgstr "¡El apodo cambió con éxito!"
+
+msgid "Erro ao alterar nickname."
+msgstr "Erro ao alterar nickname."
+
+msgid "Sexo inválido selecionado."
+msgstr "Sexo inválido seleccionado."
+
+msgid "Sexo alterado com sucesso!"
+msgstr "¡El sexo cambió con éxito!"
+
+msgid "Erro ao alterar sexo."
+msgstr "Error al cambiar el sexo."
+
+msgid "Personagem desbugado com sucesso!"
+msgstr "¡Personaje de moda exitoso!"
+
+msgid "Erro ao desbugar personagem."
+msgstr "Error de depuración del personaje."
+
+msgid "Os preços precisam ser valores numéricos."
+msgstr "Los precios deben ser valores numéricos."
+
+msgid "Preços dos serviços atualizados com sucesso!"
+msgstr "¡Precios de servicios actualizados exitosos!"
+
+msgid "Erro ao configurar os preços: "
+msgstr "Error al configurar los precios:"
+
+msgid "No Owner"
+msgstr "No hay propietario"
+
+msgid "No Leader"
+msgstr "No Leader"
+
+msgid "No Alliance"
+msgstr "No Alliance"
+
+msgid "Item name"
+msgstr "Nombre del artículo"
+
+msgid "Package Items"
+msgstr "Artículo de paquete"
+
+msgid "Package Name"
+msgstr "Nombre del paquete"
+
+msgid "Total Price"
+msgstr "Precio total"
+
+msgid "Promotion"
+msgstr "Promoción"
+
+msgid "Package name"
+msgstr "Nombre del paquete"
+
+msgid "Total price"
+msgstr "Precio total"
+
+msgid "Expiration Date"
+msgstr "Fecha de expiración"
+
+msgid "Ex: 2025-04-30 18:00"
+msgstr "Ej.: 2025-04-30 18:00"
+
+msgid "Promotion Code"
+msgstr "Código de promoción"
+
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+msgid "Promotion code"
+msgstr "Código de promoción"
+
+msgid "Ativo"
+msgstr "Activo"
+
+msgid "Item da Loja"
+msgstr "Artículo de la tienda"
+
+msgid "Itens da Loja"
+msgstr "Artículos de almacenamiento"
+
+msgid "Desconto Percentual"
+msgstr "Descuento porcentual"
+
+msgid "Validade"
+msgstr "Validez"
+
+msgid "Apoiador"
+msgstr "Seguidor"
+
+msgid "Código Promocional"
+msgstr "Código Promocional"
+
+msgid "Códigos Promocionais"
+msgstr "Códigos Promocionais"
+
+msgid "Preço Total"
+msgstr "Precio total"
+
+msgid "Promoção"
+msgstr "Promoción"
+
+msgid "Pacote da Loja"
+msgstr "Paquete de almacenamiento"
+
+msgid "Pacotes da Loja"
+msgstr "Paquetes de almacenamiento"
+
+msgid "Pacote"
+msgstr "Paquete"
+
+msgid "Item do Pacote"
+msgstr "Artículo del paquete"
+
+msgid "Itens do Pacote"
+msgstr "Artículo de paquete"
+
+msgid "Pacotes"
+msgstr "Paquetes"
+
+msgid "Promoção Aplicada"
+msgstr "Promoción aplicada"
+
+msgid "Carrinho"
+msgstr "Carro"
+
+msgid "Carrinhos"
+msgstr "Cochecito"
+
+msgid "Item no Carrinho"
+msgstr "Artículo en el carrito"
+
+msgid "Itens no Carrinho"
+msgstr "Artículos en el carrito"
+
+msgid "Pacote no Carrinho"
+msgstr "Embalar"
+
+msgid "Pacotes no Carrinho"
+msgstr "Paquete en el carrito"
+
+msgid "Nome do Personagem"
+msgstr "Nombre del personaje"
+
+msgid "Total Pago"
+msgstr "Total Pago"
+
+msgid "Data da Compra"
+msgstr "Data da Compra"
+
+msgid "Compra"
+msgstr "Compra"
+
+msgid "Compras"
+msgstr "Compras"
+
+msgid "Meu Carrinho"
+msgstr "Mi carrito"
+
+msgid "Remover Item"
+msgstr "Artículo de removedor"
+
+msgid "Visualizar Itens"
+msgstr "Ver elementos"
+
+msgid "Remover Pacote"
+msgstr "Paquete"
+
+msgid "Este pacote não contém itens."
+msgstr "Este paquete no contiene elementos."
+
+msgid "Código promocional"
+msgstr "Código promocional"
+
+msgid "Aplicar"
+msgstr "Aplicar"
+
+msgid "Finalizar Compra"
+msgstr "Finalizar Compra"
+
+msgid "Esvaziar Carrinho"
+msgstr "Chorrito"
+
+msgid "Continuar Comprando"
+msgstr "Continuar Comprando"
+
+msgid "Seu carrinho está vazio."
+msgstr "Tu carro está vacío."
+
+msgid "Loja Online"
+msgstr "Loja Online"
+
+msgid "Ver Carrinho"
+msgstr "Ver carrito"
+
+msgid "Itens Disponíveis"
+msgstr "Artículos disponibles"
+
+msgid "Adicionar"
+msgstr "Adicionar"
+
+msgid "Nenhum item disponível."
+msgstr "No hay artículo disponible."
+
+msgid "Itens inclusos"
+msgstr "Artículos incluidos"
+
+msgid "Adicionar Pacote"
+msgstr "Agregar paquete"
+
+msgid "Nenhum pacote disponível."
+msgstr "No hay paquete disponible."
+
+msgid "Painel de Gerenciamento do Shop"
+msgstr "Panel de gestión de la tienda"
+
+msgid "Gerenciar Itens"
+msgstr "Administrar artículos"
+
+msgid "Adicione, edite ou desative itens disponíveis no shop."
+msgstr "Agregar, editar o deshabilitar artículos disponibles para la tienda."
+
+msgid "Acessar"
+msgstr "Acceso"
+
+msgid "Gerenciar Pacotes"
+msgstr "Administrar paquetes"
+
+msgid "Monte pacotes personalizados com itens e promoções."
+msgstr "Monte los paquetes personalizados con artículos y promociones."
+
+msgid "Gerenciar Promoções"
+msgstr "Gestionar las promociones"
+
+msgid "Crie e gerencie códigos promocionais para o shop."
+msgstr "Crear y administrar códigos promocionales para la tienda."
+
+msgid "Editar Pacote"
+msgstr "Paquete de edición"
+
+msgid "Salvar Pacote"
+msgstr "Ahorrar"
+
+msgid "Itens no Pacote"
+msgstr "Artículo de paquete"
+
+msgid "Remover"
+msgstr "Remover"
+
+msgid "Nenhum item no pacote."
+msgstr "No hay artículo en el paquete."
+
+msgid "Cadastro de Itens"
+msgstr "Registro de artículos"
+
+msgid "Inativo"
+msgstr "Inactivo"
+
+msgid "Nenhum item cadastrado."
+msgstr "No hay artículo registrado."
+
+msgid "Cadastro de Pacotes"
+msgstr "Registro de paquetes"
+
+msgid "Cadastrar Pacote"
+msgstr "Paquete de registro"
+
+msgid "Pacotes Cadastrados"
+msgstr "Paquetes registrados"
+
+msgid "Nenhum pacote cadastrado."
+msgstr "No hay paquete registrado."
+
+msgid "Cadastro de Códigos Promocionais"
+msgstr "Registro de códigos promocionales"
+
+msgid "Cadastrar Promoção"
+msgstr "Promoción de registro"
+
+msgid "Códigos Cadastrados"
+msgstr "Códigos registrados"
+
+msgid "Nenhuma promoção cadastrada."
+msgstr "No hay promoción registrada."
+
+msgid "Histórico de Compras"
+msgstr "Histórico de Compras"
+
+msgid "Nenhuma compra realizada ainda."
+msgstr "No hay compra realizada todavía."
+
+msgid "Saldo"
+msgstr "Saldo"
+
+msgid "Carteira"
+msgstr "Cartera"
+
+msgid "Carteiras"
+msgstr "Cartera"
+
+msgid "Entrada"
+msgstr "Entrada"
+
+msgid "Saída"
+msgstr "Salida"
+
+msgid "Valor"
+msgstr "Valor"
+
+msgid "Data da Transação"
+msgstr "Fecha de transacción"
+
+msgid "Origem"
+msgstr "Origen"
+
+msgid "Destino"
+msgstr "Destino"
+
+msgid "Transação da Carteira"
+msgstr "Transacción de billetera"
+
+msgid "Transações da Carteira"
+msgstr "Transacciones de billetera"
+
+msgid "Nome da Moeda"
+msgstr "Nombre de moneda"
+
+msgid "ID da Moeda"
+msgstr "ID de moneda"
+
+msgid "Multiplicador (ex: 2.0 para 2x)"
+msgstr "Multiplicador (ex: 2.0 para 2x)"
+
+msgid "Moeda Ativa"
+msgstr "Moneda activa"
+
+msgid "Configuração de Moeda"
+msgstr "Configuración de divisas"
+
+msgid "Configurações de Moeda"
+msgstr "Configuración de divisas"
+
+msgid "Configuração de Moeda In-game"
+msgstr "Configuración de divisas en el juego"
+
+msgid "Multiplicador"
+msgstr "Multiplicador"
+
+msgid "Ativa"
+msgstr "Activo"
+
+msgid "Inativa"
+msgstr "Inactivo"
+
+msgid "Ativar"
+msgstr "Permitir"
+
+msgid "Atual"
+msgstr "Actual"
+
+msgid "Tem certeza que deseja excluir esta moeda?"
+msgstr "¿Estás seguro de que quieres eliminar esta moneda?"
+
+msgid "Nenhuma moeda configurada ainda."
+msgstr "No hay moneda configurada todavía."
+
+msgid "Nova Moeda"
+msgstr "Nueva moneda"
+
+msgid "Ex: Gold Coin"
+msgstr "Ej: moneda de oro"
+
+msgid "ID (no servidor)"
+msgstr "ID (no servidor)"
+
+msgid "Ex: 4037"
+msgstr "Ej.: 4037"
+
+msgid "Ex: 1.0"
+msgstr "Ej: 1.0"
+
+msgid "Cadastrar Moeda"
+msgstr "Registrar moneda"
+
+msgid "Minha Carteira"
+msgstr "Mi billetera"
+
+msgid "Saldo Atual"
+msgstr "Saldo actual"
+
+msgid "moedas disponíveis"
+msgstr "Monedas disponibles"
+
+msgid "Transferir para o Servidor"
+msgstr "Transferir para o Servidor"
+
+msgid "Transferir para Outro Jogador"
+msgstr "Transferir a otro jugador"
+
+msgid "Abrir Solicitação"
+msgstr "Abierto"
+
+msgid "Últimas Transações"
+msgstr "Últimas transacciones"
+
+msgid "Nenhuma transação registrada ainda."
+msgstr "No hay transacción registrada todavía."
+
+msgid "Sobre a Carteira"
+msgstr "En la billetera"
+
+msgid ""
+"Gerencie seu saldo virtual e acompanhe suas transações recentes. Use as "
+"moedas para realizar compras, enviar presentes ou desbloquear recursos "
+"exclusivos dentro do servidor."
+msgstr ""
+"Administre su equilibrio virtual y siga sus transacciones recientes. Use las"
+" monedas para realizar compras, enviar regalos o desbloquear funciones "
+"exclusivas dentro del servidor."
+
+msgid "Atualizar Carteira"
+msgstr "Actualización de billetera"
+
+msgid "Pedidos Pendentes"
+msgstr "Pedidos Pendentes"
+
+msgid ""
+"Visualize pedidos de compra de moedas que ainda não foram pagos ou "
+"processados. Evite criar novos pedidos repetidos e acompanhe o andamento dos"
+" seus pagamentos."
+msgstr ""
+"Visualice los pedidos de compra de divisas que aún no se han pagado o "
+"procesado. Evite la creación de nuevas solicitudes repetidas y siga el "
+"progreso de sus pagos."
+
+msgid "Nome do Jogador"
+msgstr "Nombre del jugador"
+
+msgid "Ex: Fulano123"
+msgstr "Ex: Fulano123"
+
+msgid "Valor da Transferência"
+msgstr "Valor de transferencia"
+
+msgid "Confirme sua senha"
+msgstr "Confirma tu contraseña"
+
+msgid "Confirmar Transferência"
+msgstr "Confirmar transferencia"
+
+msgid "Usuário:"
+msgstr "Usuario:"
+
+msgid "Saldo atual:"
+msgstr "Saldo actual:"
+
+msgid "Saldo insuficiente para transferência."
+msgstr "Balance insuficiente para la transferencia."
+
+msgid "Erro ao adicionar a moeda ao personagem."
+msgstr "Error a agregar la moneda al personaje."
+
+msgid "Title"
+msgstr "Título"
+
+msgid "Slug"
+msgstr "Babosa"
+
+msgid "Order"
+msgstr "Orden"
+
+msgid "Created at"
+msgstr "Creado a"
+
+msgid "Updated at"
+msgstr "Actualizado en"
+
+msgid "Wiki Page"
+msgstr "Wiki Página"
+
+msgid "Wiki Pages"
+msgstr "Páginas wiki"
+
+msgid "Portuguese"
+msgstr "portugués"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Wiki Page Translation"
+msgstr "Traducción de la página wiki"
+
+msgid "Wiki Page Translations"
+msgstr "Traducciones de página wiki"
+
+msgid "Information"
+msgstr "Información"
+
+msgid "Guide"
+msgstr "Guía"
+
+msgid "Warning"
+msgstr "Advertencia"
+
+msgid "Note"
+msgstr "Nota"
+
+msgid "Tip"
+msgstr "Consejo"
+
+msgid "Section Type"
+msgstr "Tipo de sección"
+
+msgid "Icon"
+msgstr "Icono"
+
+msgid "Wiki Section"
+msgstr "Sección Wiki"
+
+msgid "Wiki Sections"
+msgstr "Secciones de wiki"
+
+msgid "Subtitle"
+msgstr "Subtitular"
+
+msgid "Wiki Section Translation"
+msgstr "Traducción de la sección wiki"
+
+msgid "Wiki Section Translations"
+msgstr "Traducciones de la sección wiki"
+
+msgid "Version"
+msgstr "Versión"
+
+msgid "Release Date"
+msgstr "Fecha de lanzamiento"
+
+msgid "Server Update"
+msgstr "Actualización del servidor"
+
+msgid "Server Updates"
+msgstr "Actualizaciones del servidor"
+
+msgid "Server Update Translation"
+msgstr "Traducción de actualización del servidor"
+
+msgid "Server Update Translations"
+msgstr "Traducciones de actualización del servidor"
+
+msgid "Regular"
+msgstr "Regular"
+
+msgid "Special"
+msgstr "Especial"
+
+msgid "Event Type"
+msgstr "Tipo de evento"
+
+msgid "Server Event"
+msgstr "Evento de servidor"
+
+msgid "Server Events"
+msgstr "Eventos del servidor"
+
+msgid "Event"
+msgstr "Evento"
+
+msgid "Schedule"
+msgstr "Cronograma"
+
+msgid "Requirements"
+msgstr "Requisitos"
+
+msgid "Rewards"
+msgstr "Recompensas"
+
+msgid "Server Event Translation"
+msgstr "Traducción de eventos del servidor"
+
+msgid "Server Event Translations"
+msgstr "Traducciones de eventos del servidor"
+
+msgid "Experience"
+msgstr "Experiencia"
+
+msgid "Drop"
+msgstr "Gota"
+
+msgid "Adena"
+msgstr "Influenciado"
+
+msgid "Spoil"
+msgstr "Arruinar"
+
+msgid "Quest"
+msgstr "Búsqueda"
+
+msgid "Wiki Rate"
+msgstr "Tasa de wiki"
+
+msgid "Wiki Rates"
+msgstr "Tasas de wiki"
+
+msgid "Wiki Rate Translation"
+msgstr "Traducción de la tasa de wiki"
+
+msgid "Wiki Rate Translations"
+msgstr "Traducciones de tarifas de wiki"
+
+msgid "Custom"
+msgstr "Costumbre"
+
+msgid "Gameplay"
+msgstr "Jugabilidad"
+
+msgid "Quality of Life"
+msgstr "Calidad de vida"
+
+msgid "VIP"
+msgstr "personaje"
+
+msgid "Anti-Cheat"
+msgstr "Anti-trato"
+
+msgid "Community"
+msgstr "Comunidad"
+
+msgid "Wiki Feature"
+msgstr "Característica wiki"
+
+msgid "Wiki Features"
+msgstr "Características de Wiki"
+
+msgid "Wiki Feature Translation"
+msgstr "Traducción de características wiki"
+
+msgid "Wiki Feature Translations"
+msgstr "Traducciones de características wiki"
+
+msgid "Nome do Grupo"
+msgstr "Nombre de grupo"
+
+msgid "Remetente"
+msgstr "Remitente"
+
+msgid "Mensagem"
+msgstr "Mensaje"
+
+msgid "Data de Envio"
+msgstr "Data de Envio"
+
+msgid "Histórico de Atendimentos"
+msgstr "Historia de asistencia"
+
+msgid "Históricos de Atendimentos"
+msgstr "Históricos de los servicios"
+
+msgid "Versão"
+msgstr "Versión"
+
+msgid "Autor"
+msgstr "Autor"
+
+msgid "Upload de Arquivo"
+msgstr "Upload de Arquivo"
+
+msgid "Criado em"
+msgstr "Creado en"
+
+msgid "Atualizado em"
+msgstr "Actualizado en"
+
+msgid "Tema"
+msgstr "Tema"
+
+msgid "Temas"
+msgstr "Temas"
+
+msgid "O arquivo é muito grande. Tente um arquivo menor que 20MB."
+msgstr "El archivo es muy grande. Pruebe un archivo de menos de 20 MB."
+
+msgid "O arquivo não é um ZIP válido."
+msgstr "El archivo no es un zip válido."
+
+#, python-format
+msgid "Arquivo com extensão não permitida: %s"
+msgstr "Archivo con extensión incapaz: %s"
+
+msgid "O tema contém arquivos em caminhos não permitidos."
+msgstr "El tema contiene archivos de ruta no permitidos."
+
+msgid "O arquivo 'theme.json' não foi encontrado."
+msgstr "No se encontró el archivo 'thema.json'."
+
+#, python-format
+msgid "O campo obrigatório '%s' está ausente no theme.json."
+msgstr "El campo obligatorio '%s' está ausente en theme.json."
+
+msgid ""
+"Erro ao interpretar o arquivo theme.json. Verifique se o JSON está bem "
+"formado."
+msgstr ""
+"Error de interpretar el archivo theme.json. Asegúrese de que JSON esté bien "
+"formado."
+
+#, python-format
+msgid "Erro ao processar o arquivo do tema: %s"
+msgstr "Error Al procesar el archivo del tema: %s"
+
+msgid "Nome de referência para o background"
+msgstr "Nombre de referencia para el fondo"
+
+msgid "Imagem de fundo"
+msgstr "Fondo"
+
+msgid "Define se este background está ativo"
+msgstr "Define si este fondo está activo"
+
+msgid "Configuração de Background"
+msgstr "Configuración de fondo"
+
+msgid "Configurações de Background"
+msgstr "Configuración de fondo"
+
+msgid "Valor em Português"
+msgstr "Valor en portugués"
+
+msgid "Valor em Inglês"
+msgstr "Valor en inglés"
+
+msgid "Valor em Espanhol"
+msgstr "Valor en español"
+
+msgid "Texto"
+msgstr "Texto"
+
+msgid "Número"
+msgstr "Número"
+
+msgid "Booleano"
+msgstr "Booleano"
+
+msgid "Variável de Tema"
+msgstr "Variable de tema"
+
+msgid "Variáveis de Tema"
+msgstr "Variables de tema"
+
+msgid ""
+"O nome da variável só pode conter letras, números e underscores (_) e deve "
+"começar com uma letra ou underscore."
+msgstr ""
+"El nombre de la variable solo puede contener letras, números y subrayos (_) "
+"y debe comenzar con una letra o un guión bajo."
+
+msgid "Home"
+msgstr "Hogar"
+
+msgid "Acesso Negado"
+msgstr "Acceso denegado"
+
+msgid "Acesso Negado!"
+msgstr "¡Acceso denegado!"
+
+msgid "Você não tem permissão para acessar esta sala de chat."
+msgstr "No se le permite acceder a esta sala de chat."
+
+msgid "Chat Indisponível"
+msgstr "Chat no disponible"
+
+msgid "Chat Indisponível!"
+msgstr "¡Chat no disponible!"
+
+msgid "A solicitação"
+msgstr "La solicitud"
+
+msgid "foi"
+msgstr "el era"
+
+msgid "e não está mais disponível para conversa."
+msgstr "Y ya no está disponible para la conversación."
+
+msgid "Se você precisar de mais informações, entre em contato com o suporte."
+msgstr "Si necesita más información, comuníquese con el soporte."
+
+msgid "Chat da Solicitação"
+msgstr "Chat de la solicitud"
+
+msgid "Conversa sobre a"
+msgstr "Conversa sobre a"
+
+msgid "Protocolo:"
+msgstr "Protocolo:"
+
+msgid "Digite sua mensagem aqui..."
+msgstr "Ingrese su mensaje aquí ..."
+
+msgid "Selecionar Emoji"
+msgstr "Seleccionar emoji"
+
+msgid "Enviar"
+msgstr "Enviar"
+
+msgid "Configurações de Segurança"
+msgstr "Configuración de seguridad"
+
+msgid ""
+"Mantenha sua conta protegida ativando a autenticação em duas etapas (2FA)."
+msgstr ""
+"Mantenga su cuenta protegida activando la autenticación en dos pasos (2FA)."
+
+msgid "Autenticação em Duas Etapas (2FA)"
+msgstr "Autenticación de dos pasos (2fa)"
+
+msgid "A autenticação em duas etapas está ativada em sua conta."
+msgstr "La autenticación de dos pasos se activa en su cuenta."
+
+msgid "Desativar 2FA"
+msgstr "Desactivar"
+
+msgid ""
+"A autenticação em duas etapas não está ativada. Recomendamos ativá-la para "
+"melhorar a segurança."
+msgstr ""
+"La autenticación de dos pasos no está activada. Recomendamos activarlo para "
+"mejorar la seguridad."
+
+msgid "Ativar 2FA"
+msgstr "Activar 2FA"
+
+msgid "Tema não encontrado."
+msgstr "Tema no encontrado."
+
+msgid "Arquivo não encontrado no tema."
+msgstr "Archivo no se encuentra en el tema."
+
+msgid "Tempo Total"
+msgstr "Tiempo total"
+
+msgid "Tempo Python"
+msgstr "Tempo pitón"
+
+msgid "Tempo DB"
+msgstr "Tempo db"
+
+msgid "Total de Consultas"
+msgstr "Total de Consultas"
+
+msgid "Caminho"
+msgstr "Camino"
+
+msgid "Host"
+msgstr "Anfitrión"
+
+msgid "Porta"
+msgstr "Trayera"
+
+msgid "Tipo de Conteúdo"
+msgstr "Tipo de contenido"
+
+msgid "Corpo"
+msgstr "Cuerpo"
+
+msgid "User Agent"
+msgstr "Agente de usuario"
+
+msgid "Conteúdo da Resposta"
+msgstr "Contenido de respuesta"
+
+msgid "Código de Status da Resposta"
+msgstr "Código de Status da Resposta"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "Proxy Verificado"
+msgstr "Proxy Verificado"
+
+msgid "Auditor"
+msgstr "Auditor"
+
+msgid "Histórico"
+msgstr "Histórico"
+
+msgid "Históricos"
+msgstr "Históricos"
+
+msgid "Real-time Auditor Middleware Data"
+msgstr "Datos de middleware del auditor en tiempo real"
+
+msgid "Carregando dados..."
+msgstr "Cargando datos ..."
+
+msgid "Erro ao carregar os dados de auditoria. Tente novamente."
+msgstr "Error de carga de los datos de auditoría. Intentar otra vez."
+
+msgid "Date:"
+msgstr "Fecha:"
+
+msgid "Path:"
+msgstr "Camino:"
+
+msgid "Total Time:"
+msgstr "Tiempo total:"
+
+msgid "Python Time:"
+msgstr "Tiempo de Python:"
+
+msgid "DB Time:"
+msgstr "Tiempo de DB:"
+
+msgid "Total Queries:"
+msgstr "Consultas totales:"
+
+msgid "Method:"
+msgstr "Método:"
+
+msgid "User Agent:"
+msgstr "Agente de usuario:"
+
+msgid "Response Status Code:"
+msgstr "Código de estado de respuesta:"
+
+msgid "Nenhum dado de auditoria encontrado."
+msgstr "No se encontraron datos de auditoría."
+
+msgid "Ordem"
+msgstr "Orden"
+
+msgid "Categoria de Download"
+msgstr "Categoria de Download"
+
+msgid "Categorias de Download"
+msgstr "Categorias de Download"
+
+msgid "Cliente"
+msgstr "Cliente"
+
+msgid "Patch"
+msgstr "Parche"
+
+msgid "Guia"
+msgstr "Guía"
+
+msgid "Outro"
+msgstr "Otro"
+
+msgid "Link Direto"
+msgstr "Enlace directo"
+
+msgid "Categoria"
+msgstr "Categoría"
+
+msgid "Tipo de Download"
+msgstr "Tipo de Download"
+
+msgid "Tipo de Hospedagem"
+msgstr "Tipo de alojamiento"
+
+msgid "URL"
+msgstr "Url"
+
+msgid "Tamanho do Arquivo"
+msgstr "Tamaño de archivo"
+
+msgid "Contagem de Downloads"
+msgstr "Descargar recuento"
+
+msgid "Link de Download"
+msgstr "Link de Download"
+
+msgid "Links de Download"
+msgstr "Links de Download"
+
+msgid "Downloads"
+msgstr "Descargas"
+
+msgid "Pergunta"
+msgstr "Pregunta"
+
+msgid "Está público"
+msgstr "Está público"
+
+msgid "Pergunta Frequente"
+msgstr "Cuestión frecuente"
+
+msgid "Perguntas Frequentes"
+msgstr "Preguntas frecuentes"
+
+msgid "Pode visualizar o índice"
+msgstr "Pode visualizar o índice"
+
+msgid "Inglês"
+msgstr "Inglés"
+
+msgid "Espanhol"
+msgstr "Español"
+
+msgid "FAQ"
+msgstr "Preguntas frecuentes"
+
+msgid "Idioma"
+msgstr "Idioma"
+
+msgid "Resposta"
+msgstr "Respuesta"
+
+msgid "Tradução de FAQ"
+msgstr "Traducción de preguntas frecuentes"
+
+msgid "Traduções de FAQ"
+msgstr "Traducciones de preguntas frecuentes"
+
+msgid "Ajuda"
+msgstr "Ayuda"
+
+msgid ""
+"Encontre as respostas para as perguntas mais comuns feitas pelos nossos "
+"usuários."
+msgstr ""
+"Encuentre las respuestas a las preguntas más comunes que hacen nuestros "
+"usuarios."
+
+msgid "Não há perguntas frequentes disponíveis no momento."
+msgstr "No hay preguntas frecuentes disponibles en este momento."
+
+msgid "First Name"
+msgstr "Nombre de pila"
+
+msgid "Last Name"
+msgstr "Apellido"
+
+msgid "Email"
+msgstr "Correo electrónico"
+
+msgid "Biography"
+msgstr "Biografía"
+
+msgid "CPF"
+msgstr "CPF"
+
+msgid "Gender"
+msgstr "Género"
+
+msgid "Profile Picture"
+msgstr "Foto de perfil"
+
+msgid "Street"
+msgstr "Calle"
+
+msgid "Number"
+msgstr "Número"
+
+msgid "Complement"
+msgstr "Complementar"
+
+msgid "Neighborhood"
+msgstr "Vecindario"
+
+msgid "City"
+msgstr "Ciudad"
+
+msgid "State"
+msgstr "Estado"
+
+msgid "Postal Code"
+msgstr "Código Postal"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "example@company.com"
+msgstr "example@company.com"
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Confirm Password"
+msgstr "confirmar Contraseña"
+
+msgid "Your Username"
+msgstr "Tu nombre de usuario"
+
+msgid "Your Password"
+msgstr "Tu contraseña"
+
+msgid "Enter your email"
+msgstr "Ingrese su correo electrónico"
+
+msgid "New Password"
+msgstr "Nueva contraseña"
+
+msgid "Confirm New Password"
+msgstr "Confirmar una nueva contraseña"
+
+msgid "Old Password"
+msgstr "Contraseña anterior"
+
+msgid "Staff Status"
+msgstr "Estado del personal"
+
+msgid "Superuser Status"
+msgstr "Estado de superusuario"
+
+msgid "Groups"
+msgstr "Grupos"
+
+msgid "User Permissions"
+msgstr "Permisos de usuario"
+
+msgid "Email Verified"
+msgstr "Correo electrónico verificado"
+
+msgid "2FA Enabled"
+msgstr "2FA habilitado"
+
+msgid "Credits"
+msgstr "Créditos"
+
+msgid "Nome de usuário"
+msgstr "Nombre de usuario"
+
+msgid "Use apenas letras e números. Sem espaços ou símbolos."
+msgstr "Use solo letras y números. Sin espacios o símbolos."
+
+msgid "Foto de perfil"
+msgstr "Foto de perfil"
+
+msgid "Biografia"
+msgstr "Biografía"
+
+msgid "Gênero"
+msgstr "Género"
+
+msgid "E-mail verificado"
+msgstr "E-mail verificado"
+
+msgid "2FA habilitado"
+msgstr "2FA habilitado"
+
+msgid "Fichas"
+msgstr "Fichas"
+
+msgid "Usuários"
+msgstr "Usuarios"
+
+msgid "Rua"
+msgstr "Dos"
+
+msgid "Complemento"
+msgstr "Complemento"
+
+msgid "Bairro"
+msgstr "Vecindario"
+
+msgid "Cidade"
+msgstr "Ciudad"
+
+msgid "Estado"
+msgstr "Estado"
+
+msgid "CEP"
+msgstr "BOLSILLO"
+
+msgid "Endereço de Usuário"
+msgstr "Dirección de usuario"
+
+msgid "Endereços de Usuários"
+msgstr "Direcciones de usuario"
+
+msgid "Abreviação"
+msgstr "Abreviatura"
+
+msgid "Estados"
+msgstr "Estados"
+
+msgid "Cidades"
+msgstr "Ciudades"
+
+msgid "Dashboard"
+msgstr "Panel"
+
+msgid "Dashboards"
+msgstr "Paneles"
+
+msgid "Título"
+msgstr "Título"
+
+msgid "Conteúdo"
+msgstr "Contenido"
+
+msgid "Tradução de Dashboard"
+msgstr "Traducción del tablero"
+
+msgid "Traduções de Dashboards"
+msgstr "Traducciones de tablero"
+
+msgid "Último bônus de login"
+msgstr "Último bono de inicio de sesión"
+
+msgid "Ícone"
+msgstr "Icono"
+
+msgid "Conquista"
+msgstr "Conquista"
+
+msgid "Conquistas"
+msgstr "Conquistas"
+
+msgid "Data da Conquista"
+msgstr "Data da Conquista"
+
+msgid "Conquista de Usuário"
+msgstr "Conquista de usuarios"
+
+msgid "Conquistas de Usuários"
+msgstr "Logros de usuario"
+
+msgid "Ativar Autenticação em 2 Etapas"
+msgstr "Activar la autenticación en 2 pasos"
+
+msgid "Escaneie o QR Code abaixo com o Google Authenticator ou similar."
+msgstr ""
+"Escanee el código QR a continuación con Google Authenticator o similar."
+
+msgid "Digite o código do aplicativo"
+msgstr "Ingrese el código de aplicación"
+
+msgid "Esqueceu sua senha?"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid ""
+"Digite seu e-mail abaixo e enviaremos instruções para redefinir sua senha."
+msgstr ""
+"Ingrese su correo electrónico a continuación y enviaremos instrucciones para"
+" redefinir su contraseña."
+
+msgid "Seu E-mail"
+msgstr "Tu correo electrónico"
+
+msgid "seunome@email.com"
+msgstr "seunome@email.com"
+
+msgid "Enviar instruções"
+msgstr "Enviar instrucciones"
+
+msgid "← Voltar para o login"
+msgstr "← Volver al inicio de sesión"
+
+msgid "Melhor prevenir do que remediar."
+msgstr "Mejor seguro que curar."
+
+msgid "Sua Senha"
+msgstr "Tu contraseña"
+
+msgid "Desbloquear"
+msgstr "Desbloquear"
+
+msgid "Senha alterada com sucesso"
+msgstr "Contraseña cambiada con éxito"
+
+msgid ""
+"Sua senha foi atualizada com sucesso. Agora você pode fazer login "
+"normalmente."
+msgstr ""
+"Su contraseña se ha actualizado correctamente. Ahora puedes iniciar sesión "
+"normalmente."
+
+msgid "→ Ir para o login"
+msgstr "→ Ir para o login"
+
+msgid "Alterar senha"
+msgstr "Cambiar la contraseña"
+
+msgid "Salvar nova senha"
+msgstr "Ahorrar"
+
+msgid "Senha redefinida"
+msgstr "Contraseña redefinida"
+
+msgid ""
+"Sua senha foi redefinida com sucesso. Faça login novamente para continuar "
+"sua jornada."
+msgstr ""
+"Su contraseña ha sido redefinida correctamente. Inicie sesión nuevamente "
+"para continuar su viaje."
+
+msgid "Voltar para o login"
+msgstr "Vuelve al inicio de sesión"
+
+msgid "Email Enviado"
+msgstr "Email Enviado"
+
+msgid ""
+"Um link foi enviado para seu email. Acesse-o para redefinir sua senha e "
+"continuar sua jornada."
+msgstr ""
+"Se envió un enlace a su correo electrónico. Visítelo para redefinir su "
+"contraseña y continuar su viaje."
+
+msgid "Conta mestre criada com sucesso!"
+msgstr "Cuenta maestra creada con éxito!"
+
+msgid "Agora você precisa criar uma conta no servidor para jogar."
+msgstr "Ahora necesita crear una cuenta en el servidor para jugar."
+
+msgid "Criar Conta do Lineage 2"
+msgstr "Crear cuenta de linaje 2"
+
+msgid "Redefinir Senha"
+msgstr "Contraseña de redefinición"
+
+msgid "Entre no Reino"
+msgstr "Entre no Reino"
+
+msgid "Lembrar de mim"
+msgstr "Acuérdate de mí"
+
+msgid "Esqueceu a senha?"
+msgstr "¿Olvidó la contraseña?"
+
+msgid "Entrar no Reino"
+msgstr "Entrar no Reino"
+
+msgid "Ainda não tem conta?"
+msgstr "¿No tienes una cuenta todavía?"
+
+msgid "Forje seu destino"
+msgstr "Forje seu destino"
+
+msgid "Voltar para o início"
+msgstr "Volver al principio"
+
+msgid "Crie sua conta mestre"
+msgstr "Crea tu cuenta maestra"
+
+msgid "Preencha os campos abaixo para se juntar à aventura."
+msgstr "Complete los campos a continuación para unirse a la aventura."
+
+msgid "Eu concordo com os"
+msgstr "Estoy de acuerdo con"
+
+msgid "termos e condições"
+msgstr "Términos y condiciones"
+
+msgid "Registrar"
+msgstr "Registrar"
+
+msgid "← Já tem conta? Faça login"
+msgstr "← ¿Ya tienes una cuenta? Acceso"
+
+msgid "Voltar para o painel"
+msgstr "Regresar al panel"
+
+msgid "Verificação em 2 Etapas"
+msgstr "Verificación en 2 pasos"
+
+msgid "Insira o código do Google Authenticator para continuar."
+msgstr "Insira o código do Google Authenticator para continuar."
+
+msgid "Código de Verificação"
+msgstr "Código de verificación"
+
+msgid "Insira o código de 6 dígitos"
+msgstr "Insira o código de 6 dígitos"
+
+msgid "Verificar Código"
+msgstr "Verificar Código"
+
+msgid "Painel do Jogador"
+msgstr "Panel de jugadores"
+
+msgid "Tudo que você precisa em um só lugar."
+msgstr "Todo lo que necesitas en un solo lugar."
+
+msgid "Olá,"
+msgstr "Hola,"
+
+msgid "Confira seu progresso abaixo."
+msgstr "Echa un vistazo a tu progreso a continuación."
+
+msgid "Doação"
+msgstr "Donación"
+
+msgid "Conta L2"
+msgstr "Conta L2"
+
+msgid "Bônus diário recebido! +25 XP"
+msgstr "¡Bonificación diaria recibida! +25 xp"
+
+msgid "Saldo:"
+msgstr "Saldo:"
+
+msgid "Nenhuma carteira encontrada."
+msgstr "No se encuentra la billetera."
+
+msgid "Total criados:"
+msgstr "Total criados:"
+
+msgid "Você ainda não é um apoiador."
+msgstr "Todavía no eres un partidario."
+
+msgid "Inventários"
+msgstr "Inventarios"
+
+msgid "Ver Inventário"
+msgstr "Ver inventario"
+
+msgid "Nenhum inventário encontrado."
+msgstr "No se encuentra ningún inventario."
+
+msgid "🏆 Conquistas"
+msgstr "🏆 Conquistas"
+
+msgid "Conquista bloqueada"
+msgstr "Conquista bloqueada"
+
+msgid "Próximo"
+msgstr "Próximo"
+
+msgid "Você ainda não desbloqueou nenhuma conquista."
+msgstr "Todavía no has desbloqueado ningún logro."
+
+msgid "Painel Definitivo Lineage - PDL"
+msgstr "Painel Definitivo Lineage - PDL"
+
+msgid "Gerenciamento de Servidores de Lineage 2 com Python e Django"
+msgstr "Administración de servidores de Lineage 2 con Python y Django"
+
+msgid "A Solução Web Perfeita para Administração e Atração de Jogadores"
+msgstr ""
+"La solución web perfecta para la administración y la atracción de los "
+"jugadores"
+
+msgid "Por que usar Django e Python?"
+msgstr "Por que usar Django e Python?"
+
+msgid ""
+"Django é uma framework poderosa, segura e com uma administração pronta para "
+"uso, ideal para gerenciar servidores privados de Lineage 2."
+msgstr ""
+"Django es una administración potente, segura y lista para usar, ideal para "
+"administrar servidores privados de linaje 2."
+
+msgid "Desenvolvimento rápido e escalável"
+msgstr "Desarrollo rápido y escalable"
+
+msgid "Sistema de administração completo"
+msgstr "Sistema de administración completo"
+
+msgid "Integração com APIs e bancos de dados"
+msgstr "Integración con API y bases de datos"
+
+msgid "Alta segurança e flexibilidade"
+msgstr "Alta seguridad y flexibilidad"
+
+msgid "Django Logo"
+msgstr "Logotipo de Django"
+
+msgid "Tecnologias de Ponta"
+msgstr "Estado de -the -t -Art Technologies"
+
+msgid "Django"
+msgstr "Django"
+
+msgid "Backbone sólido com segurança e escalabilidade."
+msgstr "Columna vertebral sólida con seguridad y escalabilidad."
+
+msgid "Docker + Nginx"
+msgstr "Docker + nginx"
+
+msgid "Deploy e entrega eficientes em qualquer ambiente."
+msgstr "Implementar y entregar eficiente en cualquier entorno."
+
+msgid "Celery + Redis"
+msgstr "Celery + Redis"
+
+msgid "Execução de tarefas assíncronas com performance."
+msgstr "Tareas asincrónicas de rendimiento."
+
+msgid "Painel Administrativo"
+msgstr "Panel administrativo"
+
+msgid "Gerenciamento de jogadores e servidores"
+msgstr "Gestión de jugadores y servidores"
+
+msgid "Eventos, estatísticas e monitoramento"
+msgstr "Eventos, estadísticas y monitoreo"
+
+msgid "Integração com sistemas de pagamento"
+msgstr "Integración con sistemas de pago"
+
+msgid "Site Público"
+msgstr "Site Público"
+
+msgid "Cadastro, login e personalização de conta"
+msgstr "Registro, inicio de sesión y personalización de cuentas"
+
+msgid "Status do servidor e rankings"
+msgstr "Estado Do Ranking de servidor E"
+
+msgid "Notícias e suporte ao jogador"
+msgstr "Apoyo para noticias y jugadores"
+
+msgid "Participe do Futuro dos Servidores Privados"
+msgstr "Participe do Futuro dos Servidores Privados"
+
+msgid ""
+"O PDL é open source e está em constante evolução. Contribua, implemente, "
+"personalize e transforme a forma como servidores Lineage 2 são "
+"administrados."
+msgstr ""
+"El PDL es de código abierto y está constantemente evolucionando. Contribuir,"
+" implementar, personalizar y girar la forma en que se administran los "
+"servidores de Lineage 2."
+
+msgid "Ver Projeto no GitHub"
+msgstr "Ver Projeto no GitHub"
+
+msgid "Editar Endereço"
+msgstr "Dirección de edición"
+
+msgid "Cadastrar Endereço"
+msgstr "Registro de la dirección"
+
+msgid "Logradouro"
+msgstr "Mierda"
+
+msgid "Editar Avatar"
+msgstr "Editar Avatar"
+
+msgid "Voltar para o perfil"
+msgstr "Voltar para o perfil"
+
+msgid "Salvar Avatar"
+msgstr "Salvar Avatar"
+
+msgid "Editar Perfil"
+msgstr "Editar Perfil"
+
+msgid "Dashboard de Logs"
+msgstr "Dashboard de Logs"
+
+msgid "Nenhum log encontrado."
+msgstr "No se encontraron registros."
+
+msgid "Navegação de páginas"
+msgstr "Páginas"
+
+msgid "Primeira"
+msgstr "Primero"
+
+msgid "Página"
+msgstr "Página"
+
+msgid "de"
+msgstr "de"
+
+msgid "Última"
+msgstr "Última"
+
+msgid "Perfil/Biografia"
+msgstr "Perfil/Biografia"
+
+msgid "Endereço de Email"
+msgstr "Dirección de correo electrónico"
+
+msgid "N/A"
+msgstr "N / A"
+
+msgid "Sobrenome"
+msgstr "Apellido"
+
+msgid "Endereço"
+msgstr "DIRECCIÓN"
+
+msgid "Sobre Você"
+msgstr "Acerca de ti"
+
+msgid "000.000.000-00"
+msgstr "000.000.000-00"
+
+msgid "Não Binário"
+msgstr "No binario"
+
+msgid "Prefiro não dizer"
+msgstr "Prefiero no decir"
+
+msgid "Imagem de perfil"
+msgstr "Imagen de perfil"
+
+msgid "Imagem de perfil padrão"
+msgstr "Imagen de perfil predeterminada"
+
+msgid "O sucesso não é garantido, mas o fracasso é certo se você não tentar."
+msgstr ""
+"El éxito no está garantizado, pero el fracaso es seguro si no lo intenta."
+
+msgid ""
+"Encontre inspiração em cada desafio e mantenha-se comprometido com o seu "
+"crescimento pessoal e profissional. Lembre-se sempre de que o esforço que "
+"você coloca hoje moldará o seu amanhã."
+msgstr ""
+"Encuentre inspiración en cada desafío y manténgase comprometido con su "
+"crecimiento personal y profesional. Recuerde siempre que el esfuerzo que "
+"pones hoy dará forma a tu mañana."
+
+msgid "Ver Lista de Amigos"
+msgstr "Ver Lista de Amigos"
+
+msgid "Conta não verificada"
+msgstr "Cuenta no verificada"
+
+msgid "Seu e-mail ainda não foi verificado."
+msgstr "Su correo electrónico aún no ha sido revisado."
+
+msgid "Reenviar E-mail de Verificação"
+msgstr "Correo electrónico de verificación de reinicio"
+
+msgid "2FA Desativado"
+msgstr "2folio"
+
+msgid "A autenticação em duas etapas ainda não está ativada em sua conta."
+msgstr "La autenticación en dos pasos aún no se activa en su cuenta."
+
+msgid "Ativar Autenticação 2FA"
+msgstr "Activar la autenticación 2fa"
+
+msgid "Reenviar Verificação"
+msgstr "Resolución de verificación"
+
+msgid "Seu e-mail"
+msgstr "Tu correo electrónico"
+
+msgid "Reenviar"
+msgstr "Reenviar"
+
+msgid "Registration failed!"
+msgstr "¡Falló en el registro!"
+
+msgid "Password changed successfully!"
+msgstr "¡La contraseña cambió con éxito!"
+
+msgid "Password change failed!"
+msgstr "¡El cambio de contraseña falló!"
+
+msgid "Password reset email sent!"
+msgstr "¡Restablecer la contraseña por correo electrónico enviado!"
+
+msgid "Failed to send password reset email!"
+msgstr ""
+"¡No se pudo enviar el correo electrónico de restablecimiento de contraseña!"
+
+msgid "Password has been reset!"
+msgstr "¡Se ha restablecido la contraseña!"
+
+msgid "Password reset failed!"
+msgstr "¡El reinicio de la contraseña falló!"
+
+msgid "Notícia privada não está disponível."
+msgstr "Las noticias privadas no están disponibles."
+
+msgid "Tradução não disponível para esta notícia."
+msgstr "Traducción no disponible para esta noticia."
+
+msgid "Wiki - Lineage 2"
+msgstr "Wiki - linaje 2"
+
+msgid "Complete guide and information about Lineage 2 server"
+msgstr "Guía completa e información sobre Lineage 2 Server"
+
+msgid "General Information - Wiki"
+msgstr "Información general - Wiki"
+
+msgid "General information about the server"
+msgstr "Información general sobre el servidor"
+
+msgid "Server Rates - Wiki"
+msgstr "Tarifas del servidor - Wiki"
+
+msgid "Information about server rates and experience"
+msgstr "Información sobre tarifas y experiencia del servidor"
+
+msgid "Raid Bosses and Instances - Wiki"
+msgstr "Jefes e instancias de RAID - Wiki"
+
+msgid "Information about raid bosses and instances"
+msgstr "Información sobre jefes e instancias de RAID"
+
+msgid "Game Assistance - Wiki"
+msgstr "Asistencia al juego - Wiki"
+
+msgid "Help and assistance for players"
+msgstr "Ayuda y asistencia para los jugadores"
+
+msgid "Events Guide - Wiki"
+msgstr "Guía de eventos - Wiki"
+
+msgid "Guide for server events"
+msgstr "Guía para eventos del servidor"
+
+msgid "Server Updates - Wiki"
+msgstr "Actualizaciones del servidor - Wiki"
+
+msgid "Latest server updates and changes"
+msgstr "Últimas actualizaciones y cambios del servidor"
+
+msgid "Server Features - Wiki"
+msgstr "Características del servidor - wiki"
+
+msgid "Information about server features"
+msgstr "Información sobre las características del servidor"
+
+msgid "Usuário que iniciou a amizade."
+msgstr "Usuario que comenzó la amistad."
+
+msgid "Amigo"
+msgstr "Amigo"
+
+msgid "Usuário que é amigo do primeiro usuário."
+msgstr "Usuario que es amigo del primer usuario."
+
+msgid "Data de Criação"
+msgstr "Fecha de creación"
+
+msgid "Data e hora em que a amizade foi criada."
+msgstr "Fecha y hora cuando se creó la amistad."
+
+msgid "Aceita"
+msgstr "Aceptado"
+
+msgid "Indica se a amizade foi aceita."
+msgstr "Indica si la amistad ha sido aceptada."
+
+msgid "Amizade"
+msgstr "Amistad"
+
+msgid "Amizades"
+msgstr "Amistad"
+
+msgid "Usuário 1"
+msgstr "Usuario 1"
+
+msgid "Primeiro usuário no chat."
+msgstr "Primer usuario en el chat."
+
+msgid "Usuário 2"
+msgstr "Usuario 2"
+
+msgid "Segundo usuário no chat."
+msgstr "Según el usuario en el chat."
+
+msgid "Última Mensagem"
+msgstr "Último mensaje"
+
+msgid "Conteúdo da última mensagem no chat."
+msgstr "Contenido del último mensaje en el chat."
+
+msgid "Última Atualização"
+msgstr "Última actualización"
+
+msgid "Data e hora da última atualização do chat."
+msgstr "Fecha y hora de la última actualización de chat."
+
+msgid "Conversação"
+msgstr "Conversación"
+
+msgid "Conversações"
+msgstr "Conversaciones"
+
+msgid "Chat"
+msgstr "Charlar"
+
+msgid "Chat ao qual a mensagem pertence."
+msgstr "Chatear con el que pertenece el mensaje."
+
+msgid "Usuário que enviou a mensagem."
+msgstr "Usuario que envió el mensaje."
+
+msgid "Conteúdo da mensagem."
+msgstr "Contenido de mensaje."
+
+msgid "Data e Hora"
+msgstr "Data e Hora"
+
+msgid "Data e hora em que a mensagem foi enviada."
+msgstr "Fecha y hora se envió el mensaje."
+
+msgid "Lida"
+msgstr "Lida"
+
+msgid "Indica se a mensagem foi lida."
+msgstr "Indica si el mensaje fue leído."
+
+msgid "Histórico de Conversas"
+msgstr "Histórico de Conversas"
+
+msgid "Históricos de Conversas"
+msgstr "Históricos de Conversas"
+
+msgid "Mensagens"
+msgstr "Mensajes"
+
+msgid "Converse com seus amigos de forma rápida e prática."
+msgstr "Habla con tus amigos de manera rápida y práctica."
+
+msgid "Lista de Amigos"
+msgstr "Lista de Amigos"
+
+msgid "Procurar Amigo..."
+msgstr "Procurar Amigo..."
+
+msgid "Gerenciar Amigos"
+msgstr "Gerenciar Amigos"
+
+msgid "Clique em um amigo para iniciar o chat."
+msgstr "Haga clic en un amigo para comenzar el chat."
+
+msgid "Digite uma mensagem..."
+msgstr "Ingrese un mensaje ..."
+
+msgid "Amigos"
+msgstr "Amigos"
+
+msgid "Amigos e Conexões"
+msgstr "Amigos y conexiones"
+
+msgid "Meus Amigos"
+msgstr "Mis amigos"
+
+msgid "default profile image"
+msgstr "Imagen de perfil predeterminada"
+
+msgid "Deixar de Ser Amigo"
+msgstr "Deja de ser un amigo"
+
+msgid "Nenhum amigo adicionado ainda."
+msgstr "No hay amigos agregados todavía."
+
+msgid "Adicionar Novos Amigos"
+msgstr "Agregar nuevos amigos"
+
+msgid "Enviar Pedido"
+msgstr "Enviar Pedido"
+
+msgid "Nenhum usuário disponível para adicionar."
+msgstr "No hay usuario disponible para agregar."
+
+msgid "Convites Pendentes"
+msgstr "Invitaciones pendientes"
+
+msgid "Recusar"
+msgstr "Rechazar"
+
+msgid "Nenhum convite de amizade recebido."
+msgstr "No recibió invitación a la amistad."
+
+msgid "Published"
+msgstr "Publicado"
+
+msgid "Private"
+msgstr "Privado"
+
+msgid "Summary"
+msgstr "Resumen"
+
+msgid ""
+"Endereço amigável da notícia, gerado automaticamente a partir do título."
+msgstr ""
+"Dirección de noticias amistosas, generada automáticamente a partir del "
+"título."
+
+msgid "Imagem de capa da notícia (opcional)."
+msgstr "Imagen de portada de noticias (opcional)."
+
+msgid "Usuário responsável pela publicação."
+msgstr "Usuario responsable de la publicación."
+
+msgid "Data de Publicação"
+msgstr "Fecha de publicación"
+
+msgid "Data e hora em que a notícia foi ou será publicada."
+msgstr "Fecha y hora Las noticias fueron o serán publicadas."
+
+msgid "Publicado"
+msgstr "Publicado"
+
+msgid "Indica se a notícia está visível ao público."
+msgstr "Indica si las noticias son visibles para el público."
+
+msgid "Privado"
+msgstr "Privado"
+
+msgid "Se marcado, a notícia será visível apenas para usuários autorizados."
+msgstr ""
+"Si se marca, las noticias serán visibles solo para los usuarios autorizados."
+
+msgid "Notícia"
+msgstr "Noticias"
+
+msgid "Notícias"
+msgstr "Noticias"
+
+msgid "Pode visualizar a lista de notícias"
+msgstr "Puedes ver la lista de noticias"
+
+msgid "Pode visualizar o detalhe da notícia"
+msgstr "Puedes ver el detalle de las noticias"
+
+msgid "Idioma da tradução."
+msgstr "Lenguaje de traducción."
+
+msgid "Título da notícia neste idioma."
+msgstr "Título da notícia neste idioma."
+
+msgid "Resumo"
+msgstr "Resumen"
+
+msgid "Resumo opcional para exibição em listas."
+msgstr "Resumen opcional para la visualización de la lista."
+
+msgid "Tradução de Notícia"
+msgstr "Traducción de noticias"
+
+msgid "Traduções de Notícias"
+msgstr "Traducciones de noticias"
+
+msgid "Detalhes da Notícia"
+msgstr "Detalles de noticias"
+
+msgid "Voltar para as notícias"
+msgstr "Volver a las noticias"
+
+msgid "Fique por dentro das últimas novidades e atualizações exclusivas."
+msgstr ""
+"Manténgase al tanto de las últimas noticias y actualizaciones exclusivas."
+
+msgid "Leia mais"
+msgstr "leer más"
+
+msgid "Não há notícias privadas disponíveis no momento."
+msgstr "No hay noticias privadas disponibles en este momento."
+
+msgid "Abrir link"
+msgstr "Abrir link"
+
+msgid "Link de Redirecionamento"
+msgstr "Enlace de redirección"
+
+msgid ""
+"Usuário relacionado à notificação (pode ser nulo para notificações "
+"públicas)."
+msgstr ""
+"El usuario relacionado con la notificación (puede ser nulo para las "
+"notificaciones públicas)."
+
+msgid "Tipo de Notificação"
+msgstr "Tipo de notificación"
+
+msgid "Tipo ou categoria da notificação."
+msgstr "Tipo de notificación o categoría."
+
+msgid "Mensagem da notificação (criptografada)."
+msgstr "Mensaje de notificación (encriptado)."
+
+msgid "Visualizada"
+msgstr "Visualizada"
+
+msgid "Indica se a notificação foi visualizada pelo usuário."
+msgstr "Indica si el usuario vio la notificación."
+
+msgid "Link da Notificação"
+msgstr "Enlace de notificación"
+
+msgid "URL opcional para redirecionar ao clicar na notificação."
+msgstr "URL opcional para redirigir al hacer clic en la notificación."
+
+msgid "Notificação"
+msgstr "Notificación"
+
+msgid "Notificações"
+msgstr "Notificaciones"
+
+msgid "Usuário que visualizou a notificação pública."
+msgstr "Usuario que visualizó la notificación pública."
+
+msgid "Referência à notificação visualizada."
+msgstr "Referencia a la notificación vista."
+
+msgid "Indica se o usuário visualizou essa notificação pública."
+msgstr "Indica si el usuario ha visto esta notificación pública."
+
+msgid "Visualização de Notificação Pública"
+msgstr "Visualización de notificación pública"
+
+msgid "Visualizações de Notificações Públicas"
+msgstr "Vistas de las notificaciones públicas"
+
+msgid "Marcar todas como lidas"
+msgstr "Marcar todas como lidas"
+
+msgid "Limpar todas as notificações"
+msgstr "Limpiar todas las notificaciones"
+
+msgid "Notificações Privadas"
+msgstr "Notificaciones privadas"
+
+msgid "Não lida"
+msgstr "No amado"
+
+msgid "Detalhes da Notificação"
+msgstr "Detalles de notificación"
+
+msgid "Não há notificações privadas."
+msgstr "No hay notificaciones privadas."
+
+msgid "Notificações Públicas"
+msgstr "Notificaciones públicas"
+
+msgid "Não há notificações públicas."
+msgstr "No hay notificaciones públicas."
+
+msgid "Tem certeza que deseja limpar todas as notificações?"
+msgstr "¿Estás seguro de que quieres limpiar todas las notificaciones?"
+
+msgid "Protocolo"
+msgstr "Protocolo"
+
+msgid "Código de identificação único da solicitação."
+msgstr "Código de identificación único de la solicitud."
+
+msgid "Status atual da solicitação."
+msgstr "Estado actual de la solicitud."
+
+msgid "Usuário que iniciou a solicitação."
+msgstr "Usuario que comenzó la solicitud."
+
+msgid "Solicitação criada."
+msgstr "Solicitud creada."
+
+msgid "Solicitação"
+msgstr "Pedido"
+
+msgid "Solicitações"
+msgstr "Solicitudes"
+
+msgid "Participante da Solicitação"
+msgstr "Participante de la solicitud"
+
+msgid "Participantes da Solicitação"
+msgstr "Participantes de la solicitud"
+
+msgid "Descrição da ação realizada."
+msgstr "Descripción de la acción realizada."
+
+msgid "Momento em que a ação foi registrada."
+msgstr "Momento en que se registró la acción."
+
+msgid "Imagem opcional associada à ação."
+msgstr "Imagen opcional asociada con la acción."
+
+msgid "Usuário que realizou a ação."
+msgstr "Usuario que realizó la acción."
+
+msgid "Histórico da Solicitação"
+msgstr "Historial de solicitud"
+
+msgid "Históricos da Solicitação"
+msgstr "Historia de la solicitud"
+
+msgid "Adicionar Evento ao Histórico"
+msgstr "Agregar evento a la historia"
+
+msgid "Descrição do Evento"
+msgstr "Descripción del evento"
+
+msgid "Imagem (opcional)"
+msgstr "Imagen (opcional)"
+
+msgid "Adicionar Evento"
+msgstr "Adicionar Evento"
+
+msgid "Criar Solicitação"
+msgstr "Crear solicitud"
+
+msgid "Criar Nova Solicitação"
+msgstr "Crear nueva solicitud"
+
+msgid "Informações Importantes:"
+msgstr "Información importante:"
+
+msgid ""
+"As solicitações são tickets de suporte para iniciar um chat com a "
+"administração."
+msgstr ""
+"Las solicitudes son boletos de soporte para comenzar un chat con la "
+"administración."
+
+msgid ""
+"Enquanto o status da solicitação estiver como Pendente, o chat permanecerá "
+"ativo."
+msgstr ""
+"Mientras el estado de la solicitud está pendiente, el chat permanecerá "
+"activo."
+
+msgid ""
+"Após a solicitação ser concluída, o chat será desabilitado e o atendimento "
+"encerrado."
+msgstr ""
+"Después de completar la solicitud, el chat se deshabilitará y el servicio "
+"finalice."
+
+msgid "Somente uma solicitação pendente pode existir por vez."
+msgstr "Solo puede existir una solicitud pendiente a la vez."
+
+msgid ""
+"Seja claro e objetivo ao abrir uma solicitação para que a equipe possa "
+"ajudá-lo de forma mais eficaz."
+msgstr ""
+"Sea claro y objetivo al abrir una solicitud para que el equipo pueda "
+"ayudarlo de manera más efectiva."
+
+msgid ""
+"Após criar a solicitação, acesse o dashboard e clique em Chat para iniciar o"
+" atendimento."
+msgstr ""
+"Después de crear la solicitud, vaya al tablero y haga clic en chat para "
+"iniciar el servicio."
+
+msgid ""
+"O atendimento não é em tempo real, ou seja, você criará a solicitação e "
+"aguardará a resposta da equipe."
+msgstr ""
+"El servicio no está en tiempo real, es decir, creará la solicitud y esperará"
+" la respuesta del equipo."
+
+msgid "Detalhe da Solicitação"
+msgstr "Detalle de solicitud"
+
+msgid "Ir para o Chat"
+msgstr "Ir para o Chat"
+
+msgid "Data da Solicitação:"
+msgstr "Fecha de solicitud:"
+
+msgid "Participantes"
+msgstr "Participantes"
+
+msgid "Nenhum participante cadastrado."
+msgstr "No hay participante registrado."
+
+msgid "Histórico de Eventos"
+msgstr "Histórico de Eventos"
+
+msgid "Sistema"
+msgstr "Sistema"
+
+msgid "Nenhum evento registrado."
+msgstr "No hay evento registrado."
+
+msgid "Lista de Solicitações"
+msgstr "Lista de solicitudes"
+
+msgid "Situação"
+msgstr "Situación"
+
+msgid "Data da Solicitação"
+msgstr "Fecha de solicitud"
+
+msgid "Ver Solicitação"
+msgstr "Ver solicitud"
+
+msgid "Nenhuma solicitação encontrada."
+msgstr "No se encontró solicitud."
+
+msgid "Run the selected action"
+msgstr "Ejecute la acción seleccionada"
+
+msgid "Go"
+msgstr "Ir"
+
+msgid "Click here to select the objects across all pages"
+msgstr "Haga clic aquí para seleccionar los objetos en todas las páginas"
+
+#, python-format
+msgid ""
+"\n"
+"                            Select all %(total_count)s %(module_name)s"
+msgstr ""
+"\n"
+"Seleccione todo %(total_count)s S %(module_name)s S"
+
+msgid "Clear selection"
+msgstr "Selección clara"
+
+msgid ""
+"First, enter a username and password. Then, you'll be able to edit more user"
+" options."
+msgstr ""
+"Primero, ingrese un nombre de usuario y contraseña. Luego, podrá editar más "
+"opciones de usuario."
+
+msgid "Enter a username and password."
+msgstr "Ingrese un nombre de usuario y contraseña."
+
+#, python-format
+msgid ""
+"\n"
+"                            Digite uma nova senha para o usuário\n"
+"                            <strong>%(username)s</strong>.\n"
+"                        "
+msgstr ""
+"\n"
+"Ingrese una nueva contraseña para el usuario\n"
+"                            <strong>%(username)s S </strong>."
+
+msgid "Alterar minha senha"
+msgstr "Cambiar mi contraseña"
+
+msgid "Por favor, corrija o erro abaixo."
+msgstr "Corrija el error a continuación."
+
+msgid "Por favor, corrija os erros abaixo."
+msgstr "Corrija los errores a continuación."
+
+#, python-format
+msgid ""
+"Add\n"
+"                                %(name)s"
+msgstr ""
+"Agregar\n"
+"                                %(name)s s"
+
+#, python-format
+msgid "Add %(name)s"
+msgstr "Agregar %(name)s s"
+
+msgid "History"
+msgstr "Historia"
+
+msgid "View on site"
+msgstr "Ver en el sitio"
+
+msgid "Filter"
+msgstr "Filtrar"
+
+msgid "Remove from sorting"
+msgstr "Retirar de la clasificación"
+
+#, python-format
+msgid "Sorting priority: %(priority_number)s"
+msgstr "Prioridad de clasificación: %(priority_number)s s"
+
+msgid "Toggle sorting"
+msgstr "Clasificación de alternar"
+
+msgid "Confirmar Ação"
+msgstr "Confirmar acción"
+
+#, python-format
+msgid ""
+"\n"
+"                                Tem certeza de que deseja executar a ação \"%(action_name)s\" nos %(objects_name)s selecionados?\n"
+"                                Esta ação não pode ser desfeita.\n"
+"                            "
+msgstr ""
+"\n"
+"¿Estás seguro de que quieres realizar la acción \" %(action_name)s s\" Nos %(objects_name)s s seleccionado?\n"
+"                                Esta acción no se puede deshacer."
+
+msgid "Objetos Selecionados"
+msgstr "Objetos seleccionados"
+
+msgid "Sim, tenho certeza"
+msgstr "Si, estoy seguro"
+
+msgid "Não, voltar"
+msgstr "No, regresa"
+
+msgid "Delete"
+msgstr "Borrar"
+
+#, python-format
+msgid ""
+"\n"
+"                                    Deleting the %(object_name)s '%(escaped_object)s' would result in deleting\n"
+"                                    related objects, but your account doesn't have permission to delete the\n"
+"                                    following types of objects:\n"
+"                                "
+msgstr ""
+"\n"
+"Eliminar el %(object_name)s S ' %(escaped_object)s S' resultaría en eliminar\n"
+"                                    objetos relacionados, pero su cuenta no tiene permiso para eliminar el\n"
+"                                    siguientes tipos de objetos:"
+
+#, python-format
+msgid ""
+"\n"
+"                                    Deleting the %(object_name)s ' %(escaped_object)s' would require deleting\n"
+"                                    the following protected related objects:\n"
+"                                "
+msgstr ""
+"\n"
+"Eliminar el %(object_name)s S ' %(escaped_object)s S' requeriría eliminar\n"
+"                                    Los siguientes objetos relacionados protegidos:"
+
+#, python-format
+msgid ""
+"\n"
+"                                    Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"?\n"
+"                                    All of the following related items will be deleted:\n"
+"                                "
+msgstr ""
+"\n"
+"¿Estás seguro de que quieres eliminar el %(object_name)s S \" %(escaped_object)s s\"?\n"
+"                                    Se eliminarán todos los siguientes artículos relacionados:"
+
+msgid "Objects"
+msgstr "Objetos"
+
+msgid "No, take me back"
+msgstr "No, llévame de vuelta"
+
+msgid "Delete multiple objects"
+msgstr "Eliminar múltiples objetos"
+
+#, python-format
+msgid ""
+"\n"
+"                                        Deleting the selected %(objects_name)s would result in deleting related\n"
+"                                        objects, but your account doesn't have permission to delete the following\n"
+"                                        types of objects:\n"
+"                                    "
+msgstr "\n"
+
+#, python-format
+msgid ""
+"\n"
+"                                        Deleting the selected %(objects_name)s would require deleting the\n"
+"                                        following protected related objects:\n"
+"                                    "
+msgstr "\n"
+
+#, python-format
+msgid ""
+"\n"
+"                                        Are you sure you want to delete the selected %(objects_name)s? All of the\n"
+"                                        following objects and their related items will be deleted:\n"
+"                                    "
+msgstr "\n"
+
+msgid "Change"
+msgstr "Cambiar"
+
+msgid "View"
+msgstr "Vista"
+
+msgid "Delete?"
+msgstr "¿Borrar?"
+
+#, python-format
+msgid " By %(filter_title)s "
+msgstr "Por %(filter_title)s s"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "Import"
+msgstr "Importar"
+
+#, python-format
+msgid ""
+"\n"
+"        Export %(len)s selected item.\n"
+"        "
+msgid_plural ""
+"\n"
+"        Export %(len)s selected items.\n"
+"      "
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "This exporter will export the following fields: "
+msgstr "Este exportador exportará los siguientes campos:"
+
+msgid "Submit"
+msgstr "Entregar"
+
+msgid ""
+"Below is a preview of data to be imported. If you are satisfied with the "
+"results, click 'Confirm import'"
+msgstr ""
+"A continuación se muestra una vista previa de los datos a importar. Si está "
+"satisfecho con los resultados, haga clic en 'Confirmar importar'"
+
+msgid "Confirm import"
+msgstr "Confirmar la importación"
+
+msgid "Errors"
+msgstr "Errores"
+
+msgid "Line number"
+msgstr "Número de línea"
+
+msgid "Some rows failed to validate"
+msgstr "Algunas filas no pudieron validar"
+
+msgid ""
+"Please correct these errors in your data where possible, then reupload it "
+"using the form above."
+msgstr ""
+"Corrija estos errores en sus datos cuando sea posible, luego vuelva a "
+"cargarlos utilizando el formulario anterior."
+
+msgid "Row"
+msgstr "Fila"
+
+msgid "Non field specific"
+msgstr "No campo específico"
+
+msgid "Preview"
+msgstr "Avance"
+
+msgid "New"
+msgstr "Nuevo"
+
+msgid "Skipped"
+msgstr "Salto"
+
+msgid "Update"
+msgstr "Actualizar"
+
+msgid "This importer will import the following fields: "
+msgstr "Este importador importará los siguientes campos:"
+
+msgid ""
+"Something's wrong with your database installation. Make sure the appropriate"
+" database tables have been created, and make sure the database is readable "
+"by the appropriate user."
+msgstr ""
+"Algo está mal con la instalación de su base de datos. Asegúrese de que se "
+"hayan creado las tablas de la base de datos apropiadas y asegúrese de que el"
+" usuario apropiado sea legible."
+
+msgid "Please correct the error below."
+msgstr "Corrija el error a continuación."
+
+msgid "Please correct the errors below."
+msgstr "Corrija los errores a continuación."
+
+msgid "Date/time"
+msgstr "Fecha/hora"
+
+msgid ""
+"Este objeto não tem um histórico de alterações. Provavelmente não foi "
+"adicionado por meio deste site de administração."
+msgstr ""
+"Este objeto no tiene antecedentes de cambios. Probablemente no se agregó a "
+"través de este sitio de administración."
+
+msgid "Show all"
+msgstr "Mostrar todo"
+
+msgid "Save"
+msgstr "Ahorrar"
+
+msgid "Search"
+msgstr "Buscar"
+
+#, python-format
+msgid ""
+"\n"
+"                                    %(counter)s result\n"
+"                                "
+msgid_plural ""
+"\n"
+"                                    %(counter)s results\n"
+"                                "
+msgstr[0] ""
+msgstr[1] ""
+
+#, python-format
+msgid ""
+"\n"
+"                                    %(full_result_count)s total\n"
+"                                "
+msgstr ""
+"\n"
+"%(full_result_count)s s total"
+
+msgid "Save as new"
+msgstr "Guardar como nuevo"
+
+msgid "Save and add another"
+msgstr "Guardar y agregar otro"
+
+msgid "Save and continue editing"
+msgstr "Guardar y continuar editando"
+
+msgid "Save and view"
+msgstr "Guardar y ver"
+
+msgid "Close"
+msgstr "Cerca"
+
+msgid "Tem certeza que deseja excluir os temas selecionados?"
+msgstr "¿Estás seguro de que quieres eliminar los temas seleccionados?"
+
+msgid "Esta ação não pode ser desfeita!"
+msgstr "¡Esta acción no se puede deshacer!"
+
+msgid "Confirmar exclusão"
+msgstr "Confirmar la exclusión"
+
+msgid "400 Requisição Inválida"
+msgstr "400 requisitos no válidos"
+
+msgid "Requisição"
+msgstr "Pedido"
+
+msgid "Inválida"
+msgstr "Inválida"
+
+msgid "A requisição não pôde ser processada devido a um erro do cliente."
+msgstr "La solicitud no pudo procesarse debido a un error del cliente."
+
+msgid "404 não encontrado"
+msgstr "404 no encontrado"
+
+msgid "Página não"
+msgstr "Página No"
+
+msgid "encontrada"
+msgstr "encontrada"
+
+msgid ""
+"Ops! Parece que você seguiu um link quebrado. Se você acha que isso é um "
+"problema nosso, por favor, nos avise."
+msgstr ""
+"¡Ups! Parece que siguiste un enlace roto. Si cree que este es nuestro "
+"problema, háganoslo saber."
+
+msgid "Algo deu"
+msgstr "Algo dio"
+
+msgid "seriamente"
+msgstr "seriamente"
+
+msgid "errado"
+msgstr "equivocado"
+
+msgid ""
+"Sempre é hora de uma pausa para o café. Devemos estar de volta quando você "
+"terminar seu café."
+msgstr ""
+"Siempre es hora de un descanso para desayunar. Deberíamos volver cuando "
+"termine su café."
+
+msgid "Erro 500 no Servidor"
+msgstr "Erro 500 no Servidor"
+
+msgid "Todos os direitos reservados."
+msgstr "Reservados todos los derechos."
+
+msgid "Feito com ❤️ por aventureiros para aventureiros."
+msgstr "Hecho con ❤️ por aventureros para aventureros."
+
+msgid "Volt logo"
+msgstr "Era logo"
+
+msgid "Toggle navigation"
+msgstr "Navegación"
+
+msgid "Bloquear Sessão"
+msgstr "Sesión"
+
+msgid "Marcar como lidas"
+msgstr "Marcar como lidas"
+
+msgid "Nenhuma notificação"
+msgstr "Sin notificación"
+
+msgid "Ver todas as notificações"
+msgstr "Ver todas las notificaciones"
+
+msgid "Meu Perfil"
+msgstr "Mi perfil"
+
+msgid "Mudar Senha"
+msgstr "Cambiar la contraseña"
+
+msgid "Segurança"
+msgstr "Seguridad"
+
+msgid "Configurações"
+msgstr "Ajustes"
+
+msgid "API"
+msgstr "API"
+
+msgid "Shop"
+msgstr "Comercio"
+
+msgid "Services"
+msgstr "Servicios"
+
+msgid "Apoiadores"
+msgstr "Seguidores"
+
+msgid "Box Manager"
+msgstr "Gerente de caja"
+
+msgid "Inventário"
+msgstr "Inventario"
+
+msgid "Sair"
+msgstr "Salir"
+
+msgid "Tem certeza de que deseja limpar todas as notificações?"
+msgstr "¿Estás seguro de que quieres limpiar todas las notificaciones?"
+
+msgid "Erro ao carregar os detalhes da notificação."
+msgstr "Error de carga de detalles de notificación."
+
+msgid "Início"
+msgstr "Comenzar"
+
+msgid "Games"
+msgstr "Juego"
+
+msgid "Roleta"
+msgstr "Ruleta"
+
+msgid "Caixas"
+msgstr "Cajas"
+
+msgid "Economia Mortal"
+msgstr "Economía mortal"
+
+msgid "Battle Pass"
+msgstr "Pase de batalla"
+
+msgid "Ajuda (FAQ)"
+msgstr "Ayuda (FAQ)"
+
+msgid "Tops"
+msgstr "Tops"
+
+msgid "Top PVP"
+msgstr "PVP superior"
+
+msgid "Top Adena"
+msgstr "Adina superior"
+
+msgid "Top Clans"
+msgstr "Clanes superiores"
+
+msgid "Heroes"
+msgstr "Héroes"
+
+msgid "Top Olympiad"
+msgstr "Top Olympiad"
+
+msgid "All Heroes"
+msgstr "Todos los héroes"
+
+msgid "Current Heroes"
+msgstr "Héroes actuales"
+
+msgid "Castle Siege"
+msgstr "Asedio del castillo"
+
+msgid "Permissões"
+msgstr "Permisos"
+
+msgid "Relatórios"
+msgstr "Informes"
+
+msgid "Movimentações dos Inventários"
+msgstr "Movimientos de inventario"
+
+msgid "Movimentações dos Leilões"
+msgstr "Movimientos de subasta"
+
+msgid "Movimentações da Loja"
+msgstr "Mover los movimientos"
+
+msgid "Auditoria"
+msgstr "Auditoria"
+
+msgid "Logs Info"
+msgstr "Información de registros"
+
+msgid "Logs Errors"
+msgstr "Errores de registro"
+
+msgid "Logo do Lineage2"
+msgstr "LOGO DO LINEAGE2"
+
+msgid "Informações"
+msgstr "Información"
+
+msgid "Minha Conta"
+msgstr "Mi cuenta"
+
+msgid "Entrar"
+msgstr "Entrar"
+
+msgid "Download"
+msgstr "Descargar"
+
+msgid "Acordo do Usuário"
+msgstr "Acuerdo de usuario"
+
+msgid "Termos de Serviço"
+msgstr "Términos de servicio"
+
+msgid "Política de Privacidade"
+msgstr "Política de Privacidade"
+
+msgid "Baixe tudo o que você precisa para começar sua jornada"
+msgstr "Descargue todo lo que necesita para comenzar su viaje"
+
+msgid "downloads"
+msgstr "descargas"
+
+msgid "Nenhum download disponível no momento."
+msgstr "No hay descarga disponible en este momento."
+
+msgid "Verificação de E-mail"
+msgstr "Cheque por correo electrónico"
+
+msgid "Link inválido ou expirado."
+msgstr "Link inválido ou expirado."
+
+msgid ""
+"Por favor, solicite um novo e-mail de verificação ou entre em contato com o "
+"suporte."
+msgstr ""
+"Solicite un nuevo correo electrónico de verificación o comuníquese con el "
+"soporte."
+
+msgid "Voltar ao registro"
+msgstr "Volver al registro"
+
+msgid "Conta verificada com sucesso!"
+msgstr "Cuenta verificada con éxito!"
+
+msgid "Agora você pode acessar sua conta com segurança."
+msgstr "Ahora puede acceder a su cuenta de manera segura."
+
+msgid "Veja abaixo as dúvidas mais comuns da comunidade."
+msgstr "Vea a continuación las preguntas más comunes de la comunidad."
+
+msgid "Nenhuma pergunta frequente disponível no momento."
+msgstr "No hay una pregunta frecuente disponible en este momento."
+
+msgid "Inicie sua Jornada em Lineage Agora!"
+msgstr "¡Comience su viaje de linaje ahora!"
+
+msgid "Onde Lendas Nascem, Heróis Lutam e a Glória é Eterna."
+msgstr "Donde nacen las leyendas, los héroes luchan y la gloria es eterna."
+
+msgid "Baixe o Jogo"
+msgstr "Descargar el juego"
+
+msgid "Crie sua conta mestra"
+msgstr "Crea tu cuenta maestra"
+
+msgid "Aproveite o melhor do Lineage"
+msgstr "Disfruta lo mejor del linaje"
+
+msgid "O servidor mais atualizado, moderno e estável para jogar Lineage"
+msgstr ""
+"El servidor más actualizado, moderno y estable para reproducir el linaje"
+
+msgid "PvP e Castelos"
+msgstr "PvP y castillos"
+
+msgid "Missões Personalizadas"
+msgstr "Misiones personalizadas"
+
+msgid "Eventos e Recompensas"
+msgstr "Eventos e Recompensas"
+
+msgid "Wiki"
+msgstr "Semana"
+
+msgid "Wiki e Atualizações do Lineage"
+msgstr "Actualizaciones de wiki y linaje"
+
+msgid "Informações Gerais"
+msgstr "información general"
+
+msgid "Taxas de Experiência"
+msgstr "Tarifas de experiencia"
+
+msgid "Chefes de Raide e Instâncias"
+msgstr "Raide Heads e instancias"
+
+msgid "Ajuda no Jogo"
+msgstr "Ayuda del juego"
+
+msgid "Guia de Eventos"
+msgstr "Guía de eventos"
+
+msgid "Atualização"
+msgstr "Actualizar"
+
+msgid "Trailer Oficial"
+msgstr "Trailer Oficial"
+
+msgid "Assista ao trailer e mergulhe no mundo épico do nosso servidor!"
+msgstr "¡Mira el trailer y sumérgete en el mundo épico de nuestro servidor!"
+
+msgid "Melhores Clãs"
+msgstr "Mejores clanes"
+
+msgid "Cresta"
+msgstr "Cresta"
+
+msgid "Nome do Clã"
+msgstr "Nombre del clan"
+
+msgid "Jogadores Online Agora"
+msgstr "Jugadores en línea ahora"
+
+msgid "O campo de batalha está ativo!"
+msgstr "¡El campo de batalla está activo!"
+
+msgid "Faça parte da nossa comunidade"
+msgstr "Sea parte de nuestra comunidad"
+
+msgid "Junte-se à nossa"
+msgstr "Unirse a nuestro"
+
+msgid "comunidade"
+msgstr "comunidad"
+
+msgid "e fique por dentro"
+msgstr "Y mantente en la cima"
+
+msgid "Publicado em"
+msgstr "Publicado en"
+
+msgid "Notícias Recentes"
+msgstr "Noticias recientes"
+
+msgid "Não há notícias disponíveis no momento."
+msgstr "No hay noticias disponibles en este momento."
+
+msgid "Última atualização"
+msgstr "Última actualización"
+
+msgid "Informações que Coletamos"
+msgstr "Información que recopilamos"
+
+msgid "Coletamos as seguintes informações:"
+msgstr "Recopilamos la siguiente información:"
+
+msgid "Informações da conta (nome de usuário, e-mail, senha)"
+msgstr ""
+"Información de la cuenta (nombre de usuario, correo electrónico, contraseña)"
+
+msgid "Dados de jogo (personagens, progresso, interações)"
+msgstr "Datos del juego (personajes, progreso, interacciones)"
+
+msgid "Informações técnicas (IP, dispositivo, navegador)"
+msgstr "Información técnica (IP, dispositivo, navegador)"
+
+msgid "Comunicações com a equipe de suporte"
+msgstr "Comunicaciones con el equipo de apoyo"
+
+msgid "Como Usamos Suas Informações"
+msgstr "¿Cómo usamos su información?"
+
+msgid "Utilizamos suas informações para:"
+msgstr "Usamos su información para:"
+
+msgid "Fornecer e manter nossos serviços"
+msgstr "Proporcionar y mantener nuestros servicios"
+
+msgid "Melhorar a experiência do usuário"
+msgstr "Mejorar la experiencia del usuario"
+
+msgid "Prevenir fraudes e abusos"
+msgstr "Prevenir fraudes e abusos"
+
+msgid "Comunicar atualizações importantes"
+msgstr "Comunicar actualizaciones importantes"
+
+msgid "Compartilhamento de Dados"
+msgstr "Intercambio de datos"
+
+msgid ""
+"Não vendemos suas informações pessoais. Podemos compartilhar dados apenas "
+"quando:"
+msgstr ""
+"No vendemos su información personal. Podemos compartir datos solo cuando:"
+
+msgid "Exigido por lei"
+msgstr "Exigido por lei"
+
+msgid "Necessário para proteger nossos direitos"
+msgstr "Necesario para proteger nuestros derechos"
+
+msgid "Com seu consentimento explícito"
+msgstr "Con su consentimiento explícito"
+
+msgid "Segurança dos Dados"
+msgstr "Seguridad de datos"
+
+msgid ""
+"Implementamos medidas de segurança para proteger suas informações, "
+"incluindo:"
+msgstr ""
+"Implementamos medidas de seguridad para proteger su información, incluida:"
+
+msgid "Criptografia de dados sensíveis"
+msgstr "Cifrado de datos confidencial"
+
+msgid "Monitoramento de segurança"
+msgstr "Monitoreo de seguridad"
+
+msgid "Acesso restrito às informações"
+msgstr "Acceso restringido a la información"
+
+msgid "Seus Direitos"
+msgstr "Sus derechos"
+
+msgid "Você tem direito a:"
+msgstr "Tienes derecho a:"
+
+msgid "Acessar seus dados pessoais"
+msgstr "Acceda a sus datos personales"
+
+msgid "Corrigir informações imprecisas"
+msgstr "Información inexacta correcta"
+
+msgid "Solicitar a exclusão de dados"
+msgstr "Solicitar la eliminación de datos"
+
+msgid "Retirar seu consentimento"
+msgstr "Elimina tu consentimiento"
+
+msgid "Cookies e Tecnologias Similares"
+msgstr "Cookies e Tecnologias Similares"
+
+msgid ""
+"Utilizamos cookies e tecnologias similares para melhorar sua experiência e "
+"coletar informações sobre o uso do serviço."
+msgstr ""
+"Utilizamos cookies y tecnologías similares para mejorar su experiencia y "
+"recopilar información sobre el uso del servicio."
+
+msgid "Alterações na Política"
+msgstr "Cambios en la política"
+
+msgid ""
+"Podemos atualizar esta política periodicamente. Notificaremos sobre mudanças"
+" significativas."
+msgstr ""
+"Podemos actualizar esta política periódicamente. Notificaremos cambios "
+"significativos."
+
+msgid "Contato"
+msgstr "Contacto"
+
+msgid "Para questões sobre privacidade, entre em contato através do"
+msgstr "Para problemas de privacidad, contáctenos a través del"
+
+msgid "Discord"
+msgstr "Discordia"
+
+msgid "ou"
+msgstr "o"
+
+msgid "e-mail"
+msgstr "correo electrónico"
+
+msgid "Um mundo para verdadeiros aventureiros."
+msgstr "Un mundo para verdaderos aventureros."
+
+msgid "Termos e Condições"
+msgstr "Términos y condiciones"
+
+msgid "Termos e Condições de Uso"
+msgstr "Términos y condiciones de uso"
+
+msgid "Sobre o Servidor"
+msgstr "Sobre o Servidor"
+
+msgid "O"
+msgstr "EL"
+
+msgid ""
+"é um servidor privado, sem vínculos com a NCSoft. Criado por fãs e para fins"
+" recreativos."
+msgstr ""
+"Es un servidor privado, sin bonos con NCSOFT. Creado por fanáticos y con "
+"fines recreativos."
+
+msgid "Regras Gerais"
+msgstr "Reglas generales"
+
+msgid "Proibido uso de bots, cheats, exploits ou automações."
+msgstr "Prohibido usar bots, cheques, exploits o automatizaciones."
+
+msgid "Contas compartilhadas são por sua conta e risco."
+msgstr "Las cuentas compartidas tienen su propio riesgo."
+
+msgid "Atitudes tóxicas não serão toleradas."
+msgstr "Las actitudes tóxicas no serán toleradas."
+
+msgid "Exploração de bugs será punida."
+msgstr "La exploración de errores será castigada."
+
+msgid "A Staff pode agir contra comportamentos nocivos."
+msgstr "El personal puede actuar contra comportamientos dañinos."
+
+msgid "Contas e Segurança"
+msgstr "Cuentas y seguridad"
+
+msgid ""
+"Você é responsável por sua conta. Use senhas seguras. Não nos "
+"responsabilizamos por perdas causadas por descuido."
+msgstr ""
+"Usted es responsable de su cuenta. Use contraseñas seguras. No somos "
+"responsables de las pérdidas causadas por el descuido."
+
+msgid "Política de Doações"
+msgstr "Política de donación"
+
+msgid ""
+"Doações são voluntárias, sem reembolso, e ajudam na manutenção do servidor. "
+"Os benefícios podem mudar."
+msgstr ""
+"Las donaciones son voluntarias, sin reembolso, y ayudan a mantener el "
+"servidor. Los beneficios pueden cambiar."
+
+msgid "Propriedade Intelectual"
+msgstr "Propiedad intelectual"
+
+msgid ""
+"Lineage 2 é da NCSoft. Este servidor é feito por fãs e não possui fins "
+"lucrativos."
+msgstr ""
+"El linaje 2 es de NCSoft. Este servidor está hecho por los fanáticos y no "
+"tiene ganancias."
+
+msgid "Responsabilidades da Staff"
+msgstr "Responsabilidades da Staff"
+
+msgid ""
+"A Staff visa manter o servidor justo e estável. Mudanças, resets ou "
+"manutenções podem ocorrer."
+msgstr ""
+"El personal tiene como objetivo mantener el servidor justo y estable. Pueden"
+" ocurrir cambios, reinicios o mantenimiento."
+
+msgid "Penalidades"
+msgstr "Penalidades"
+
+msgid "Infrações podem resultar em:"
+msgstr "Las infracciones pueden resultar en:"
+
+msgid "Advertência"
+msgstr "Advertencia"
+
+msgid "Mute"
+msgstr "Silenciar"
+
+msgid "Banimento"
+msgstr "Destierro"
+
+msgid "Perda de itens"
+msgstr "Pérdida de artículos"
+
+msgid "Alterações nos Termos"
+msgstr "Cambios en los términos"
+
+msgid ""
+"Os termos podem mudar. Ao continuar jogando, você aceita as atualizações "
+"automaticamente."
+msgstr ""
+"Los términos pueden cambiar. Al continuar jugando, acepta actualizaciones "
+"automáticamente."
+
+msgid "Fale conosco pelo"
+msgstr "Contáctenos para"
+
+msgid "ou fórum oficial em caso de dúvidas ou denúncias."
+msgstr "o foro oficial en caso de dudas o quejas."
+
+msgid "Aceitação do Acordo"
+msgstr "Aceptación del acuerdo"
+
+msgid ""
+"Ao criar uma conta e utilizar nossos serviços, você concorda com todos os "
+"termos deste acordo. Este documento estabelece as regras e responsabilidades"
+" para o uso do servidor."
+msgstr ""
+"Al crear una cuenta y usar nuestros servicios, usted acepta todos los "
+"términos de este Acuerdo. Este documento establece las reglas y "
+"responsabilidades para el uso del servidor."
+
+msgid "Conta e Segurança"
+msgstr "Cuenta y seguridad"
+
+msgid "Você deve ter pelo menos 13 anos de idade para criar uma conta."
+msgstr "Debe tener al menos 13 años para crear una cuenta."
+
+msgid "Você é responsável por manter a segurança de sua conta."
+msgstr "Usted es responsable de mantener la seguridad de su cuenta."
+
+msgid "Não compartilhe suas credenciais de acesso com terceiros."
+msgstr "No comparta sus credenciales de acceso con terceros."
+
+msgid "Notifique-nos imediatamente sobre qualquer uso não autorizado."
+msgstr "Notifíquenos de inmediato sobre cualquier uso no autorizado."
+
+msgid "Comportamento do Usuário"
+msgstr "Comportamiento del usuario"
+
+msgid "Ao utilizar nossos serviços, você concorda em:"
+msgstr "Al usar nuestros servicios, usted acepta:"
+
+msgid "Respeitar outros jogadores e membros da equipe."
+msgstr "Respeta a otros jugadores y miembros del equipo."
+
+msgid "Não utilizar linguagem ofensiva ou discriminatória."
+msgstr "No use lenguaje ofensivo o discriminatorio."
+
+msgid ""
+"Não realizar atividades que prejudiquem a experiência de outros jogadores."
+msgstr "No realice actividades que socaven la experiencia de otros jugadores."
+
+msgid "Não utilizar programas ou métodos que dêem vantagens injustas."
+msgstr "No use programas o métodos que brinden ventajas injustas."
+
+msgid "Conteúdo do Usuário"
+msgstr "Contenido de usuario"
+
+msgid ""
+"Você mantém os direitos sobre o conteúdo que cria, mas nos concede permissão"
+" para utilizá-lo em relação aos serviços."
+msgstr ""
+"Usted mantiene los derechos sobre el contenido que crea, pero nos da permiso"
+" para usarlo en relación con los servicios."
+
+msgid "Modificações do Serviço"
+msgstr "Modificaciones de servicio"
+
+msgid ""
+"Reservamo-nos o direito de modificar, suspender ou encerrar qualquer aspecto"
+" do serviço a qualquer momento."
+msgstr ""
+"Nos reservamos el derecho de modificar, suspender o terminar cualquier "
+"aspecto del servicio en cualquier momento."
+
+msgid "Limitação de Responsabilidade"
+msgstr "Limitación de responsabilidad"
+
+msgid ""
+"Não nos responsabilizamos por perdas de dados, interrupções do serviço ou "
+"outros danos que possam ocorrer durante o uso."
+msgstr ""
+"No somos responsables de las pérdidas de datos, interrupciones del servicio "
+"u otros daños que pueden ocurrir durante el uso."
+
+msgid "Rescisão"
+msgstr "Terminación"
+
+msgid ""
+"Podemos encerrar ou suspender sua conta se você violar este acordo ou as "
+"regras do servidor."
+msgstr ""
+"Podemos finalizar o suspender su cuenta si viola este acuerdo o las reglas "
+"del servidor."
+
+msgid "Alterações no Acordo"
+msgstr "Cambios en el acuerdo"
+
+msgid ""
+"Podemos modificar este acordo a qualquer momento. As alterações entram em "
+"vigor após a publicação."
+msgstr ""
+"Podemos modificar este acuerdo en cualquier momento. Los cambios entran en "
+"vigor después de la publicación."
+
+msgid "Para questões sobre este acordo, entre em contato através do"
+msgstr "Para preguntas sobre este acuerdo, contáctenos a través del"
+
+msgid "Obrigado por passar um tempo de qualidade conosco no site hoje."
+msgstr "Gracias por pasar un tiempo de calidad con nosotros en el sitio hoy."
+
+msgid "Entrar novamente"
+msgstr "Entra"
+
+msgid "Documentação"
+msgstr "Documentación"
+
+msgid "Alteração de senha"
+msgstr "Cambio de contraseña"
+
+msgid "Sua senha foi alterada."
+msgstr "Su contraseña ha sido cambiada."
+
+msgid ""
+"Por favor, insira sua senha antiga, por motivos de segurança, e depois "
+"insira sua nova senha duas vezes para verificarmos se foi digitada "
+"corretamente."
+msgstr ""
+"Ingrese su contraseña anterior por razones de seguridad y luego ingrese su "
+"nueva contraseña dos veces para verificar si se escribió correctamente."
+
+msgid "Assistência do Jogo"
+msgstr "Ayuda del juego"
+
+msgid "Problemas Comuns"
+msgstr "Problemas Comuns"
+
+msgid "Suporte Técnico"
+msgstr "Apoyo técnico"
+
+msgid "Guia Wiki"
+msgstr "Guía de wiki"
+
+msgid "Taxas"
+msgstr "Tarifa"
+
+msgid "Chefes de Raid"
+msgstr "Chefes de Raid"
+
+msgid "Atualizações"
+msgstr "Actualizaciones"
+
+msgid "Recursos"
+msgstr "Recursos"
+
+msgid "Eventos Regulares"
+msgstr "Eventos Regulares"
+
+msgid "Requisitos"
+msgstr "Requisitos"
+
+msgid "Eventos Especiais"
+msgstr "Eventos especiales"
+
+msgid "Recursos do Servidor"
+msgstr "Recursos do Servidor"
+
+msgid "Recursos Personalizados"
+msgstr "Recursos Personalizados"
+
+msgid "Recursos de Gameplay"
+msgstr "Recursos de Gameplay"
+
+msgid "Recursos de Qualidade de Vida"
+msgstr "Recursos de calidad de vida"
+
+msgid "Recursos VIP"
+msgstr "Recursos VIP"
+
+msgid "Recursos Anti-Cheat"
+msgstr "Recursos Anti-Cheat"
+
+msgid "Recursos da Comunidade"
+msgstr "Recursos comunitarios"
+
+msgid "Informações do Servidor"
+msgstr "Información del servidor"
+
+msgid "Recursos do Jogo"
+msgstr "Recursos de juego"
+
+msgid "Começando"
+msgstr "A partir de"
+
+msgid "Diretrizes da Comunidade"
+msgstr "Directrices de la comunidad"
+
+msgid "Bem-vindo ao Guia Wiki"
+msgstr "Bienvenido a la guía wiki"
+
+msgid "Encontre todas as informações que você precisa sobre o servidor"
+msgstr "Encuentre toda la información que necesita sobre el servidor"
+
+msgid "Raid Bosses"
+msgstr "Jefes de ruidos"
+
+msgid "Raids Regulares"
+msgstr "Raids Regulares"
+
+msgid "Horários"
+msgstr "Cronograma"
+
+msgid "Raids Especiais"
+msgstr "Incursiones especiales"
+
+msgid "Raids Mundiais"
+msgstr "Incursiones mundiales"
+
+msgid "Taxas do Servidor"
+msgstr "Taxas do Servidor"
+
+msgid "Taxas de Drop"
+msgstr "Taxas de Drop"
+
+msgid "Taxas de Adena"
+msgstr "Taxas de Adena"
+
+msgid "Taxas de Spoil"
+msgstr "Taxas de Spoil"
+
+msgid "Taxas de Quest"
+msgstr "Taxas de Quest"
+
+msgid "Atualizações do Servidor"
+msgstr "Actualizaciones del servidor"
+
+msgid "Nenhuma atualização disponível no momento."
+msgstr "No hay actualización disponible en este momento."
+
+msgid "🔐 Gerador de credenciais"
+msgstr "🔐 Generador de credenciales"
+
+msgid "Digite a senha que deseja proteger: "
+msgstr "Ingrese la contraseña que desea proteger:"
+
+msgid "Jogue Agora"
+msgstr "Jugar ahora"
+
+msgid "Suporte"
+msgstr "Apoyo"
+
+msgid "Server"
+msgstr "Servidor"
+
+msgid "Estatística"
+msgstr "Estadística"
+
+msgid "Lineage 2 PDL"
+msgstr "Linaje 2 PDL"
+
+msgid "Jogar Agora"
+msgstr "Jugar ahora"
+
+msgid "O Que Torna Nosso Servidor Único?"
+msgstr "¿Qué hace que nuestro servidor sea único?"
+
+msgid "PvP & Sieges"
+msgstr "PvP y Sieges"
+
+msgid ""
+"Domine castelos, lute por território e mostre sua força no campo de batalha."
+msgstr ""
+"Castillos Domine, lucha territorio y muestran tu fuerza en el campo de "
+"batalla."
+
+msgid "Conteúdo exclusivo com recompensas únicas para jogadores dedicados."
+msgstr "Contenido exclusivo con recompensas únicas para jugadores dedicados."
+
+msgid "Eventos & Premiações"
+msgstr "Eventos y premios"
+
+msgid "Participe de eventos semanais com itens raros e bônus poderosos."
+msgstr "Únase a eventos semanales con potentes artículos y bonos raros."
+
+msgid "Download & Instalação"
+msgstr "Descargar e instalación"
+
+msgid ""
+"Baixe agora o cliente e patch oficial e comece sua jornada em nosso "
+"servidor."
+msgstr ""
+"Descargue ahora el cliente oficial y el parche y comience su viaje en "
+"nuestro servidor."
+
+msgid "Baixar Patch"
+msgstr "Patch de descarga"
+
+msgid "Baixar Cliente"
+msgstr "Descargar cliente"
+
+msgid "Junte-se à Comunidade"
+msgstr "Únete a la comunidad"
+
+msgid ""
+"Conecte-se com outros jogadores, tire dúvidas e participe dos eventos via "
+"Discord."
+msgstr ""
+"Conéctese con otros jugadores, haga preguntas y participe en eventos a "
+"través de Discord."
+
+msgid "Entrar no Discord"
+msgstr "Entrar no Discord"
+
+msgid ""
+"Notificações staff só podem ser enviadas para usuários staff ou "
+"superusuários."
+msgstr ""
+"Las notificaciones del personal solo se pueden enviar a los usuarios del "
+"personal o los superusores."
+
+msgid "Você não tem permissão para criar notificações públicas staff."
+msgstr "No se le permite crear notificaciones públicas del personal."
+
+#~ msgid "Lineage2 Logo"
+#~ msgstr "Logotipo de linaje2"
+
+#~ msgid "Sobre"
+#~ msgstr "Sobre"
+
+#~ msgid "Comunidade"
+#~ msgstr "Comunidad"
+
+#~ msgid "Painel"
+#~ msgstr "Panel"
+
+#~ msgid "Jogue Grátis"
+#~ msgstr "Jugar gratis"
+
+#~ msgid "Escolha Sua Classe"
+#~ msgstr "Elige tu clase"
+
+#~ msgid "Top Clãs"
+#~ msgstr "Clanes superiores"
+
+#~ msgid "Clã:"
+#~ msgstr "Clan:"
+
+#~ msgid "Pontuação de Reputação:"
+#~ msgstr "Puntuación de reputación:"
+
+#~ msgid "Aliança:"
+#~ msgstr "Alianza:"
+
+#~ msgid "Membros:"
+#~ msgstr "Miembros:"
+
+#~ msgid "Jogadores online Agora"
+#~ msgstr "Jugadores en línea ahora"
+
+#~ msgid "Excluir Item"
+#~ msgstr "Excluir Item"
+
+#, python-format
+#~ msgid "Tem certeza que deseja excluir <strong>%(item.name)s</strong>?"
+#~ msgstr ""
+#~ "¿Estás seguro de que quieres eliminar <strong>%(item.name)s s </strong>?"
+
+#~ msgid "Adicionar Itens ao Pacote"
+#~ msgstr "Agregar elementos al paquete"
+
+#~ msgid "Selecione os Itens"
+#~ msgstr "Seleccione los elementos"
+
+#~ msgid "Adicionar Itens"
+#~ msgstr "Agregar elementos"
+
+#~ msgid "Este é o seu painel principal. Confira seu progresso abaixo."
+#~ msgstr ""
+#~ "Este es su panel principal. Echa un vistazo a tu progreso a continuación."
+
+#~ msgid "Status de Apoiador"
+#~ msgstr "Estado del seguidor"
+
+#~ msgid "Seus Leilões"
+#~ msgstr "Tus subastas"
+
+#~ msgid "Experiencia"
+#~ msgstr "Experiencia"
+
+#~ msgid "Conquista bloqueada. Desbloqueie para ver detalhes."
+#~ msgstr "Conquista bloqueada. Desbloquee para ver detalles."
+
+#~ msgid "Ir para Leilão"
+#~ msgstr "Subasta"
+
+#~ msgid "Fazer Doação"
+#~ msgstr "Donar"
+
+#~ msgid "date published"
+#~ msgstr "fecha publicada"

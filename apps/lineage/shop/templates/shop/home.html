@@ -1,0 +1,237 @@
+{% extends "layouts/base.html" %}
+{% load i18n static l10n %}
+{% load itens_extras %}
+
+{% block content %}
+<style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+  h3, h5 {
+    font-family: 'Orbitron', sans-serif;
+    color: #6f42c1;
+    text-transform: uppercase;
+  }
+
+  .card {
+    background-color: #1f1f2e;
+    border: 1px solid #333;
+    color: #fff;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 12px rgba(111, 66, 193, 0.4);
+  }
+
+  .btn-primary, .btn-outline-primary {
+    background: linear-gradient(to right, #0dcaf0, #6f42c1);
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 12px;
+    text-shadow: 0 0 2px #000;
+    transition: 0.3s ease;
+  }
+
+  .btn-outline-primary {
+    background: none;
+    border: 2px solid #6f42c1;
+    color: #6f42c1;
+  }
+
+  .btn-outline-primary:hover {
+    background: #6f42c1;
+    color: white;
+    border-color: #6f42c1;
+  }
+
+  .btn-outline-info {
+    border: 2px solid #0dcaf0;
+    color: #0dcaf0;
+  }
+
+  .btn-outline-info:hover {
+    background: #0dcaf0;
+    color: #000;
+  }
+
+  .btn-close {
+    filter: invert(1);
+  }
+
+  .list-group-item {
+    background-color: #2a2a3d;
+    color: #fff;
+    border: 1px solid #444;
+  }
+
+  .modal-content {
+    background-color: #1f1f2e;
+    color: #fff;
+  }
+
+  .modal-header, .modal-footer {
+    border: none;
+  }
+
+  .text-success {
+    color: #0fdf8a !important;
+  }
+
+  .page-link {
+    background-color: #2a2a3d;
+    color: #0dcaf0;
+    border: 1px solid #444;
+    font-weight: bold;
+  }
+
+  .page-link:hover {
+    background-color: #6f42c1;
+    color: white;
+  }
+
+  .page-item.active .page-link {
+    background-color: #0dcaf0;
+    color: #000;
+    border-color: #0dcaf0;
+  }
+</style>
+
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold">
+      <i class="bi bi-bag me-2"></i>{% trans "Loja Online" %}
+    </h3>
+    <a href="{% url 'shop:view_cart' %}" class="btn btn-primary rounded-pill px-4">
+      <i class="bi bi-cart4 me-2"></i>{% trans "Ver Carrinho" %}
+    </a>
+  </div>
+
+  <!-- Itens -->
+  <h5 class="fw-semibold mb-3">{% trans "Itens Disponíveis" %}</h5>
+  <div class="row g-4 mb-4">
+    {% for item in items %}
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm rounded-4">
+        <div class="card-body text-center">
+          <img src="{% item_image_url item.item_id %}" alt="{{ item.item_name }}" class="mb-3" style="width: 48px;">
+          <h5 class="fw-bold">{{ item.nome }}</h5>
+          <p class="mb-1">{% trans "Quantidade" %}: {{ item.quantidade }}</p>
+          <p class="fw-semibold text-success">R$ {{ item.preco }}</p>
+          <a href="{% url 'shop:add_item_to_cart' item.id %}" class="btn btn-outline-primary rounded-pill">
+            <i class="bi bi-plus-circle me-1"></i>{% trans "Adicionar" %}
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>{% trans "Nenhum item disponível." %}</p>
+    {% endfor %}
+  </div>
+
+  {% if items.has_other_pages %}
+  <nav class="mt-3">
+    <ul class="pagination justify-content-center">
+      {% if items.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?items_page={{ items.previous_page_number }}{% if packages.number %}&packages_page={{ packages.number }}{% endif %}" aria-label="Anterior">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+      {% for num in items.paginator.page_range %}
+      <li class="page-item {% if num == items.number %}active{% endif %}">
+        <a class="page-link" href="?items_page={{ num }}{% if packages.number %}&packages_page={{ packages.number }}{% endif %}">{{ num }}</a>
+      </li>
+      {% endfor %}
+      {% if items.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?items_page={{ items.next_page_number }}{% if packages.number %}&packages_page={{ packages.number }}{% endif %}" aria-label="Próximo">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+
+  <!-- Pacotes -->
+  <h5 class="fw-semibold mt-5 mb-3">{% trans "Pacotes" %}</h5>
+  <div class="row g-4">
+    {% for package in packages %}
+    <div class="col-md-4">
+      <div class="card h-100 shadow-sm rounded-4">
+        <div class="card-body text-center">
+          <h5 class="fw-bold">{{ package.nome }}</h5>
+          <p class="mb-1">{% trans "Itens inclusos" %}: {{ package.itens.count }}</p>
+          <p class="fw-semibold text-success">R$ {{ package.preco_total }}</p>
+          <a href="{% url 'shop:add_package_to_cart' package.id %}" class="btn btn-outline-primary rounded-pill">
+            <i class="bi bi-box-seam me-1"></i>{% trans "Adicionar Pacote" %}
+          </a>
+          <button type="button" class="btn btn-outline-info rounded-pill mt-2" data-bs-toggle="modal" data-bs-target="#modalPackageItems{{ package.id }}">
+            <i class="bi bi-eye me-1"></i>{% trans "Visualizar Itens" %}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Itens do Pacote -->
+    <div class="modal fade" id="modalPackageItems{{ package.id }}" tabindex="-1" aria-labelledby="modalPackageItemsLabel{{ package.id }}" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalPackageItemsLabel{{ package.id }}">{{ package.nome }} - {% trans "Itens do Pacote" %}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group">
+              {% for item in package.itens.all %}
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <img src="{% item_image_url item.item_id %}" alt="{{ item.item_name }}" class="me-2" style="width:24px;">
+                {{ item.nome }} <span class="text-muted">x{{ item.quantidade }}</span>
+              </li>
+              {% empty %}
+              <li class="list-group-item">{% trans "Este pacote não contém itens." %}</li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <p>{% trans "Nenhum pacote disponível." %}</p>
+    {% endfor %}
+  </div>
+
+  {% if packages.has_other_pages %}
+  <nav class="mt-3">
+    <ul class="pagination justify-content-center">
+      {% if packages.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?packages_page={{ packages.previous_page_number }}{% if items.number %}&items_page={{ items.number }}{% endif %}" aria-label="Anterior">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+      {% for num in packages.paginator.page_range %}
+      <li class="page-item {% if num == packages.number %}active{% endif %}">
+        <a class="page-link" href="?packages_page={{ num }}{% if items.number %}&items_page={{ items.number }}{% endif %}">{{ num }}</a>
+      </li>
+      {% endfor %}
+      {% if packages.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?packages_page={{ packages.next_page_number }}{% if items.number %}&items_page={{ items.number }}{% endif %}" aria-label="Próximo">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% endif %}
+</div>
+{% endblock %}

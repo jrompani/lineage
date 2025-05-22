@@ -1,0 +1,128 @@
+{% extends 'layouts/base-auth.html' %}
+{% load static widget_tweaks i18n %}
+
+{% block content %}
+<style>
+  body {
+    background: url("{{ background_url }}") no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .login-panel {
+    background-color: rgba(15, 15, 15, 0.92);
+    color: #f0e6d2;
+    border-radius: 1rem;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+    border: 1px solid #e0c36b;
+  }
+
+  .login-panel h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #e0c36b;
+    text-shadow: 0 0 10px rgba(255, 215, 100, 0.4);
+  }
+
+  .login-panel .form-control {
+    background-color: #1a1a1a;
+    border-color: #444;
+    color: #fff;
+  }
+
+  .login-panel .form-control::placeholder {
+    color: #aaa;
+  }
+
+  .btn-login {
+    background: linear-gradient(to right, #b89b56, #d5c170);
+    color: #000;
+    font-weight: bold;
+    text-shadow: 0 0 5px #fff8dc;
+    border: none;
+  }
+
+  .btn-login:hover {
+    background: linear-gradient(to right, #d5c170, #b89b56);
+  }
+
+  .auth-link a {
+    color: #e0c36b;
+  }
+
+  .auth-link a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+</style>
+
+<section class="vh-100 d-flex align-items-center justify-content-center">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        <div class="p-4 login-panel">
+          <div class="text-center mb-4">
+            <h1>{% trans "Entre no Reino" %}</h1>
+          </div>
+          <form method="post" class="mt-4">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+              {% for error in form.non_field_errors %}
+                <div class="text-danger mb-3">{{ error }}</div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+              <label for="email" class="form-label">{{ form.username.label|default:"{% trans 'Usuário' %}" }}</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-light">
+                  <i class="bi bi-person-fill"></i>
+                </span>
+                {{ form.username|add_class:"form-control bg-dark border-secondary text-light" }}
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">{{ form.password.label|default:"{% trans 'Senha' %}" }}</label>
+              <div class="input-group">
+                <span class="input-group-text bg-dark border-secondary text-light">
+                  <i class="bi bi-lock-fill"></i>
+                </span>
+                {{ form.password|add_class:"form-control bg-dark border-secondary text-light" }}
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember">
+                <label class="form-check-label" for="remember">{% trans "Lembrar de mim" %}</label>
+              </div>
+              <div class="auth-link small">
+                <a href="{% url 'password_reset' %}">{% trans "Esqueceu a senha?" %}</a>
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button type="submit" class="btn btn-login btn-block">{% trans "Entrar no Reino" %}</button>
+            </div>
+          </form>
+
+          <div class="text-center mt-4 auth-link">
+            {% trans "Ainda não tem conta?" %}
+            <a href="{% url 'register' %}" class="fw-bold">{% trans "Forje seu destino" %}</a>
+          </div>
+
+          <div class="text-center mt-3">
+            <div class="auth-link small">
+              <a href="{% url 'index' %}">
+                ← {% trans "Voltar para o início" %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

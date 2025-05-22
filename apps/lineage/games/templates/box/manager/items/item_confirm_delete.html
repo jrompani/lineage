@@ -1,0 +1,49 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <h1 class="display-5 fw-bold">{{ season.name }}</h1>
+    <p class="lead">
+      <strong>XP:</strong> {{ progress.xp }} |
+      <strong>Nível Atual:</strong> {{ current_level }}
+    </p>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for level in levels %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border-primary">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Nível {{ level.level }} <small class="text-light">XP: {{ level.required_xp }}</small></h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              {% for reward in level.battlepassreward_set.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>
+                    {{ reward.description }}
+                    {% if reward.is_premium %}
+                      <span class="badge bg-warning text-dark ms-2">Premium</span>
+                    {% endif %}
+                  </span>
+
+                  {% if reward in progress.claimed_rewards.all %}
+                    <span class="badge bg-success">✅ Resgatado</span>
+                  {% else %}
+                    <form action="{% url 'claim_reward' reward.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-sm btn-outline-success">Resgatar</button>
+                    </form>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

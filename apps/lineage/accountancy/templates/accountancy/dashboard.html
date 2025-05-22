@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="text-center mb-4">{% trans "Dashboard Contábil" %}</h2>
+
+  <div class="row g-4">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 text-center">
+        <h4 class="mb-3">{% trans "Saldo de Usuários" %}</h4>
+        <a href="{% url 'accountancy:relatorio_saldo' %}" class="btn btn-primary btn-lg w-100">{% trans "Ver Relatório" %}</a>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 text-center">
+        <h4 class="mb-3">{% trans "Fluxo de Caixa Diário" %}</h4>
+        <a href="{% url 'accountancy:relatorio_fluxo_caixa' %}" class="btn btn-primary btn-lg w-100">{% trans "Ver Relatório" %}</a>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 text-center">
+        <h4 class="mb-3">{% trans "Pedidos e Pagamentos" %}</h4>
+        <a href="{% url 'accountancy:relatorio_pedidos_pagamentos' %}" class="btn btn-primary btn-lg w-100">{% trans "Ver Relatório" %}</a>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 text-center">
+        <h4 class="mb-3">{% trans "Reconciliação de Carteiras" %}</h4>
+        <a href="{% url 'accountancy:relatorio_reconciliacao_wallet' %}" class="btn btn-primary btn-lg w-100">{% trans "Ver Relatório" %}</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'admin:index' %}" class="btn btn-secondary">{% trans "Voltar para o Admin" %}</a>
+  </div>
+</div>
+{% endblock %}

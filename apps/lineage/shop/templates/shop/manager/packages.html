@@ -1,0 +1,57 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4 py-3 px-4">
+      <h4 class="mb-0 fw-bold">{% trans "Cadastro de Pacotes" %}</h4>
+    </div>
+    <div class="card-body px-5 py-4">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success rounded-pill">{% trans "Cadastrar Pacote" %}</button>
+      </form>
+
+      <hr class="my-4">
+
+      <h5 class="fw-bold">{% trans "Pacotes Cadastrados" %}</h5>
+      <ul class="list-group">
+        {% for package in packages %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              {{ package.nome }} — R${{ package.preco_total }}
+              {% if package.ativo %}
+                <span class="badge bg-success">{% trans "Ativo" %}</span>
+              {% else %}
+                <span class="badge bg-secondary">{% trans "Inativo" %}</span>
+              {% endif %}
+            </div>
+            <a href="{% url 'shop:edit_package' package.id %}" class="btn btn-warning btn-sm">{% trans "Editar" %}</a>
+          </li>
+        {% empty %}
+          <li class="list-group-item">{% trans "Nenhum pacote cadastrado." %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts para o FilteredSelectMultiple -->
+<script type="text/javascript" src="{% url 'jsi18n' %}"></script>
+<script type="text/javascript">
+  window.addEventListener('load', function () {
+    if (typeof django !== 'undefined' && django.jQuery) {
+      django.jQuery('select.selectfilter, select.selectfilterstacked').each(function () {
+        SelectFilter.init(
+          this.id,
+          this.getAttribute('data-field-name'),
+          this.classList.contains('selectfilterstacked')
+        );
+      });
+    }
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center fw-bold">{% trans "Painel de Gerenciamento do Shop" %}</h2>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-box-seam display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">{% trans "Gerenciar Itens" %}</h5>
+                    <p class="card-text">{% trans "Adicione, edite ou desative itens disponíveis no shop." %}</p>
+                    <a href="{% url 'shop:items' %}" class="btn btn-outline-primary w-100 mt-2">{% trans "Acessar" %}</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-gift display-4 text-success mb-3"></i>
+                    <h5 class="card-title">{% trans "Gerenciar Pacotes" %}</h5>
+                    <p class="card-text">{% trans "Monte pacotes personalizados com itens e promoções." %}</p>
+                    <a href="{% url 'shop:packages' %}" class="btn btn-outline-success w-100 mt-2">{% trans "Acessar" %}</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-percent display-4 text-warning mb-3"></i>
+                    <h5 class="card-title">{% trans "Gerenciar Promoções" %}</h5>
+                    <p class="card-text">{% trans "Crie e gerencie códigos promocionais para o shop." %}</p>
+                    <a href="{% url 'shop:promotions' %}" class="btn btn-outline-warning w-100 mt-2">{% trans "Acessar" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

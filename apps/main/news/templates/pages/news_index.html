@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Notícias" %}{% endblock title %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="header-bg">
+    <h1 class="text-white">{% trans "Notícias" %}</h1>
+    <p>{% trans "Fique por dentro das últimas novidades e atualizações exclusivas." %}</p>
+</div>
+
+{% if user.is_authenticated %}
+<div class="row">
+    {% if private_news_list %}
+        {% for item in private_news_list %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 rounded">
+                    {% if item.news.image %}
+                        <img class="card-img-top rounded-top" src="{{ item.news.image.url }}" alt="{{ item.translation.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h3 class="card-title text-dark">{{ item.translation.title }}</h3>
+                        <p class="card-text flex-grow-1">{{ item.translation.summary }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                {% trans "Autor" %}: {{ item.news.author.username }} | {% trans "Data" %}: {{ item.news.pub_date }}
+                            </small>
+                        </p>
+                        <a href="{% url 'news:detail' item.news.slug %}" class="btn btn-primary mt-3">{% trans "Leia mais" %}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <p class="text-muted">{% trans "Não há notícias privadas disponíveis no momento." %}</p>
+        </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock content %}
+
+{% block extra_js %}
+<!-- JS extra, se necessário -->
+{% endblock extra_js %}

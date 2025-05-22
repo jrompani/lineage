@@ -1,0 +1,53 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+
+<div class="auth-wrapper">
+    <div class="auth-content">
+        <div class="auth-bg">
+            <span class="r"></span>
+            <span class="r s"></span>
+            <span class="r s"></span>
+            <span class="r"></span>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <h3 class="mb-4">{% trans 'Editar Perfil' %}</h3>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.first_name.label_tag }}
+                        {{ form.first_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.last_name.label_tag }}
+                        {{ form.last_name }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.email.label_tag }}
+                        {{ form.email }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.bio.label_tag }}
+                        {{ form.bio }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.cpf.label_tag }}
+                        {{ form.cpf }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.gender.label_tag }}
+                        {{ form.gender }}
+                    </div>
+                    <button type="submit" class="btn btn-primary shadow-2 mb-4">{% trans 'Salvar' %}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Incluir o JavaScript para a máscara CPF -->
+<script src="{% static 'js/mask-cpf.js' %}"></script>
+
+{% endblock content %}

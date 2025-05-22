@@ -1,0 +1,166 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+{% load static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4 py-3 px-4">
+      <h4 class="mb-0 fw-bold">
+        <i class="bi bi-download me-2"></i>{% trans "Retirar Item do Servidor" %}
+      </h4>
+    </div>
+    <div class="card-body px-5 py-4">
+
+      <!-- Seletor de personagem -->
+      <form method="get" class="mb-4">
+        <div class="mb-3">
+          <label class="form-label fw-semibold" for="char_id">{% trans "Personagem" %}</label>
+          <select class="form-select" id="char_id" name="char_id" required onchange="this.form.submit()">
+            <option value="">{% trans "Selecione um personagem" %}</option>
+            {% for p in personagens %}
+              <option value="{{ p.obj_Id|stringformat:'s' }}" {% if p.obj_Id|stringformat:"s" == char_id %}selected{% endif %}>
+                {{ p.char_name }} (Lv.{{ p.base_level }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </form>
+
+      {% if char_id %}
+        {% if items %}
+          <h5 class="fw-bold mb-3">{% trans "Inventário de" %} {{ personagem.char_name }}</h5>
+
+          <!-- Lista de itens -->
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th>{% trans "Item" %}</th>
+                  <th>{% trans "Encantamento" %}</th>
+                  <th>{% trans "Quantidade" %}</th>
+                  <th>{% trans "Localização" %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for item in items %}
+                  <tr class="clickable-row" 
+                      data-item-id="{{ item.item_type }}" 
+                      data-item-amount="{{ item.amount }}"
+                      data-item-name="{{ item.name }}">
+                      <td class="fw-bold text-primary d-flex align-items-center">
+                        <img src="{% item_image_url item.item_type %}" 
+                        alt="{{ item.item_name }}"
+                        class="me-2 rounded border border-secondary"
+                        style="width: 32px; height: 32px;">
+                        {{ item.name }}
+                      </td>
+                    <td>{{ item.enchant }}</td>
+                    <td>{{ item.amount }}</td>
+                    <td>{{ item.location }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Paginação -->
+          <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+              {% if items.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?char_id={{ char_id }}&page={{ items.previous_page_number }}">{% trans "Anterior" %}</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">{% trans "Anterior" %}</span></li>
+              {% endif %}
+
+              <li class="page-item disabled"><span class="page-link">{{ items.number }} / {{ items.paginator.num_pages }}</span></li>
+
+              {% if items.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?char_id={{ char_id }}&page={{ items.next_page_number }}">{% trans "Próxima" %}</a>
+                </li>
+              {% else %}
+                <li class="page-item disabled"><span class="page-link">{% trans "Próxima" %}</span></li>
+              {% endif %}
+            </ul>
+          </nav>
+
+          <!-- Form de retirada -->
+          <form method="post" class="mt-4">
+            {% csrf_token %}
+            <input type="hidden" name="char_id" value="{{ char_id }}">
+
+            <!-- Nome do Item -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold" for="item_name">{% trans "Item Selecionado" %}</label>
+              <input type="text" class="form-control" id="item_name" readonly>
+            </div>
+
+            <!-- ID do Item (interno) -->
+            <input type="hidden" id="item_id" name="item_id" required>
+
+            <!-- Quantidade -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold" for="quantity">{% trans "Quantidade" %}</label>
+              <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <!-- Senha -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold" for="senha">{% trans "Sua senha" %}</label>
+              <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-success rounded-pill px-4 shadow-sm">
+                <i class="bi bi-check-circle me-2"></i>{% trans "Retirar" %}
+              </button>
+            </div>
+          </form>
+
+        {% else %}
+          <div class="alert alert-info mt-4">
+            {% trans "Nenhum item encontrado no inventário deste personagem." %}
+          </div>
+        {% endif %}
+      {% endif %}
+
+      <div class="mt-4">
+        <a href="{% url 'inventory:inventario_dashboard' %}" class="btn btn-primary rounded-pill">
+          <i class="bi bi-arrow-left me-1"></i>{% trans "Voltar para o Inventário" %}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- JS para capturar clique e preencher form -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const rows = document.querySelectorAll(".clickable-row");
+    const itemIdInput = document.getElementById("item_id");
+    const quantityInput = document.getElementById("quantity");
+    const itemNameInput = document.getElementById("item_name");
+  
+    rows.forEach(row => {
+      row.addEventListener("click", () => {
+        const itemId = row.getAttribute("data-item-id");
+        let itemAmount = row.getAttribute("data-item-amount");
+        const itemName = row.getAttribute("data-item-name");
+  
+        // Garante que itemAmount é string, depois remove tudo que não for número
+        itemAmount = String(itemAmount).replace(/[^\d]/g, '');
+  
+        itemIdInput.value = itemId;
+        quantityInput.value = itemAmount;
+        quantityInput.max = itemAmount;
+        itemNameInput.value = itemName;
+      });
+    });
+  });  
+</script>
+{% endblock %}

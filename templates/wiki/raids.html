@@ -1,0 +1,113 @@
+{% extends 'wiki/base.html' %}
+{% load static i18n %}
+
+{% block wiki_content %}
+<div class="raids-container">
+    <h1>{% trans "Raid Bosses" %}</h1>
+
+    <!-- Regular Raids -->
+    <div class="raids-section mb-5">
+        <h2>{% trans "Raids Regulares" %}</h2>
+        <div class="row">
+            {% for raid in regular_raids %}
+            <div class="col-md-6 mb-4">
+                <div class="raid-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ raid.translation.title }}</h3>
+                            <div class="raid-content">
+                                {{ raid.translation.content|safe }}
+                            </div>
+                            {% if raid.schedule %}
+                            <div class="raid-schedule mt-3">
+                                <h4>{% trans "Horários" %}</h4>
+                                {{ raid.schedule|safe }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Special Raids -->
+    <div class="raids-section mb-5">
+        <h2>{% trans "Raids Especiais" %}</h2>
+        <div class="row">
+            {% for raid in special_raids %}
+            <div class="col-md-6 mb-4">
+                <div class="raid-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ raid.translation.title }}</h3>
+                            <div class="raid-content">
+                                {{ raid.translation.content|safe }}
+                            </div>
+                            {% if raid.schedule %}
+                            <div class="raid-schedule mt-3">
+                                <h4>{% trans "Horários" %}</h4>
+                                {{ raid.schedule|safe }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- World Raids -->
+    <div class="raids-section">
+        <h2>{% trans "Raids Mundiais" %}</h2>
+        <div class="row">
+            {% for raid in world_raids %}
+            <div class="col-md-6 mb-4">
+                <div class="raid-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ raid.translation.title }}</h3>
+                            <div class="raid-content">
+                                {{ raid.translation.content|safe }}
+                            </div>
+                            {% if raid.schedule %}
+                            <div class="raid-schedule mt-3">
+                                <h4>{% trans "Horários" %}</h4>
+                                {{ raid.schedule|safe }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .raids-container {
+        padding: 20px;
+    }
+
+    .raid-card {
+        height: 100%;
+    }
+
+    .raid-content {
+        margin-top: 1rem;
+    }
+
+    .raid-schedule {
+        border-top: 1px solid var(--border-color);
+        padding-top: 1rem;
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %} 

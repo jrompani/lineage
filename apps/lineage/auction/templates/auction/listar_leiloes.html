@@ -1,0 +1,78 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n static %}
+{% load itens_extras %}
+
+{% block extrahead %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+  h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #6f42c1;
+    text-transform: uppercase;
+  }
+
+  .btn-primary {
+    background: linear-gradient(to right, #0dcaf0, #6f42c1);
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: 0.3s;
+    text-shadow: 0 0 2px #000;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 12px rgba(111, 66, 193, 0.6);
+    transform: scale(1.03);
+  }
+
+  .alert-secondary {
+    background-color: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+  }
+
+  .pagination {
+    justify-content: center;
+    padding: 15px 0;
+  }
+
+  .pagination .page-link {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #444;
+    text-shadow: 0 0 2px #000;
+  }
+
+  .pagination .page-item.active .page-link {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+    box-shadow: 0 0 8px rgba(111, 66, 193, 0.6);
+  }
+
+  .pagination .page-link:hover {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">{% trans "Leilões" %}</h2>
+    <a href="{% url 'auction:criar_leilao' %}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> {% trans "Criar Leilão" %}
+    </a>
+  </div>
+
+  {% include "auction/partials/_leilao_secao.html" with titulo=_("Leilões Ativos") lista=leiloes_ativos msg_vazio=_("Nenhum leilão ativo no momento.") page=leiloes_ativos page_param="page_ativos" %}
+  {% include "auction/partials/_leilao_secao.html" with titulo=_("Leilões Pendentes de Entrega") lista=leiloes_pendentes_entrega msg_vazio=_("Nenhum leilão pendente de entrega.") page=leiloes_pendentes_entrega page_param="page_pendentes_entrega" %}
+
+  {% if user.is_staff %}
+    {% include "auction/partials/_leilao_secao.html" with titulo=_("Leilões Finalizados") lista=leiloes_finalizados msg_vazio=_("Nenhum leilão finalizado.") page=leiloes_finalizados page_param="page_finalizados" %}
+    {% include "auction/partials/_leilao_secao.html" with titulo=_("Leilões Cancelados") lista=leiloes_cancelados msg_vazio=_("Nenhum leilão cancelado.") page=leiloes_cancelados page_param="page_cancelados" %}
+  {% endif %}
+</div>
+{% endblock %}

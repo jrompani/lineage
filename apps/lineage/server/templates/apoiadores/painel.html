@@ -1,0 +1,104 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Painel do Apoiador" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="display-4 text-center mb-4 text-primary">
+        {% trans "Painel do Apoiador" %} – {{ apoiador.nome_publico }}
+    </h2>
+
+    <!-- Exibir Cupom Ativo -->
+    {% if cupom %}
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center mb-3 mb-md-0">
+                    {% if apoiador.imagem %}
+                        <img src="{{ apoiador.imagem.url }}" alt="{{ apoiador.nome_publico }}" class="img-fluid rounded-3 shadow-sm" style="max-height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="text-muted">{% trans "Sem imagem" %}</div>
+                    {% endif %}
+                </div>
+
+                <div class="col-md-6 text-center">
+                    <h3 class="h5 text-muted">{% trans "Seu Cupom Ativo" %}</h3>
+                    <p class="h4 text-success">{% trans "Código" %}: <strong>{{ cupom.codigo }}</strong></p>
+                    <p class="text-muted">{% trans "Desconto" %}: {{ cupom.desconto_percentual }}%</p>
+                    <p class="text-muted">{% trans "Válido até" %}: {{ cupom.validade|date:"d/m/Y" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body text-center">
+            <h3 class="h5 text-muted">{% trans "Ainda não há cupom ativo." %}</h3>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Estatísticas -->
+    <div class="row row-cols-1 row-cols-md-2 g-4 mb-4">
+        <div class="col">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body text-center">
+                    <h3 class="h5 text-muted">{% trans "Total de Vendas" %}</h3>
+                    <p class="h4 text-success">R$ {{ total_vendas|floatformat:2 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card shadow-sm border-0 rounded-3">
+                <div class="card-body text-center">
+                    <h3 class="h5 text-muted">{% trans "Usuários Impactados" %}</h3>
+                    <p class="h4 text-primary">{{ total_usuarios }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações -->
+    <div class="text-center mb-5 d-flex justify-content-center gap-3 flex-wrap">
+        <a href="{% url 'server:solicitar_comissao' %}" class="btn btn-success btn-lg shadow-sm">
+            💸 {% trans "Solicitar Comissão" %}
+        </a>
+        <a href="{% url 'server:editar_imagem_apoiador' %}" class="btn btn-outline-primary btn-lg shadow-sm">
+            🖼️ {% trans "Editar Imagem" %}
+        </a>
+    </div>
+
+    <!-- Tabela de Compras -->
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">{% trans "Usuário" %}</th>
+                        <th scope="col">{% trans "Personagem" %}</th>
+                        <th scope="col">{% trans "Total" %}</th>
+                        <th scope="col">{% trans "Data" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for compra in compras %}
+                    <tr>
+                        <td>{{ compra.user.username }}</td>
+                        <td>{{ compra.character_name }}</td>
+                        <td class="text-success">R$ {{ compra.total_pago }}</td>
+                        <td>{{ compra.data_compra|date:"d/m/Y H:i" }}</td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            {% trans "Nenhuma compra registrada ainda." %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

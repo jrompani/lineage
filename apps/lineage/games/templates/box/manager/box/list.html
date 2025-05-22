@@ -1,0 +1,40 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2 class="mb-4">{% trans "Caixas Criadas" %}</h2>
+  <a href="{% url 'games:box_create' %}" class="btn btn-success mb-3">{% trans "Nova Caixa" %}</a>
+
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>{% trans "ID" %}</th>
+        <th>{% trans "Usuário" %}</th>
+        <th>{% trans "Tipo" %}</th>
+        <th>{% trans "Aberta?" %}</th>
+        <th>{% trans "Ações" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for box in boxes %}
+      <tr>
+        <td>{{ box.id }}</td>
+        <td>{% if box.user %}{{ box.user.username }}{% else %}(sem usuário){% endif %}</td>
+        <td>{{ box.box_type.name }}</td>
+        <td>{{ box.opened|yesno:"Sim,Não" }}</td>
+        <td>
+          <a href="{% url 'games:box_edit' box.id %}" class="btn btn-sm btn-primary">{% trans "Editar" %}</a>
+          <a href="{% url 'games:box_delete' box.id %}" class="btn btn-sm btn-danger">{% trans "Excluir" %}</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="5">{% trans "Nenhuma caixa encontrada." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Botão para voltar ao dashboard -->
+  <a href="{% url 'games:box_manager_dashboard' %}" class="btn btn-secondary mt-3">{% trans "Voltar ao Dashboard" %}</a>
+</div>
+{% endblock %}

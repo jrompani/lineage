@@ -1,0 +1,51 @@
+{% extends "layouts/base.html" %}
+{% load i18n static %}
+
+{% block extrahead %}
+    <!-- jQuery do Django Admin -->
+    <script src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+    <script>var django = { jQuery: window.jQuery };</script>
+
+    {{ form.media }}
+    <script type="text/javascript" src="{% url 'jsi18n' %}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>
+        {% if box_type %}
+            {% trans "Editar Tipo de Caixa" %}
+        {% else %}
+            {% trans "Criar Novo Tipo de Caixa" %}
+        {% endif %}
+    </h2>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.non_field_errors }}
+
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success mt-3">
+            {% if box_type %}
+                {% trans "Salvar Alterações" %}
+            {% else %}
+                {% trans "Criar Tipo de Caixa" %}
+            {% endif %}
+        </button>
+    </form>
+
+    <a href="{% url 'games:box_type_list' %}" class="btn btn-secondary mt-3">
+        {% trans "Cancelar" %}
+    </a>
+</div>
+{% endblock %}

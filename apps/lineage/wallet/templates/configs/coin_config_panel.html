@@ -1,0 +1,101 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card shadow-lg rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4">
+      <h4 class="mb-0 fw-bold"><i class="bi bi-currency-exchange me-2"></i>{% trans "Configuração de Moeda In-game" %}</h4>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="table-responsive">
+          <table class="table align-middle table-hover table-striped">
+            <thead>
+              <tr>
+                <th>{% trans "Nome" %}</th>
+                <th>{% trans "ID" %}</th>
+                <th>{% trans "Multiplicador" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Ação" %}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for moeda in moedas %}
+              <tr class="{% if moeda.ativa %}table-success{% endif %}">
+                <td>{{ moeda.nome }}</td>
+                <td>{{ moeda.coin_id }}</td>
+                <td>x{{ moeda.multiplicador }}</td>
+                <td>
+                  {% if moeda.ativa %}
+                    <span class="badge bg-success">{% trans "Ativa" %}</span>
+                  {% else %}
+                    <span class="badge bg-secondary">{% trans "Inativa" %}</span>
+                  {% endif %}
+                </td>
+                <td style="min-width: 160px;">
+                  <div class="d-grid gap-2">
+                    {% if not moeda.ativa %}
+                    <form method="post" class="w-100">
+                      {% csrf_token %}
+                      <input type="hidden" name="activate_coin_id" value="{{ moeda.id }}">
+                      <button type="submit" class="btn btn-sm btn-outline-primary w-100 text-nowrap">
+                        {% trans "Ativar" %}
+                      </button>
+                    </form>
+                    {% else %}
+                    <button class="btn btn-sm btn-outline-secondary w-100 text-nowrap" disabled>
+                      {% trans "Atual" %}
+                    </button>
+                    {% endif %}
+
+                    <form method="post" class="w-100" onsubmit="return confirm('{% trans "Tem certeza que deseja excluir esta moeda?" %}')">
+                      {% csrf_token %}
+                      <input type="hidden" name="delete_coin_id" value="{{ moeda.id }}">
+                      <button type="submit" class="btn btn-sm btn-outline-danger w-100 text-nowrap">
+                        <i class="bi bi-trash me-1"></i>{% trans "Excluir" %}
+                      </button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="5" class="text-center text-muted">{% trans "Nenhuma moeda configurada ainda." %}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </form>
+
+      <hr class="my-4">
+
+      <h5 class="fw-bold mb-3"><i class="bi bi-plus-circle me-2"></i>{% trans "Nova Moeda" %}</h5>
+      <form method="post" class="row g-3">
+        {% csrf_token %}
+        <input type="hidden" name="create_coin" value="1">
+        <div class="col-md-4">
+          <label class="form-label">{% trans "Nome" %}</label>
+          <input type="text" name="nome" class="form-control" placeholder="{% trans 'Ex: Gold Coin' %}" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">{% trans "ID (no servidor)" %}</label>
+          <input type="text" name="coin_id" class="form-control" placeholder="{% trans 'Ex: 4037' %}" required>
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">{% trans "Multiplicador" %}</label>
+          <input type="number" step="0.01" name="multiplicador" class="form-control" placeholder="{% trans 'Ex: 1.0' %}" required>
+        </div>
+        <div class="col-12 text-end">
+          <button type="submit" class="btn btn-success rounded-pill px-4">
+            <i class="bi bi-save me-2"></i>{% trans "Cadastrar Moeda" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

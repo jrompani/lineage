@@ -1,0 +1,90 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Amigos" %}{% endblock title %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/friends.css' %}">
+{% endblock extrahead %}
+
+{% block content %}
+<!-- [ Main Content ] start -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header d-flex align-items-center">
+        <i class="fas fa-users mr-2"></i>
+        <h5 class="mb-0"> {% trans "Amigos e Conexões" %}</h5>
+      </div>
+      <div class="card-body">
+
+        <!-- Lista de Amigos -->
+        <div class="section-header mb-3">
+          <h6><i class="fas fa-users mr-2"></i> {% trans "Meus Amigos" %}</h6>
+        </div>
+        <ul class="list-group mb-4">
+          {% for friendship in accepted_friendships %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                {% if friendship.friend.avatar %}
+                  <img src="{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' friendship.friend.uuid %}" alt="{{ friendship.friend.username }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                {% else %}
+                  <img src="{% static 'assets/img/team/generic_user.png' %}" alt="{% trans 'default profile image' %}" class="img-fluid rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                {% endif %}
+                <span>{{ friendship.friend.username }}</span>
+              </div>
+              <a href="{% url 'message:remove_friend' friendship.id %}" class="btn btn-danger btn-sm">{% trans 'Deixar de Ser Amigo' %}</a>
+            </li>
+          {% empty %}
+            <li class="list-group-item">{% trans 'Nenhum amigo adicionado ainda.' %}</li>
+          {% endfor %}
+        </ul>
+
+        <!-- Adicionar Amigos -->
+        <div class="section-header mb-3">
+          <h6><i class="fas fa-user-plus mr-2"></i> {% trans "Adicionar Novos Amigos" %}</h6>
+        </div>
+        <ul class="list-group mb-4">
+          {% for user in users %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                {% if user.avatar %}
+                  <img src="{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' user.uuid %}" alt="{{ user.username }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                {% else %}
+                  <img src="{% static 'assets/img/team/generic_user.png' %}" alt="{% trans 'default profile image' %}" class="img-fluid rounded-circle" style="width: 40px; height: 40px; margin-right: 10px;">
+                {% endif %}
+                <span>{{ user.username }}</span>
+              </div>
+              <a href="{% url 'message:send_friend_request' user.id %}" class="btn btn-primary btn-sm">
+                {% trans 'Enviar Pedido' %}
+              </a>
+            </li>
+          {% empty %}
+            <li class="list-group-item">{% trans 'Nenhum usuário disponível para adicionar.' %}</li>
+          {% endfor %}
+        </ul>
+
+        <!-- Convites de Amizade -->
+        <div class="section-header mb-3">
+          <h6><i class="fas fa-user-friends mr-2"></i> {% trans "Convites Pendentes" %}</h6>
+        </div>
+        <ul class="list-group">
+          {% for request in pending_friend_requests %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>{{ request.user.username }}</div>
+              <div>
+                <a href="{% url 'message:accept_friend_request' request.id %}" class="btn btn-success btn-sm mr-1">{% trans 'Aceitar' %}</a>
+                <a href="{% url 'message:reject_friend_request' request.id %}" class="btn btn-danger btn-sm">{% trans 'Recusar' %}</a>
+              </div>
+            </li>
+          {% empty %}
+            <li class="list-group-item">{% trans 'Nenhum convite de amizade recebido.' %}</li>
+          {% endfor %}
+        </ul>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- [ Main Content ] end -->
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">{% trans 'Editar Avatar' %}</h5>
+        </div>
+        <div class="card-body">
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="d-flex justify-content-between mt-4">
+              <a href="{% url 'profile' %}" class="btn btn-secondary">{% trans 'Voltar para o perfil' %}</a>
+              <button type="submit" class="btn btn-success">{% trans 'Salvar Avatar' %}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

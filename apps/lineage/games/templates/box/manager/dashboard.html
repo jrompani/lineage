@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center fw-bold">{% trans "Painel de Gerenciamento de Caixas" %}</h2>
+
+    <!-- Estatísticas -->
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Tipos de Caixas" %}</h5>
+                    <p class="display-6 fw-bold text-primary">{{ box_type_count }}</p>
+                    <a href="{% url 'games:box_type_list' %}" class="btn btn-outline-primary w-100 mt-2">
+                        {% trans "Ver Tipos de Caixa" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Caixas Criadas" %}</h5>
+                    <p class="display-6 fw-bold text-success">{{ box_count }}</p>
+                    <a href="{% url 'games:box_list' %}" class="btn btn-outline-success w-100 mt-2">
+                        {% trans "Ver Caixas" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Itens Cadastrados" %}</h5>
+                    <p class="display-6 fw-bold text-danger">{{ item_count }}</p>
+                    <a href="{% url 'games:item_list' %}" class="btn btn-outline-danger w-100 mt-2">
+                        {% trans "Ver Itens" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ações rápidas -->
+    <div class="row g-4 mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Criar Tipo de Caixa" %}</h5>
+                    <p>{% trans "Adicione um novo tipo de caixa com raridades e preços definidos." %}</p>
+                    <a href="{% url 'games:box_type_create' %}" class="btn btn-warning w-100">
+                        {% trans "Novo Tipo de Caixa" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Criar Caixa" %}</h5>
+                    <p>{% trans "Associe caixas aos usuários com base nos tipos existentes." %}</p>
+                    <a href="{% url 'games:box_create' %}" class="btn btn-warning w-100">
+                        {% trans "Nova Caixa" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans "Cadastrar Item" %}</h5>
+                    <p>{% trans "Cadastre novos itens disponíveis para as caixas." %}</p>
+                    <a href="{% url 'games:item_create' %}" class="btn btn-warning w-100">
+                        {% trans "Novo Item" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

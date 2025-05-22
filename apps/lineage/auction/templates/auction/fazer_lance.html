@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">{% trans "Dar Lance" %}</h2>
+    <a href="{% url 'auction:listar_leiloes' %}" class="btn btn-secondary">
+      <i class="bi bi-arrow-left"></i> {% trans "Voltar" %}
+    </a>
+  </div>
+
+  <div class="card bg-dark text-light border-secondary">
+    <div class="card-header d-flex align-items-center">
+      <img src="{% item_image_url auction.item_id %}"
+      alt="{{ auction.item_name }}"
+      class="me-3 rounded border border-secondary"
+      style="width: 64px; height: 64px;"> 
+      <div>
+        <h4 class="mb-0">{{ auction.item_name }}</h4>
+        <small class="text-muted">ID: {{ auction.item_id }}</small>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <p>
+        <i class="bi bi-currency-dollar"></i>
+        <strong>{% trans "Lance atual:" %}</strong>
+        R$ {{ auction.current_bid|default:auction.starting_bid }}
+      </p>
+      <p>
+        <i class="bi bi-clock-fill"></i>
+        <strong>{% trans "Tempo restante:" %}</strong>
+        <span class="text-warning fw-bold">{{ auction.end_time|timeuntil }}</span>
+      </p>
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          <label class="form-label fw-semibold">{% trans "Selecione o Personagem" %}</label>
+          <select name="character_name" class="form-select rounded-3" required>
+            <option value="" disabled selected>{% trans "Escolha um personagem" %}</option>
+            {% for p in personagens %}
+              <option value="{{ p.char_name }}">{{ p.char_name }} (Lv.{{ p.base_level }})</option>
+            {% endfor %}
+          </select>
+        </div>
+      
+        <div class="mb-3">
+          <label for="bid_value" class="form-label">{% trans "Seu lance" %}</label>
+          <input type="number" step="0.01" min="0" name="bid_amount" id="bid_amount" class="form-control" required>
+        </div>
+      
+        <button type="submit" class="btn btn-success">
+          <i class="bi bi-gavel"></i> {% trans "Confirmar Lance" %}
+        </button>
+      </form>      
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'layouts/base-default.html' %}
+{% load static i18n %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'default/css/wiki.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="wiki-container">
+    <div class="wiki-nav-container" data-aos="fade-right" data-aos-duration="1000">
+        <div class="wiki-nav-header">
+            <i class="fas fa-book-open"></i>
+            <h2>{% trans "Guia Wiki" %}</h2>
+        </div>
+        <div class="wiki-nav-menu">
+            <ul class="wiki-nav-list">
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:home' %}" {% if request.resolver_match.url_name == 'home' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-home"></i>{% trans "Início" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:general' %}" {% if request.resolver_match.url_name == 'general' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-info-circle"></i>{% trans "Informações Gerais" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:rates' %}" {% if request.resolver_match.url_name == 'rates' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-chart-line"></i>{% trans "Taxas" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:raids' %}" {% if request.resolver_match.url_name == 'raids' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-dragon"></i>{% trans "Chefes de Raid" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:assistance' %}" {% if request.resolver_match.url_name == 'assistance' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-hands-helping"></i>{% trans "Assistência do Jogo" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:events' %}" {% if request.resolver_match.url_name == 'events' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-calendar-alt"></i>{% trans "Guia de Eventos" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:updates' %}" {% if request.resolver_match.url_name == 'updates' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-sync"></i>{% trans "Atualizações" %}
+                    </a>
+                </li>
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:features' %}" {% if request.resolver_match.url_name == 'features' %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-star"></i>{% trans "Recursos" %}
+                    </a>
+                </li>
+                {% for item in pages %}
+                <li class="wiki-nav-item">
+                    <a href="{% url 'wiki:page' item.page.slug %}" {% if request.resolver_match.kwargs.slug == item.page.slug %}class="wiki-nav-link active"{% else %}class="wiki-nav-link"{% endif %}>
+                        <i class="fas fa-book"></i>{{ item.translation.title }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <div class="wiki-content" data-aos="fade-left" data-aos-duration="1000">
+        <div class="content-wrapper">
+            {% block wiki_content %}{% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+<script>
+    // Initialize AOS
+    AOS.init();
+</script>
+{% endblock %} 

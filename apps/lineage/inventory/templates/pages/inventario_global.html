@@ -1,0 +1,52 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+{% load static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+  
+  <!-- Cabeçalho -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary d-flex align-items-center mb-0">
+      <i class="bi bi-gem me-2"></i>{% trans "Inventário Global" %}
+    </h2>
+    <a href="{% url 'inventory:inventario_dashboard' %}" class="btn btn-outline-primary rounded-pill px-4 py-2 shadow-sm d-flex align-items-center">
+      <i class="bi bi-arrow-left me-2"></i>{% trans "Voltar" %}
+    </a>
+  </div>
+
+  <!-- Tabela -->
+  <div class="table-responsive rounded-4 overflow-hidden shadow-sm border">
+    <table class="table table-dark table-hover table-striped table-bordered mb-0">
+      <thead class="table-primary text-dark">
+        <tr>
+          <th class="fw-semibold">{% trans "Item" %}</th>
+          <th class="text-end fw-semibold">{% trans "Quantidade Total" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in itens_globais %}
+        <tr>
+          <td class="fw-bold text-white d-flex align-items-center">
+            <img src="{% item_image_url item.item_id %}" 
+            alt="{{ item.item_name }}"
+            class="me-2 rounded border border-secondary"
+            style="width: 32px; height: 32px;">
+            {{ item.item_name }}
+          </td>
+          <td class="text-end">
+            <span class="badge bg-success fs-6 px-3 py-2 rounded-pill">{{ item.total_quantity }}</span>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="2" class="text-center text-primary py-4">{% trans "Nenhum item encontrado." %}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock %}

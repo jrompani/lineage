@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+{% load i18n custom_filters %}
+
+{% block extrahead %}
+<style>
+    .transition {
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .hover-shadow-sm:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
+      }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-gradient bg-primary text-white rounded-top-4 d-flex justify-content-between align-items-center py-3 px-4">
+      <h4 class="mb-0 fw-bold"><i class="bi bi-gear-fill me-2"></i>{% trans "Configurações de Endpoints da API" %}</h4>
+    </div>
+    <div class="card-body px-5 py-4">
+      <form method="post">
+        {% csrf_token %}
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          {% for field in fields %}
+            <div class="col">
+              <div class="form-check form-switch ps-0 d-flex align-items-center border rounded-3 p-3 bg-light shadow-sm transition hover-shadow-sm">
+                <input class="form-check-input ms-0 me-3" type="checkbox" name="{{ field }}" id="{{ field }}"
+                      {% if toggle|get_attr:field %}checked{% endif %}>
+                <label class="form-check-label fw-semibold" for="{{ field }}">{{ field|capfirst }}</label>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="text-end mt-4">
+          <button type="submit" class="btn btn-lg btn-success rounded-pill px-4 shadow-sm">
+            <i class="bi bi-check-circle me-2"></i>{% trans "Salvar Alterações" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock content %}

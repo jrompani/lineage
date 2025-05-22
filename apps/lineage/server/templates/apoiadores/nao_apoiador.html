@@ -1,0 +1,28 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Seja um Apoiador" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-3 p-5 text-center">
+        <h1 class="text-3xl font-extrabold text-primary mb-4">
+            🚀 {% trans "Você ainda não é um apoiador" %}
+        </h1>
+        <p class="text-muted mb-4">
+            {% trans "Este painel é exclusivo para streamers e parceiros do nosso servidor. Como apoiador, você poderá gerar códigos promocionais, ter seu próprio painel e ganhar recompensas por cada indicação." %}
+        </p>
+
+        <div class="d-flex justify-content-center mb-4">
+            <a href="{% url 'server:formulario_apoiador' %}"
+               class="btn btn-outline-primary btn-lg py-3 px-5 rounded-pill">
+                ✨ {% trans "Solicitar Acesso" %}
+            </a>
+        </div>
+
+        <p class="text-sm text-gray-400 mt-6">
+            {% trans "Já é apoiador? Entre em contato com a staff caso enfrente problemas de acesso." %}
+        </p>
+    </div>
+</div>
+{% endblock %}

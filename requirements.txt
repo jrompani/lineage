@@ -1,0 +1,56 @@
+# Core
+django
+python-dotenv
+str2bool
+
+# django libs extensions
+django-admin-volt
+django-cors-headers
+django-redis
+django_ratelimit
+django-import-export
+django-encrypted-fields-and-files
+django-celery-beat
+django-ckeditor-5
+django-widget-tweaks
+django-po-translate
+
+# Deployment
+whitenoise
+gunicorn
+
+# DB Layer
+psycopg2-binary
+pymysql
+sqlalchemy
+redis
+
+# especials
+cryptography
+pillow
+tablib
+diff_match_patch
+python-ipware
+passlib[bcrypt]
+requests
+
+# celery
+celery
+flower
+
+# websockets
+channels
+channels-redis
+daphne
+
+# payments
+mercadopago
+stripe
+
+# for history-migrates
+django-ckeditor
+
+# Authenticator 2FA
+django-otp 
+qrcode
+pyotp

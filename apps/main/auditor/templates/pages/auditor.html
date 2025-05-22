@@ -1,0 +1,82 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>{% trans "Real-time Auditor Middleware Data" %}</h1>
+            <ul id="audit-data-list" class="list-group">
+                <!-- List items will be dynamically added here -->
+            </ul>
+            <div id="loading-message" class="text-center mt-3" style="display:none;">
+                <i class="fas fa-spinner fa-spin"></i> {% trans "Carregando dados..." %}
+            </div>
+            <div id="error-message" class="alert alert-danger mt-3" style="display:none;">
+                {% trans "Erro ao carregar os dados de auditoria. Tente novamente." %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Carregar jQuery de um CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        var limit = 10;  // Defina o limite de registros
+
+        // Função para pegar dados da auditoria e atualizar a lista
+        function fetchAuditorData() {
+            $('#loading-message').show();  // Exibe a mensagem de carregamento
+            $('#error-message').hide();  // Esconde a mensagem de erro
+
+            $.ajax({
+                url: `/app/auditor/data?limit=${limit}`,  // URL para a view AuditorDataView com o limite
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(xhr, settings) {
+                    // Inclui o CSRF token se a aplicação Django usar CSRF
+                    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                    if (csrfToken) {
+                        xhr.setRequestHeader("X-CSRFToken", csrfToken);
+                    }
+                },
+                success: function(data) {
+                    $('#loading-message').hide();  // Esconde a mensagem de carregamento
+                    $('#audit-data-list').empty();  // Limpa os itens existentes
+                    if (data.length > 0) {
+                        $.each(data, function(index, item) {
+                            var listItem = `<li class="list-group-item">
+                                <strong>{% trans "Date:" %}</strong> ${item.date}<br>
+                                <strong>{% trans "Path:" %}</strong> ${item.path}<br>
+                                <strong>{% trans "Total Time:" %}</strong> ${item.total_time}<br>
+                                <strong>{% trans "Python Time:" %}</strong> ${item.python_time}<br>
+                                <strong>{% trans "DB Time:" %}</strong> ${item.db_time}<br>
+                                <strong>{% trans "Total Queries:" %}</strong> ${item.total_queries}<br>
+                                <strong>{% trans "Method:" %}</strong> ${item.method}<br>
+                                <strong>{% trans "User Agent:" %}</strong> ${item.user_agent}<br>
+                                <strong>{% trans "Response Status Code:" %}</strong> ${item.response_status_code}
+                            </li>`;
+                            $('#audit-data-list').append(listItem);  // Adiciona novo item à lista
+                        });
+                    } else {
+                        $('#audit-data-list').append('<li class="list-group-item">{% trans "Nenhum dado de auditoria encontrado." %}</li>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    $('#loading-message').hide();  // Esconde a mensagem de carregamento
+                    $('#error-message').show();  // Exibe a mensagem de erro
+                    console.error('Erro ao buscar dados de auditoria:', error);
+                }
+            });
+        }
+
+        // Busca dados inicialmente
+        fetchAuditorData();
+
+        // Busca dados a cada 5 segundos (intervalo ajustável conforme necessário)
+        setInterval(fetchAuditorData, 5000);
+    });
+</script>
+{% endblock content %}

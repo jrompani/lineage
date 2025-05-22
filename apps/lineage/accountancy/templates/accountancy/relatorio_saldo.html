@@ -1,0 +1,41 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">{% trans "Relatório de Saldo dos Usuários" %}</h2>
+
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>{% trans "Usuário" %}</th>
+          <th>{% trans "Saldo na Wallet" %}</th>
+          <th>{% trans "Saldo Calculado" %}</th>
+          <th>{% trans "Diferença" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in relatorio %}
+        <tr>
+          <td>{{ item.usuario }}</td>
+          <td>R$ {{ item.saldo_wallet }}</td>
+          <td>R$ {{ item.saldo_calculado }}</td>
+          <td>
+            {% if item.diferenca == 0 %}
+              <span class="text-success">R$ {{ item.diferenca }}</span>
+            {% else %}
+              <span class="text-danger">R$ {{ item.diferenca }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'accountancy:dashboard' %}" class="btn btn-secondary">{% trans "Voltar para o Dashboard" %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

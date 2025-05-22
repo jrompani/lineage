@@ -1,0 +1,50 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4 py-3 px-4">
+      <h4 class="mb-0 fw-bold">{% trans "Editar Pacote" %}</h4>
+    </div>
+    <div class="card-body px-5 py-4">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.media }}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success rounded-pill">{% trans "Salvar Pacote" %}</button>
+      </form>
+
+      <hr class="my-4">
+
+      <h5 class="fw-bold">{% trans "Itens no Pacote" %}</h5>
+      <ul class="list-group">
+        {% for package_item in package_items %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ package_item.item.nome }} — x{{ package_item.quantidade }}
+            <a href="{% url 'shop:remove_item_from_package' package_item.id %}" class="btn btn-danger btn-sm">{% trans "Remover" %}</a>
+          </li>
+        {% empty %}
+          <li class="list-group-item">{% trans "Nenhum item no pacote." %}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Inclui o script necessário para ativar o SelectFilter -->
+<script type="text/javascript" src="{% url 'jsi18n' %}"></script>
+<script type="text/javascript">
+  window.addEventListener('load', function() {
+    if (typeof django !== 'undefined' && django.jQuery) {
+      django.jQuery('select.selectfilter, select.selectfilterstacked').each(function() {
+        SelectFilter.init(
+          this.id,
+          this.getAttribute('data-field-name'),
+          this.classList.contains('selectfilterstacked')
+        );
+      });
+    }
+  });
+</script>
+{% endblock %}

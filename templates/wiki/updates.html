@@ -1,0 +1,57 @@
+{% extends 'wiki/base.html' %}
+{% load static i18n %}
+
+{% block wiki_content %}
+<div class="updates-container">
+    <h1>{% trans "Atualizações do Servidor" %}</h1>
+
+    <div class="updates-list">
+        {% for update in updates %}
+        <div class="update-card mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="update-version">v{{ update.version }}</h2>
+                    <div class="update-date">{{ update.release_date|date:"d/m/Y" }}</div>
+                </div>
+                <div class="card-body">
+                    {{ update.translation.content|safe }}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="no-updates">
+            <p>{% trans "Nenhuma atualização disponível no momento." %}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .updates-container {
+        padding: 20px;
+    }
+
+    .update-card .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--bg-secondary);
+    }
+
+    .update-version {
+        margin: 0;
+        color: var(--primary-color);
+    }
+
+    .update-date {
+        color: var(--text-muted);
+    }
+
+    .no-updates {
+        text-align: center;
+        padding: 2rem;
+        background-color: var(--bg-secondary);
+        border-radius: 0.5rem;
+    }
+</style>
+{% endblock %} 

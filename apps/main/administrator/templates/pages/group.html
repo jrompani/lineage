@@ -1,0 +1,85 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Chat da Solicitação" %}{% endblock title %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-button@4.6.0/dist/index.min.css">
+<link rel="stylesheet" href="{% static 'group.css' %}">
+{% endblock extrastyle %}
+
+{% block content %}
+<!-- Chat Room Header -->
+<div class="chat-header">
+    <h1 class="chat-title">
+        {% trans "Conversa sobre a" %} {{ type_chat }} {{ solicitation_context }} 
+        <strong>{{ solicitation }}</strong>
+    </h1>
+    <div class="chat-info">
+        <span class="chat-protocol">
+            {% trans "Protocolo:" %} <strong>{{ group_name }}</strong>
+        </span><br>
+    </div>
+</div>
+
+<!-- Chat Log -->
+<div id="chat-log">
+    <div id="messages-container">
+        {% for message in chat_messages %}
+            <div class="chat-message {% if message.sender.username == username %}sent{% else %}received{% endif %}">
+                <img 
+                    src="{% if message.sender.avatar %}{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' message.sender.uuid %}{% else %}{% static 'assets/img/team/generic_user.png' %}{% endif %}" 
+                    class="message-avatar" 
+                    alt="{{ message.sender.username }}" 
+                    width="40" 
+                    height="40"
+                >                  
+                <div class="message-content">
+                    <div class="message-header">
+                        <strong class="sender-name">{{ message.sender.username }}</strong>
+                        <span class="message-time">{{ message.timestamp|date:"d/m/Y, H:i:s" }}</span>
+                    </div>
+                    <div class="message-text">{{ message.message }}</div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Input for Chat Message -->
+<div class="input-group mt-3">
+    <input 
+        id="chat-message-input" 
+        type="text" 
+        class="form-control" 
+        placeholder="{% trans 'Digite sua mensagem aqui...' %}"
+        aria-label="{% trans 'Mensagem' %}"
+    >
+    <button 
+        id="emoji-button" 
+        type="button" 
+        class="btn btn-outline-secondary" 
+        aria-label="{% trans 'Selecionar Emoji' %}"
+    >
+        &#x1F60A;
+    </button>
+    <input 
+        id="chat-message-submit" 
+        type="button" 
+        class="btn btn-primary" 
+        value="{% trans 'Enviar' %}"
+    >
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.2/dist/index.min.js"></script>
+
+<script>
+    const groupName = "{{ group_name }}";
+    const currentUser = "{{ username }}"; 
+    const currentUserAvatar = "{{ avatar_url }}";
+</script>
+
+<script src="{% static 'group.js' %}"></script>
+{% endblock extra_js %}

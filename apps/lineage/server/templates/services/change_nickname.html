@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">{% trans "Alterar Nickname" %}</h2>
+
+    <p class="text-center mb-3">
+      {% trans "Personagem:" %} <strong>{{ char_name }}</strong>
+    </p>
+
+    <p class="text-center mb-3">
+      {% trans "Preço do serviço:" %} <strong>R${{ price }}</strong>
+    </p>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="name">{% trans "Novo Nickname" %}</label>
+        <input type="text" name="name" id="name" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100 mt-3">{% trans "Alterar Nickname" %}</button>
+    </form>
+
+    {% if messages %}
+      <div class="mt-4">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>{% trans "Itens Cadastrados" %}</h2>
+  <a href="{% url 'games:item_create' %}" class="btn btn-success mb-3">{% trans "Novo Item" %}</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>{% trans "Imagem" %}</th>
+        <th>{% trans "Nome" %}</th>
+        <th>{% trans "ID" %}</th>
+        <th>{% trans "Enchant" %}</th>
+        <th>{% trans "Raridade" %}</th>
+        <th>{% trans "Ações" %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td><img src="{{ item.image.url }}" height="40"></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.item_id }}</td>
+        <td>{{ item.enchant }}</td>
+        <td>{{ item.get_rarity_display }}</td>
+        <td>
+          <a href="{% url 'games:item_edit' item.pk %}" class="btn btn-sm btn-primary">{% trans "Editar" %}</a>
+          <a href="{% url 'games:item_delete' item.pk %}" class="btn btn-sm btn-danger">{% trans "Excluir" %}</a>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">{% trans "Nenhum item encontrado." %}</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="{% url 'games:box_manager_dashboard' %}" class="btn btn-secondary mt-3">
+    {% trans "Voltar ao Dashboard" %}
+  </a>
+</div>
+{% endblock %}

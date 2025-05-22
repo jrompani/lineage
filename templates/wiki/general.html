@@ -1,0 +1,132 @@
+{% extends 'wiki/base.html' %}
+{% load static i18n %}
+
+{% block wiki_content %}
+<div class="general-container">
+    <h1>{% trans "Informações Gerais" %}</h1>
+
+    <!-- Server Information -->
+    <div class="info-section mb-5">
+        <h2>{% trans "Informações do Servidor" %}</h2>
+        <div class="row">
+            {% for info in server_info %}
+            <div class="col-md-6 mb-4">
+                <div class="info-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ info.translation.title }}</h3>
+                            <div class="info-content">
+                                {{ info.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Game Features -->
+    <div class="info-section mb-5">
+        <h2>{% trans "Recursos do Jogo" %}</h2>
+        <div class="row">
+            {% for feature in game_features %}
+            <div class="col-md-6 mb-4">
+                <div class="info-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ feature.translation.title }}</h3>
+                            <div class="info-content">
+                                {{ feature.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Getting Started -->
+    <div class="info-section mb-5">
+        <h2>{% trans "Começando" %}</h2>
+        <div class="row">
+            {% for guide in getting_started %}
+            <div class="col-md-6 mb-4">
+                <div class="info-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ guide.translation.title }}</h3>
+                            <div class="info-content">
+                                {{ guide.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Community Guidelines -->
+    <div class="info-section mb-5">
+        <h2>{% trans "Diretrizes da Comunidade" %}</h2>
+        <div class="row">
+            {% for guideline in community_guidelines %}
+            <div class="col-md-6 mb-4">
+                <div class="info-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ guideline.translation.title }}</h3>
+                            <div class="info-content">
+                                {{ guideline.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Technical Support -->
+    <div class="info-section">
+        <h2>{% trans "Suporte Técnico" %}</h2>
+        <div class="row">
+            {% for support in technical_support %}
+            <div class="col-md-6 mb-4">
+                <div class="info-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ support.translation.title }}</h3>
+                            <div class="info-content">
+                                {{ support.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .general-container {
+        padding: 20px;
+    }
+
+    .info-card {
+        height: 100%;
+    }
+
+    .info-content {
+        margin-top: 1rem;
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %} 

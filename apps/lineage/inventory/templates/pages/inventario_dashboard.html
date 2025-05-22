@@ -1,0 +1,86 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+{% load static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">
+      <i class="bi bi-backpack2-fill me-2"></i>{% trans "Meu Inventário" %}
+    </h2>
+    <div class="d-flex gap-3">
+      <a href="{% url 'inventory:retirar_item' %}" class="btn btn-outline-secondary rounded-pill px-4 shadow-sm transition">
+        <i class="bi bi-plus-circle me-2"></i>{% trans "Adicionar Item" %}
+      </a>
+      <a href="{% url 'inventory:inventario_global' %}" class="btn btn-primary rounded-pill px-4 shadow-sm transition">
+        <i class="bi bi-boxes me-2"></i>{% trans "Inventário Global" %}
+      </a>
+    </div>
+  </div>
+
+  <!-- Personagens com seus itens -->
+  {% for data in inventory_data %}
+    <div class="card bg-dark text-white border-0 shadow-lg rounded-4 mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center bg-primary rounded-top-4 p-3">
+        <div>
+          <i class="bi bi-person-circle me-2 text-secondary"></i>
+          <strong class="text-secondary">{{ data.inventory.character_name }}</strong>
+          <span class="badge {% if data.inventory.is_online %}bg-success{% else %}bg-danger{% endif %} ms-2">
+            {% if data.inventory.is_online %}{% trans "Online" %}{% else %}{% trans "Offline" %}{% endif %}
+          </span>
+        </div>
+        <button class="btn btn-outline-secondary btn-sm rounded-pill" type="button" data-bs-toggle="collapse" data-bs-target="#inv{{ data.inventory.id }}">
+          <i class="bi bi-box-seam me-1"></i>{% trans "Itens" %}
+        </button>
+      </div>
+
+      <div id="inv{{ data.inventory.id }}" class="collapse show">
+        <div class="card-body">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+            {% for item in data.items %}
+              <div class="col">
+                <div class="card bg-dark border-0 shadow text-white rounded-4 overflow-hidden h-100">
+                  <div class="card-body text-center py-4 d-flex flex-column justify-content-between h-100">
+                      <img src="{% item_image_url item.item_id %}" 
+                      alt="{{ item.item_name }}"
+                      class="mb-3 rounded border border-secondary d-block mx-auto"
+                      style="width: 32px; height: 32px;">
+                    <h5 class="fw-bold mb-2 text-primary">{{ item.item_name }}</h5>
+                    <p class="mb-3 small text-primary">
+                      <span class="fw-semibold">{% trans "Quantidade" %}:</span>
+                      <span class="fw-semibold text-primary me-3">{{ item.quantity }}</span>
+                      <span class="fw-semibold">{% trans "Encantamento" %}:</span>
+                      <span class="fw-semibold text-primary">+{{ item.enchant }}</span>
+                    </p>
+                    <div class="d-grid gap-2">
+                      <a href="{% url 'inventory:inserir_item' char_name=data.inventory.character_name item_id=item.item_id|unlocalize %}" class="btn btn-outline-success btn-sm rounded-pill">
+                        <i class="bi bi-upload me-1"></i>{% trans "Devolver" %}
+                      </a>
+                      <a href="{% url 'inventory:trocar_item' %}?character_name_origem={{ data.inventory.character_name }}&item_id={{ item.item_id|unlocalize }}" class="btn btn-outline-warning btn-sm rounded-pill">
+                        <i class="bi bi-arrow-left-right me-1"></i>{% trans "Trocar" %}
+                      </a>
+                      <a href="{% url 'inventory:transferir_para_bag' char_name=data.inventory.character_name item_id=item.item_id|unlocalize %}" class="btn btn-outline-info btn-sm rounded-pill">
+                        <i class="bi bi-bag me-1"></i>{% trans "Enviar para Bag" %}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="col">
+                <div class="alert alert-info rounded-4 text-center text-primary">
+                  {% trans "Nenhum item no inventário." %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+</div>
+{% endblock %}

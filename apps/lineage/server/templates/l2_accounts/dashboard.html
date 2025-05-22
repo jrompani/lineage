@@ -1,0 +1,102 @@
+{% extends "layouts/base.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div class="container mt-5">
+
+  <!-- Dados da Conta -->
+  <div class="card shadow-sm mb-4 border-light">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0"><i class="fa fa-info-circle"></i> {% trans "Informações da Conta" %}</h5>
+    </div>
+    <div class="card-body">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>{% trans "Login:" %}</strong> {{ account.login }}</li>
+            <li class="list-group-item"><strong>{% trans "Email:" %}</strong> {{ account.email }}</li>
+            <li class="list-group-item"><strong>{% trans "Criada em:" %}</strong>
+              {% if created_time %}
+                {{ created_time }}
+              {% else %}
+                {% trans "Não disponível" %}
+              {% endif %}
+            </li>
+            <li class="list-group-item"><strong>{% trans "Último IP:" %}</strong>
+              {{ lastIP|default:"-" }}
+            </li>
+            <li class="list-group-item"><strong>{% trans "Status:" %}</strong> {{ account.status }}</li>
+            <li class="list-group-item"><strong>{% trans "Total de Personagens:" %}</strong> {{ char_count|default:"0" }}</li>
+          </ul>
+        </div>
+        <div class="col-md-8 text-center">
+          <img src="{% static 'assets/img/banner-pdl.png' %}" alt="{% trans 'Logo Lineage 2' %}"
+               class="img-fluid mb-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Personagens -->
+  <div class="card shadow-sm mb-4 border-light">
+    <div class="card-header bg-primary text-white">
+      <h5 class="mb-0"><i class="fa fa-users"></i> {% trans "Seus Personagens" %}</h5>
+    </div>
+    <div class="card-body">
+      {% if characters %}
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for char in characters %}
+        <div class="col">
+          <div class="card h-100 shadow">
+            <div class="card-header text-center fw-bold bg-dark text-primary">
+              {{ char.nome }}
+            </div>
+            <div class="text-center mt-3">
+              <img src="{% static 'assets/img/l2/avatar/' %}{{ char.avatar }}" 
+                   class="rounded" 
+                   alt="Avatar de {{ char.nome }}" 
+                   style="width: 160px; height: 160px; object-fit: cover;">
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush small">
+                <li class="list-group-item"><strong>{% trans "Título:" %}</strong> {{ char.title|default:"-" }}</li>
+                <li class="list-group-item"><strong>{% trans "Nível:" %}</strong> {{ char.level }}</li>
+                <li class="list-group-item"><strong>{% trans "Classe Base:" %}</strong> {{ char.base_class }}</li>
+                <li class="list-group-item"><strong>{% trans "Online:" %}</strong> {{ char.online }}</li>
+              </ul>
+            </div>
+            <div class="card-footer d-grid gap-2">
+              <a href="{% url 'server:change_sex' char.id %}" class="btn btn-outline-success btn-sm">
+                <i class="fa fa-male"></i> {% trans "Alterar Sexo" %}
+              </a>
+              <a href="{% url 'server:unstuck' char.id %}" class="btn btn-outline-warning btn-sm">
+                <i class="fa fa-undo-alt"></i> {% trans "Destravar" %}
+              </a>
+              <a href="{% url 'server:change_nickname' char.id %}" class="btn btn-outline-info btn-sm">
+                <i class="fa fa-pencil-alt"></i> {% trans "Alterar Nickname" %}
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted">{% trans "Nenhum personagem encontrado." %}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Serviços -->
+  <div class="card shadow-sm mb-4 border-light">
+    <div class="card-header bg-danger text-white">
+      <h5 class="mb-0">{% trans "Serviços da Conta" %}</h5>
+    </div>
+    <div class="card-body d-grid gap-2">
+      <a href="{% url 'server:update_password' %}" class="btn btn-outline-danger btn-lg">
+        <i class="fa fa-lock"></i> {% trans "Alterar Senha" %}
+      </a>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

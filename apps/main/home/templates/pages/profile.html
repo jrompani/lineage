@@ -1,0 +1,215 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block extrahead %}
+    <style>
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .avatar-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .username {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/inputmask@5.0.7/dist/inputmask.min.js"></script>
+{% endblock extrahead %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>{% trans 'Perfil/Biografia' %}</h5>
+        </div>
+        <div class="card-block">
+          <div class="row m-3">
+
+            <!-- Email -->
+            <div class="col-sm-12 mb-4">
+              <div class="form-group">
+                <label for="exampleInputEmail1">{% trans 'Endereço de Email' %}</label>
+                <span class="form-control" id="exampleInputEmail1">
+                  {% if user.email %}{{ user.email }}{% else %}{% trans 'N/A' %}{% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Nome -->
+            <div class="col-sm-6 mb-4">
+              <div class="form-group">
+                <label for="fn">{% trans 'Nome' %}</label>
+                <span class="form-control" id="fn">
+                  {% if user.first_name %}{{ user.first_name }}{% else %}{% trans 'N/A' %}{% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Sobrenome -->
+            <div class="col-sm-6 mb-4">
+              <div class="form-group">
+                <label for="ln">{% trans 'Sobrenome' %}</label>
+                <span class="form-control" id="ln">
+                  {% if user.last_name %}{{ user.last_name }}{% else %}{% trans 'N/A' %}{% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Endereço -->
+            <div class="col-sm-12 mb-4">
+              <div class="form-group">
+                <label for="add">{% trans 'Endereço' %}</label>
+                <span class="form-control" id="add">
+                  {% if user.addresses.exists %}
+                    {{ user.addresses.first }}
+                  {% else %}
+                    {% trans 'N/A' %}
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Botão de Endereço -->
+            <div class="col-sm-12 mb-4">
+              <div class="form-group m-3">
+                <a href="{% url 'add_or_edit_address' %}" class="btn btn-secondary">
+                  {% if user.addresses.exists %}
+                    {% trans 'Editar Endereço' %}
+                  {% else %}
+                    {% trans 'Cadastrar Endereço' %}
+                  {% endif %}
+                </a>
+              </div>
+            </div>
+
+            <!-- Sobre Você -->
+            <div class="col-sm-12 mb-4">
+              <div class="form-group">
+                <label for="abt">{% trans 'Sobre Você' %}</label>
+                <span class="form-control" id="abt">
+                  {% if user.bio %}{{ user.bio }}{% else %}{% trans 'N/A' %}{% endif %}
+                </span>
+              </div>
+
+              <!-- CPF -->
+              <div class="form-group mt-4">
+                <label for="cpf">{% trans 'CPF' %}</label>
+                <span class="form-control" id="cpf">
+                  {% if user.cpf %}{{ user.cpf }}{% else %}{% trans '000.000.000-00' %}{% endif %}
+                </span>
+              </div>
+            </div>
+
+            <!-- Gênero -->
+            <div class="col-sm-12 mb-4">
+              <div class="form-group">
+                <label for="gender">{% trans 'Gênero' %}</label>
+                <span class="form-control" id="gender">
+                  {% if user.gender %}
+                    {% if user.gender == 'male' %}{% trans 'Masculino' %}
+                    {% elif user.gender == 'female' %}{% trans 'Feminino' %}
+                    {% elif user.gender == 'non_binary' %}{% trans 'Não Binário' %}
+                    {% else %}{% trans 'Prefiro não dizer' %}
+                    {% endif %}
+                  {% else %}
+                    {% trans 'N/A' %}
+                  {% endif %}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <a href="{% url 'edit_profile' %}" class="btn btn-primary">{% trans 'Editar Perfil' %}</a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Coluna da foto e informações extras -->
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-block m-3">
+          <div class="d-flex align-items-center justify-content-center flex-column">
+            <div class="avatar-container">
+              {% if user.avatar %}
+                <img src="{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' user.uuid %}"
+                     alt="{% trans 'Imagem de perfil' %}" class="avatar-image rounded-circle">
+              {% else %}
+                <img class="avatar-image rounded-circle"
+                     alt="{% trans 'Imagem de perfil padrão' %}"
+                     src="{% static 'assets/img/team/generic_user.png' %}">
+              {% endif %}
+            </div>
+            <div class="text-center">
+              <h4 class="font-weight-bold h6 text-uppercase username">{{ user.username }}</h4>
+              <p class="font-italic text-muted">{% trans 'O sucesso não é garantido, mas o fracasso é certo se você não tentar.' %}</p>
+            </div>
+            <!-- Botão de editar avatar -->
+            <a href="{% url 'edit_avatar' %}" class="btn btn-primary mt-3">{% trans 'Editar Avatar' %}</a>
+        </div>
+        
+
+          <div class="small font-weight-light mt-4 text-center text-muted">
+            <p>{% trans 'Encontre inspiração em cada desafio e mantenha-se comprometido com o seu crescimento pessoal e profissional. Lembre-se sempre de que o esforço que você coloca hoje moldará o seu amanhã.' %}</p>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-center flex-column">
+            <a href="{% url 'message:friends_list' %}" class="btn btn-secondary mt-3">{% trans 'Ver Lista de Amigos' %}</a>
+          </div>
+
+          {% if not user.is_email_verified %}
+            <div class="alert alert-warning text-center mt-4">
+              <strong>{% trans 'Conta não verificada' %}</strong><br>
+              {% trans 'Seu e-mail ainda não foi verificado.' %}
+            </div>
+            <form method="post" action="{% url 'reenviar_verificacao' %}" class="text-center mt-2">
+              {% csrf_token %}
+              <input type="hidden" name="email" value="{{ user.email }}">
+              <button type="submit" class="btn btn-outline-warning">{% trans 'Reenviar E-mail de Verificação' %}</button>
+            </form>
+          {% endif %}
+
+          {% if not user.is_2fa_enabled %}
+            <div class="alert alert-info text-center mt-4">
+              <strong>{% trans '2FA Desativado' %}</strong><br>
+              {% trans 'A autenticação em duas etapas ainda não está ativada em sua conta.' %}
+            </div>
+            <form method="post" action="{% url 'ativar_2fa' %}" class="text-center mt-2">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-outline-primary">{% trans 'Ativar Autenticação 2FA' %}</button>
+            </form>
+          {% endif %}        
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- [ Main Content ] end -->
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var cpfField = document.getElementById('cpf');
+        var im = new Inputmask('999.999.999-99');
+        im.mask(cpfField);
+    });
+</script>
+
+{% endblock content %}

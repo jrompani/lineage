@@ -1,0 +1,137 @@
+{% extends "layouts/base.html" %}
+{% load i18n static l10n %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+  <h3 class="fw-bold mb-4">
+    <i class="bi bi-cart4 me-2"></i>{% trans "Meu Carrinho" %}
+  </h3>
+
+  {% if cart.cartitem_set.all or cart.cartpackage_set.all %}
+  <div class="mb-4">
+    <h5 class="fw-semibold">{% trans "Itens no Carrinho" %}</h5>
+    <ul class="list-group mb-3">
+      {% for ci in cart.cartitem_set.all %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          <img src="{% item_image_url ci.item.item_id %}" 
+          alt="{{ ci.item.item_name }}"
+          class="me-2" style="width:24px;">
+          <span title="{{ ci.item.descricao }}">
+            {{ ci.item.nome }} {{ ci.item.quantidade }} x{{ ci.quantidade|unlocalize }}
+          </span>
+        </span>
+        <div class="d-flex align-items-center">
+          <strong class="me-3">R$ {{ ci.item.preco|floatformat:2 }}</strong>
+          <form method="post" action="{% url 'shop:remove_cart_item' ci.item.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger" title="{% trans 'Remover Item' %}">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </form>
+        </div>
+      </li>
+      {% endfor %}
+      
+      {% for cp in cart.cartpackage_set.all %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>
+          📦 {{ cp.pacote.nome }} x{{ cp.quantidade|unlocalize }}
+          <button type="button" class="btn btn-outline-info btn-sm ms-3" data-bs-toggle="modal" data-bs-target="#modalPackageItems{{ cp.pacote.id }}">
+            <i class="bi bi-eye me-1"></i>{% trans "Visualizar Itens" %}
+          </button>
+        </span>
+        <div class="d-flex align-items-center">
+          <strong class="me-3">R$ {{ cp.pacote.preco_total|floatformat:2 }}</strong>
+          <form method="post" action="{% url 'shop:remove_cart_package' cp.pacote.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-outline-danger" title="{% trans 'Remover Pacote' %}">
+              <i class="bi bi-x-circle"></i>
+            </button>
+          </form>
+        </div>
+      </li>
+
+      <!-- Modal para visualizar itens do pacote -->
+      <div class="modal fade" id="modalPackageItems{{ cp.pacote.id }}" tabindex="-1" aria-labelledby="modalPackageItemsLabel{{ cp.pacote.id }}" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalPackageItemsLabel{{ cp.pacote.id }}">{{ cp.pacote.nome }} - {% trans "Itens do Pacote" %}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul class="list-group">
+                {% for item in cp.pacote.itens.all %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <!-- Imagem do ícone do item -->
+                  <img src="{% item_image_url item.item_id %}" 
+                  alt="{{ item.item_name }}"
+                  class="me-2" style="width:24px;">
+                  {{ item.nome }} <span class="text-muted">x{{ item.quantidade }}</span>
+                </li>
+                {% empty %}
+                <li class="list-group-item">{% trans "Este pacote não contém itens." %}</li>
+                {% endfor %}
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </ul>
+
+    <form method="post" action="{% url 'shop:apply_promo_code' %}" class="mb-3 d-flex">
+      {% csrf_token %}
+      <input type="text" name="promo_code" class="form-control rounded-start-pill" placeholder="{% trans 'Código promocional' %}">
+      <button type="submit" class="btn btn-success rounded-end-pill ms-2">
+        <i class="bi bi-ticket-perforated me-1"></i>{% trans "Aplicar" %}
+      </button>
+    </form>
+
+    <div class="text-end mb-3">
+      <h4 class="fw-bold text-success">
+        {% trans "Total" %}: R$ {{ cart.calcular_total|floatformat:2 }}
+      </h4>
+    </div>
+
+    <form method="post" action="{% url 'shop:checkout' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label fw-semibold">{% trans "Selecione o Personagem" %}</label>
+        <select name="character_name" class="form-select rounded-3" required>
+          <option value="" disabled selected>{% trans "Escolha um personagem" %}</option>
+          {% for p in personagens %}
+            <option value="{{ p.char_name }}">{{ p.char_name }} (Lv.{{ p.base_level }})</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary rounded-pill px-4 shadow-sm">
+          <i class="bi bi-credit-card me-2"></i>{% trans "Finalizar Compra" %}
+        </button>
+      </div>
+    </form>
+
+    <form method="post" action="{% url 'shop:clear_cart' %}" class="text-end mt-3">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-danger btn-sm rounded-pill">
+        <i class="bi bi-trash me-1"></i>{% trans "Esvaziar Carrinho" %}
+      </button>
+    </form>
+
+    <div class="mt-3">
+      <a href="{% url 'shop:shop_home' %}" class="btn btn-outline-secondary rounded-pill">
+        <i class="bi bi-arrow-left me-1"></i>{% trans "Continuar Comprando" %}
+      </a>
+    </div>
+  </div>
+  {% else %}
+  <p>{% trans "Seu carrinho está vazio." %}</p>
+  {% endif %}
+</div>
+{% endblock %}

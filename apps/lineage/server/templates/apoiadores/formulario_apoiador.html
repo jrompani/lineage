@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Solicitar Acesso como Apoiador" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-3 p-4">
+        <h1 class="text-center text-primary mb-4">🤝 {% trans "Torne-se um Apoiador" %}</h1>
+        <p class="text-center text-muted mb-4">
+            {% trans "Preencha o formulário abaixo. Após a análise, você poderá acessar benefícios exclusivos, gerar códigos promocionais e acompanhar seu desempenho!" %}
+        </p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="nome_publico" class="form-label">{% trans "Nome Público" %}</label>
+                <input type="text" id="nome_publico" name="nome_publico" required class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="descricao" class="form-label">{% trans "Descrição" %}</label>
+                <textarea id="descricao" name="descricao" rows="4" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="link_twitch" class="form-label">{% trans "Link do Twitch" %}</label>
+                <input type="url" id="link_twitch" name="link_twitch" placeholder="https://twitch.tv/..." class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="link_youtube" class="form-label">{% trans "Link do YouTube" %}</label>
+                <input type="url" id="link_youtube" name="link_youtube" placeholder="https://youtube.com/..." class="form-control">
+            </div>
+
+            <div class="mb-3">
+                <label for="imagem" class="form-label">{% trans "Imagem / Avatar" %}</label>
+                <input type="file" id="imagem" name="imagem" accept="image/*" class="form-control">
+            </div>
+
+            <div class="pt-3">
+                <button type="submit" class="btn btn-primary w-100">
+                    📩 {% trans "Enviar Solicitação" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

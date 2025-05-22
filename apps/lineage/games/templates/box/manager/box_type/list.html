@@ -1,0 +1,38 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% trans "Tipos de Caixa" %}</h2>
+    <a href="{% url 'games:box_type_create' %}" class="btn btn-success mb-3">{% trans "Novo Tipo de Caixa" %}</a>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>{% trans "Nome" %}</th>
+                <th>{% trans "Preço" %}</th>
+                <th>{% trans "Ações" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for box_type in box_types %}
+            <tr>
+                <td>{{ box_type.name }}</td>
+                <td>{{ box_type.price }}</td>
+                <td>
+                    <a href="{% url 'games:box_type_edit' box_type.id %}" class="btn btn-primary btn-sm">{% trans "Editar" %}</a>
+                    <a href="{% url 'games:box_type_delete' box_type.id %}" class="btn btn-danger btn-sm">{% trans "Deletar" %}</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3">{% trans "Nenhum tipo de caixa encontrado." %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Botão para voltar ao dashboard -->
+    <a href="{% url 'games:box_manager_dashboard' %}" class="btn btn-secondary mt-3">{% trans "Voltar ao Dashboard" %}</a>
+</div>
+{% endblock %}

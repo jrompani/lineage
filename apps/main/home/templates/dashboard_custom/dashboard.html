@@ -1,0 +1,334 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block extrahead %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+  .gamer-card {
+    background-color: #ffffff;
+    border: 2px solid #6f42c1;
+    border-radius: 1rem;
+    box-shadow: 0 0 15px rgba(111, 66, 193, 0.4);
+    color: #212529;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1rem;
+  }
+
+  .gamer-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(111, 66, 193, 0.6);
+  }
+
+  .gamer-card h6 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    color: #6f42c1;
+    font-size: 13px;
+    margin-bottom: 0.5rem;
+  }
+
+  .gamer-inventory li {
+    list-style: none;
+    padding: 4px 0;
+  }
+
+  .gamer-inventory a {
+    color: #0d6efd;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .avatar-frame {
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(255, 193, 7, 0.6);
+  }
+
+  .btn-glow {
+    border-radius: 10px;
+    font-weight: bold;
+    background: linear-gradient(to right, #0dcaf0, #6f42c1);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    text-shadow: 0 0 2px #000;
+    font-size: 14px;
+  }
+
+  .btn-glow:hover {
+    box-shadow: 0 0 15px rgba(13, 202, 240, 0.7);
+    transform: scale(1.03);
+  }
+
+  .text-muted {
+    color: #6c757d !important;
+  }
+
+  .progress {
+    height: 12px;
+    border-radius: 8px;
+  }
+
+  .conquista-card {
+    padding: 0.8rem;
+    font-size: 13px;
+  }
+
+  .opacity-50 {
+    opacity: 0.5;
+  }
+
+  h1.text-primary {
+    color: #6f42c1 !important;
+  }
+</style>
+{% endblock extrahead %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="text-center mb-4">
+    <h1 class="text-primary fw-bold">{% trans "Painel do Jogador" %}</h1>
+    <p class="text-primary">{% trans "Tudo que você precisa em um só lugar." %}</p>
+  </div>
+
+  <div class="gamer-card">
+    <div class="row align-items-center mb-3">
+      <div class="col-lg-9 d-flex align-items-center justify-content-between flex-wrap">
+        <div>
+          <h2 class="fw-bold mb-2">{% trans "Olá," %} {{ request.user.first_name|default:request.user.username }} 👾</h2>
+          <p class="text-muted mb-0">{% trans "Confira seu progresso abaixo." %}</p>
+        </div>
+        <div class="d-flex flex-wrap gap-2 mt-2 mt-lg-0">
+          <a href="{% url 'auction:listar_leiloes' %}" class="btn btn-outline-info btn-glow">
+            <i class="fas fa-gavel me-1"></i>{% trans "Leilões" %}
+          </a>
+          <a href="{% url 'payment:novo_pedido' %}" class="btn btn-outline-info btn-glow">
+            <i class="fas fa-donate me-1"></i>{% trans "Doação" %}
+          </a>
+          <a href="{% url 'server:account_dashboard' %}" class="btn btn-outline-info btn-glow">
+            <i class="fas fa-user-shield me-1"></i>{% trans "Conta L2" %}
+          </a>
+          <a href="{% url 'wallet:dashboard' %}" class="btn btn-outline-info btn-glow">
+            <i class="fas fa-wallet me-1"></i>{% trans "Carteira" %}
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-3 text-end">
+        {% if image %}
+          <img src="{{ image }}" class="avatar-frame" width="70" alt="avatar">
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="progress">
+        <div class="progress-bar bg-success" role="progressbar" style="width: {{ xp_percent }}%;"></div>
+      </div>
+      <small class="text-muted d-block mt-1">Nível {{ perfil.level }}</small>
+      {% if ganhou_bonus %}
+        <small class="text-success">🎉 {% trans "Bônus diário recebido! +25 XP" %}</small>
+      {% endif %}
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="gamer-card h-100">
+          <h6><i class="fas fa-wallet me-2 text-success"></i>{% trans "Carteira" %}</h6>
+          {% if wallet %}
+            <p class="mb-0"><strong>{% trans "Saldo:" %}</strong> R$ {{ wallet.saldo|floatformat:2 }}</p>
+          {% else %}
+            <p class="text-muted">{% trans "Nenhuma carteira encontrada." %}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gamer-card h-100">
+          <h6><i class="fas fa-gavel me-2 text-info"></i>{% trans "Leilões" %}</h6>
+          <p class="mb-0"><strong>{% trans "Total criados:" %}</strong> {{ leiloes_user }}</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="gamer-card h-100">
+          <h6><i class="fas fa-star me-2 text-warning"></i>{% trans "Apoiador" %}</h6>
+          {% if is_apoiador %}
+            <p class="mb-0"><strong>{% trans "Status:" %}</strong> {{ status }}</p>
+          {% else %}
+            <p class="text-muted">{% trans "Você ainda não é um apoiador." %}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h6 class="text-info"><i class="fas fa-boxes me-2"></i>{% trans "Inventários" %}</h6>
+      {% if inventories %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 gamer-inventory">
+          {% for inv in inventories %}
+          <div class="col">
+            <div class="gamer-card h-100">
+              <p class="mb-1"><strong>{{ inv.character_name }}</strong></p>
+              <a href="{% url 'inventory:inventario_dashboard' %}" class="btn-link">{% trans "Ver Inventário" %}</a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">{% trans "Nenhum inventário encontrado." %}</p>
+      {% endif %}
+    </div>
+
+    <div class="mt-4">
+      <h6 class="text-info">{% trans "🏆 Conquistas" %}</h6>
+      {% if conquistas %}
+        <div class="row g-2">
+          {% for c in conquistas %}
+            {% with conquista=c.conquista desbloqueada=c.desbloqueada %}
+              <div class="col-6 col-md-4 col-lg-3">
+                <div class="card conquista-card text-center h-100 {% if not desbloqueada %}opacity-50{% endif %}">
+                  {% if desbloqueada and conquista.icone %}
+                    <img src="{{ conquista.icone.url }}" width="36" class="mb-1" alt="{{ conquista.nome }}">
+                  {% elif desbloqueada %}
+                    <i class="fas fa-trophy fa-lg text-warning mb-1"></i>
+                  {% else %}
+                    <i class="fas fa-lock fa-lg text-muted mb-1"></i>
+                  {% endif %}
+                  <div>
+                    <strong class="d-block">{{ conquista.nome }}</strong>
+                    <small class="text-muted d-block">
+                      {% if desbloqueada %}
+                        {{ conquista.descricao }}
+                      {% else %}
+                        {% trans "Conquista bloqueada" %}
+                      {% endif %}
+                    </small>
+                  </div>
+                </div>
+              </div>
+            {% endwith %}
+          {% endfor %}
+        </div>
+
+        <div class="mt-3 text-center">
+          <nav aria-label="Paginação das conquistas">
+            <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Anterior">
+                    &laquo; {% trans "Anterior" %}
+                  </a>
+                </li>
+              {% endif %}
+              {% for num in page_obj.paginator.page_range %}
+                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                  <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                </li>
+              {% endfor %}
+              {% if page_obj.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Próximo">
+                    {% trans "Próximo" %} &raquo;
+                  </a>
+                </li>
+              {% endif %}
+            </ul>
+          </nav>
+        </div>
+      {% else %}
+        <p class="text-muted">{% trans "Você ainda não desbloqueou nenhuma conquista." %}</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% if dashboard %}
+  <div class="container-fluid py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card shadow-sm bg-light rounded p-4">
+          {% if translation %}
+            {{ translation.content|safe }}
+          {% else %}
+            {{ dashboard.content|safe }}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  <!-- Informações de painel se não houver dashboard -->
+  <div class="py-5 bg-dark text-white">
+    <div class="container text-center">
+      <img src="{% static 'assets/img/banner-pdl.png' %}" alt="{% trans 'Logo Lineage 2' %}" class="img-fluid mb-4" style="max-height: 240px;">
+      <h1 class="display-5 fw-bold text-primary">{% trans 'Painel Definitivo Lineage - PDL' %}</h1>
+      <p class="lead mb-4 text-primary">{% trans 'Gerenciamento de Servidores de Lineage 2 com Python e Django' %}</p>
+      <p class="text-primary">{% trans 'A Solução Web Perfeita para Administração e Atração de Jogadores' %}</p>
+    </div>
+  </div>
+
+  <div class="container py-5">
+    <div class="row align-items-center mb-5">
+      <div class="col-md-6">
+        <h2 class="fw-bold">{% trans 'Por que usar Django e Python?' %}</h2>
+        <p>{% trans 'Django é uma framework poderosa, segura e com uma administração pronta para uso, ideal para gerenciar servidores privados de Lineage 2.' %}</p>
+        <ul>
+          <li>{% trans 'Desenvolvimento rápido e escalável' %}</li>
+          <li>{% trans 'Sistema de administração completo' %}</li>
+          <li>{% trans 'Integração com APIs e bancos de dados' %}</li>
+          <li>{% trans 'Alta segurança e flexibilidade' %}</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <img src="{% static 'assets/img/django-logo.png' %}" class="img-fluid" alt="{% trans 'Django Logo' %}">
+      </div>
+    </div>
+  
+    <div class="row mb-5">
+      <div class="col-12">
+        <h2 class="fw-bold text-center mb-4">{% trans 'Tecnologias de Ponta' %}</h2>
+        <div class="row text-center">
+          <div class="col-md-4 mb-4">
+            <h5>{% trans 'Django' %}</h5>
+            <p>{% trans 'Backbone sólido com segurança e escalabilidade.' %}</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h5>{% trans 'Docker + Nginx' %}</h5>
+            <p>{% trans 'Deploy e entrega eficientes em qualquer ambiente.' %}</p>
+          </div>
+          <div class="col-md-4 mb-4">
+            <h5>{% trans 'Celery + Redis' %}</h5>
+            <p>{% trans 'Execução de tarefas assíncronas com performance.' %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row mb-5">
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans 'Painel Administrativo' %}</h3>
+        <ul>
+          <li>{% trans 'Gerenciamento de jogadores e servidores' %}</li>
+          <li>{% trans 'Eventos, estatísticas e monitoramento' %}</li>
+          <li>{% trans 'Integração com sistemas de pagamento' %}</li>
+        </ul>
+      </div>
+      <div class="col-md-6">
+        <h3 class="fw-bold">{% trans 'Site Público' %}</h3>
+        <ul>
+          <li>{% trans 'Cadastro, login e personalização de conta' %}</li>
+          <li>{% trans 'Status do servidor e rankings' %}</li>
+          <li>{% trans 'Notícias e suporte ao jogador' %}</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col text-center">
+        <h2 class="fw-bold mb-3">{% trans 'Participe do Futuro dos Servidores Privados' %}</h2>
+        <p class="text-muted">{% trans 'O PDL é open source e está em constante evolução. Contribua, implemente, personalize e transforme a forma como servidores Lineage 2 são administrados.' %}</p>
+        <a href="https://github.com/D3NKYT0/lineage" class="btn btn-primary btn-lg mt-3">{% trans 'Ver Projeto no GitHub' %}</a>
+      </div>
+    </div>
+  </div>
+{% endif %}
+{% endblock content %}

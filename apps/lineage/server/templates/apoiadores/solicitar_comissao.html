@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}
+{% load i18n widget_tweaks %}
+
+{% block title %}{% trans "Solicitar Comissão" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-sm rounded-4 p-5">
+        <h1 class="display-5 text-success text-center mb-4">
+            💸 {% trans "Solicitar Comissão" %}
+        </h1>
+        <p class="lead text-muted text-center mb-4">
+            {% trans "Informe o valor que deseja solicitar como comissão. Ele deve ser compatível com o valor disponível." %}
+        </p>
+
+        <!-- Valor disponível -->
+        <div class="alert alert-info text-center fw-semibold fs-5 mb-5">
+            💼 {% trans "Valor disponível para saque:" %} <strong>R$ {{ valor_disponivel|floatformat:2 }}</strong>
+        </div>        
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.valor.id_for_label }}" class="form-label fw-semibold">{% trans "Valor da Comissão" %}</label>
+                        {{ form.valor|add_class:"form-control form-control-lg" }}
+                        {% if form.valor.errors %}
+                            <div class="invalid-feedback d-block mt-2">
+                                {{ form.valor.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg w-100 mt-3">
+                        ✅ {% trans "Solicitar Comissão" %}
+                    </button>
+                </form>
+                <div class="text-center mt-4">
+                    <a href="{% url 'server:painel_apoiador' %}" class="btn btn-outline-secondary">
+                        ← {% trans "Voltar para o Painel" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

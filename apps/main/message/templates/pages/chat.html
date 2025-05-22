@@ -1,0 +1,101 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Chat" %}{% endblock title %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/emoji-button@4.6.0/dist/index.min.css">
+<link rel="stylesheet" href="{% static 'css/chat.css' %}">
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
+{% endblock extrastyle %}
+
+{% block extrahead %}
+<!-- Extra head content se necessário -->
+{% endblock extrahead %}
+
+{% block content %}
+<div class="row">
+    <!-- Mensagens -->
+    <div class="col-sm-12">
+        <!-- Cabeçalho -->
+        <div class="col-sm-12 mb-4 bg-light-gray p-4">
+            <h2 class="fw-bold text-white">{% trans "Mensagens" %}</h2>
+            <p class="text-white">{% trans "Converse com seus amigos de forma rápida e prática." %}</p>
+        </div>      
+
+        <!-- Card de mensagens -->
+        <div class="card mb-0">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Lista de amigos -->
+                    <div class="col-lg-3 col-md-12">
+                        <div class="message-mobile">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="fw-bold">{% trans "Lista de Amigos" %}</span>
+                                <i class="fas fa-times" id="toggle-friend-list" style="cursor: pointer;"></i>
+                            </div>
+
+                            {% if accepted_friendships %}
+                                <!-- Campo de busca -->
+                                <div id="friend-list" class="input-group mb-3">
+                                    <input type="text" id="msg-friends" class="form-control" placeholder="{% trans 'Procurar Amigo...' %}" oninput="filterFriends()">
+                                    <span class="input-group-text"><i class="feather icon-search"></i></span>
+                                </div>
+
+                                <!-- Lista de amigos -->
+                                <div id="friend-list-content" class="list-group overflow-auto mb-3" style="max-height: 500px;">
+                                    {% for friendship in accepted_friendships %}
+                                        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between friend-item" data-friend-id="{{ friendship.friend.id }}">
+                                            <div class="d-flex" style="gap: 8px;">
+                                                <img src="{% if friendship.friend.avatar %}{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' friendship.friend.uuid %}{% else %}{% static 'assets/img/team/generic_user.png' %}{% endif %}" class="rounded-circle me-3" alt="{{ friendship.friend.username }}" width="40" height="40">
+                                                <div class="me-auto">
+                                                    <h6 class="mb-0 friend-name">{{ friendship.friend.username }}</h6>
+                                                    <small class="friend-status">...</small>
+                                                </div>
+                                            </div>
+                                            <span class="badge ms-auto" id="unread-count-{{ friendship.friend.id }}"></span>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="d-flex justify-content-center">
+                                    <a href="{% url 'message:friends_list' %}" class="btn btn-primary">{% trans 'Gerenciar Amigos' %}</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Área do Chat -->
+                    <div class="col-lg-9 col-md-12">
+                        <div class="chat-box border rounded p-3">
+                            <div id="message-container" class="custom-overflow" style="max-height: 500px !important;">
+                                <p class="text-center">{% trans "Clique em um amigo para iniciar o chat." %}</p>
+                            </div>
+                            <hr>
+                            <div class="input-group" id="message-input-group" style="display: none;">
+                                <textarea id="message-input" class="form-control" placeholder="{% trans 'Digite uma mensagem...' %}" rows="2"></textarea>
+                                <button id="emoji-button" type="button" class="btn btn-outline-secondary">&#x1F60A;</button>
+                                <input class="btn btn-primary" id="send-message" type="button" value="{% trans 'Enviar' %}">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<!-- Emoji Button Script -->
+<script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@3.0.2/dist/index.min.js"></script>
+
+<script>
+    const currentUser = '{{ username }}';
+    const csrfToken = '{{ csrf_token }}';
+    const avatarUrl = '{% if user_uuid %}{% url 'serve_files:serve_decrypted_file' 'home' 'user' 'avatar' user_uuid %}{% else %}{% static 'assets/img/team/generic_user.png' %}{% endif %}';
+</script>
+
+<script src="{% static 'js/chat.js' %}"></script>
+{% endblock extra_js %}

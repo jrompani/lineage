@@ -1,0 +1,43 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="mb-4 text-center">{% trans "Comprar Moedas" %}</h2>
+
+    <form method="post" action="{% url 'payment:novo_pedido' %}">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="valor" class="form-label">{% trans "Valor em Reais (R$)" %}</label>
+        <input
+          type="number"
+          class="form-control"
+          id="valor"
+          name="valor"
+          step="0.01"
+          min="1"
+          placeholder="{% trans 'Digite o valor que deseja comprar' %}"
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="metodo" class="form-label">{% trans "Escolha o Meio de Pagamento" %}</label>
+        <select class="form-select" id="metodo" name="metodo" required>
+          <option value="MercadoPago">{% trans "Mercado Pago" %}</option>
+          <option value="Stripe">{% trans "Stripe" %}</option>
+          {# {% trans "Adicione outras opções no futuro se desejar" %} #}
+        </select>
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-success btn-lg">
+          {% trans "Gerar Pedido" %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

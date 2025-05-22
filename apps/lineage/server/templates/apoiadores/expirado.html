@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Apoio Expirado" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg border-0 rounded-4 p-5 text-center bg-white">
+        <div class="mb-4">
+            <h1 class="text-4xl fw-bold text-danger mb-3">
+                ❌ {% trans "Apoio Expirado" %}
+            </h1>
+            <p class="fs-5 text-muted">
+                {% trans "Seu cupom de apoiador expirou." %}
+            </p>
+        </div>
+
+        <div class="my-4">
+            <p class="text-gray-600">
+                {% trans "Para continuar como apoiador e receber um novo cupom de desconto, você pode reenviar sua solicitação agora mesmo." %}
+            </p>
+        </div>
+
+        <div class="mt-5">
+            <a href="{% url 'server:formulario_apoiador' %}" class="btn btn-danger btn-lg px-4">
+                {% trans "Enviar Nova Solicitação" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

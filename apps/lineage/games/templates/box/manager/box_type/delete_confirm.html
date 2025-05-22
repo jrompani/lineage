@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center text-danger">{% trans "Confirmar Exclusão" %}</h2>
+    <p class="text-center mt-3">
+        {% trans "Tem certeza que deseja excluir o tipo de caixa" %} {{ box_type.name }}?
+    </p>
+
+    <form method="post" class="text-center mt-4">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">{% trans "Confirmar" %}</button>
+        <a href="{% url 'games:box_type_list' %}" class="btn btn-secondary ms-2">{% trans "Cancelar" %}</a>
+    </form>
+</div>
+{% endblock %}

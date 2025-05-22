@@ -1,0 +1,55 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Verificação de E-mail' %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .verification-card {
+            max-width: 500px;
+            margin: 5rem auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            background-color: white;
+        }
+        .icon-success {
+            font-size: 3rem;
+            color: #28a745;
+        }
+        .icon-error {
+            font-size: 3rem;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="verification-card text-center">
+        {% if erro %}
+            <div class="icon-error mb-3">
+                <i class="bi bi-x-circle-fill"></i>
+            </div>
+            <h3 class="text-danger">{% trans 'Link inválido ou expirado.' %}</h3>
+            <p>{% trans 'Por favor, solicite um novo e-mail de verificação ou entre em contato com o suporte.' %}</p>
+            <a href="{% url 'register' %}" class="btn btn-outline-danger mt-3">{% trans 'Voltar ao registro' %}</a>
+        {% else %}
+            <div class="icon-success mb-3">
+                <i class="bi bi-check-circle-fill"></i>
+            </div>
+            <h3 class="text-success">{% trans 'Conta verificada com sucesso!' %}</h3>
+            <p>{% trans 'Agora você pode acessar sua conta com segurança.' %}</p>
+            <a href="{% url 'dashboard' %}" class="btn btn-success mt-3">{% trans 'Entrar' %}</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Ícones do Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</body>
+</html>

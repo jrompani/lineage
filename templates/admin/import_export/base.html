@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% load i18n admin_modify admin_urls static %}
+
+{% block extrahead %}
+{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}" />
+{% endblock extrahead %}
+
+{% block title_scream %}<!-- CODE HERE -->{% endblock title_scream %}
+
+{% block breadcrumb_scream %}
+    <li class="breadcrumb-item"><a href="javascript: void(0)"><!-- CODE HERE --></a></li>
+    <li class="breadcrumb-item" aria-current="page"><!-- CODE HERE --></li>
+{% endblock breadcrumb_scream %}
+
+{% block head_scream %}
+    <h5 class="display-5"><!-- CODE HERE --></h5>
+{% endblock head_scream %}
+
+{% block content_scream %}
+
+{% endblock content_scream %}
+
+{% block extra_js %}
+{% block bodyclass %}{{ block.super }} {{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock bodyclass %}
+{% if not is_popup %}{% endif %}
+{% endblock extra_js %}

@@ -1,0 +1,94 @@
+{% extends 'wiki/base.html' %}
+{% load static i18n %}
+
+{% block wiki_content %}
+<div class="assistance-container">
+    <h1>{% trans "Assistência do Jogo" %}</h1>
+
+    <!-- Common Issues -->
+    <div class="assistance-section mb-5">
+        <h2>{% trans "Problemas Comuns" %}</h2>
+        <div class="row">
+            {% for issue in common_issues %}
+            <div class="col-md-6 mb-4">
+                <div class="issue-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ issue.translation.title }}</h3>
+                            <div class="issue-content">
+                                {{ issue.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="assistance-section mb-5">
+        <h2>{% trans "Perguntas Frequentes" %}</h2>
+        <div class="row">
+            {% for faq in faqs %}
+            <div class="col-md-6 mb-4">
+                <div class="faq-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ faq.translation.title }}</h3>
+                            <div class="faq-content">
+                                {{ faq.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Technical Support -->
+    <div class="assistance-section">
+        <h2>{% trans "Suporte Técnico" %}</h2>
+        <div class="row">
+            {% for support in technical_support %}
+            <div class="col-md-6 mb-4">
+                <div class="support-card">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h3 class="card-title">{{ support.translation.title }}</h3>
+                            <div class="support-content">
+                                {{ support.translation.content|safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .assistance-container {
+        padding: 20px;
+    }
+
+    .issue-card,
+    .faq-card,
+    .support-card {
+        height: 100%;
+    }
+
+    .issue-content,
+    .faq-content,
+    .support-content {
+        margin-top: 1rem;
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+</style>
+{% endblock %} 

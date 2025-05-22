@@ -1,0 +1,27 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Editar Imagem do Apoiador" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">🖼️ {% trans "Editar Imagem" %}</h2>
+
+    <div class="card shadow-sm border-0 rounded-3">
+        <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    {{ form.imagem.label_tag }}
+                    {{ form.imagem }}
+                    {% if form.imagem.errors %}
+                        <div class="text-danger">{{ form.imagem.errors }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn btn-primary">{% trans "Salvar" %}</button>
+                <a href="{% url 'server:painel_apoiador' %}" class="btn btn-secondary">{% trans "Cancelar" %}</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4">
+    <h2 class="text-center mb-4">{% trans "Relatório de Fluxo de Caixa" %}</h2>
+
+    <canvas id="graficoFluxoCaixa" width="400" height="200" class="mb-5"></canvas>
+
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>{% trans "Data" %}</th>
+          <th>{% trans "Entradas" %}</th>
+          <th>{% trans "Saídas" %}</th>
+          <th>{% trans "Saldo do Dia" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in relatorio %}
+        <tr>
+          <td>{{ item.data|date:"d/m/Y" }}</td>
+          <td>R$ {{ item.entrada|floatformat:2 }}</td>
+          <td>R$ {{ item.saida|floatformat:2 }}</td>
+          <td>
+            {% if item.saldo >= 0 %}
+              <span class="text-success">R$ {{ item.saldo|floatformat:2 }}</span>
+            {% else %}
+              <span class="text-danger">R$ {{ item.saldo|floatformat:2 }}</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+      <a href="{% url 'accountancy:dashboard' %}" class="btn btn-secondary">{% trans "Voltar para o Dashboard" %}</a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = {{ labels|safe }};
+  const entradas = {{ entradas|safe }};
+  const saidas = {{ saidas|safe }};
+  const saldos = {{ saldos|safe }};
+
+  const ctx = document.getElementById('graficoFluxoCaixa').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Entradas',
+          data: entradas,
+          borderColor: 'green',
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: 'Saídas',
+          data: saidas,
+          borderColor: 'red',
+          tension: 0.3,
+          fill: false
+        },
+        {
+          label: 'Saldo do Dia',
+          data: saldos,
+          borderColor: 'blue',
+          tension: 0.3,
+          fill: false
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Fluxo de Caixa por Dia'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Valor (R$)'
+          }
+        }
+      }
+    }
+  });
+</script>
+
+{% endblock %}

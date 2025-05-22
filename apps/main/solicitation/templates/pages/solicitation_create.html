@@ -1,0 +1,30 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Criar Solicitação" %}{% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2><i class="fas fa-plus-circle"></i> {% trans "Criar Nova Solicitação" %}</h2>
+    
+    <div class="alert alert-info">
+        <p><strong>{% trans "Informações Importantes:" %}</strong></p>
+        <ul>
+            <li>{% trans "As solicitações são tickets de suporte para iniciar um chat com a administração." %}</li>
+            <li>{% trans "Enquanto o status da solicitação estiver como Pendente, o chat permanecerá ativo." %}</li>
+            <li>{% trans "Após a solicitação ser concluída, o chat será desabilitado e o atendimento encerrado." %}</li>
+            <li>{% trans "Somente uma solicitação pendente pode existir por vez." %}</li>
+            <li>{% trans "Seja claro e objetivo ao abrir uma solicitação para que a equipe possa ajudá-lo de forma mais eficaz." %}</li>
+            <li>{% trans "Após criar a solicitação, acesse o dashboard e clique em Chat para iniciar o atendimento." %}</li>
+            <li>{% trans "O atendimento não é em tempo real, ou seja, você criará a solicitação e aguardará a resposta da equipe." %}</li>
+        </ul>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success"><i class="fas fa-check"></i> {% trans "Criar Solicitação" %}</button>
+        <a href="{% url 'solicitation:solicitation_list' %}" class="btn btn-secondary">{% trans "Cancelar" %}</a>
+    </form>
+</div>
+{% endblock content %}

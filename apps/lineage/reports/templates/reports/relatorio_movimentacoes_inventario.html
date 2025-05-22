@@ -1,0 +1,171 @@
+{% extends "layouts/base.html" %}
+{% load humanize i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 bg-dark text-light rounded-4">
+    <h2 class="text-center mb-4">📊 <strong>{% trans "Relatório de Movimentações de Itens" %}</strong></h2>
+
+    <canvas id="graficoMovimentacoes" height="150" class="mb-4"></canvas>
+
+    <div class="table-responsive">
+      <table class="table table-striped table-dark table-bordered text-center rounded-3">
+        <thead class="bg-secondary text-white">
+          <tr>
+            <th>🔁 {% trans "Ação" %}</th>
+            <th>📦 {% trans "Total" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>❌ {% trans "Retirados" %}</td>
+            <td>{{ total_retirado }}</td>
+          </tr>
+          <tr>
+            <td>✅ {% trans "Inseridos" %}</td>
+            <td>{{ total_inserido }}</td>
+          </tr>
+          <tr>
+            <td>🔄 {% trans "Trocados" %}</td>
+            <td>{{ total_troca }}</td>
+          </tr>
+          <tr>
+            <td>🔁 {% trans "Recebidos" %}</td>
+            <td>{{ total_recebido }}</td>
+          </tr>
+          <tr>
+            <td>📦 {% trans "Bag para Inventário" %}</td>
+            <td>{{ total_bag_para_inventario }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-center mt-4 mb-3">🔄 {% trans "Itens Mais Trocados" %}</h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-dark table-bordered text-center rounded-3">
+        <thead class="bg-secondary text-white">
+          <tr>
+            <th>📦 {% trans "Item" %}</th>
+            <th>🔄 {% trans "Total Trocado" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in itens_trocados %}
+            <tr>
+              <td>{{ item.item_name }}</td> <!-- Ajuste aqui -->
+              <td>{{ item.total_trocado }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="2">{% trans "Nenhum item trocado." %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="text-center mt-4 mb-3">📦 {% trans "Itens Mais Movimentados" %}</h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-dark table-bordered text-center rounded-3">
+        <thead class="bg-secondary text-white">
+          <tr>
+            <th>📦 {% trans "Item" %}</th>
+            <th>📈 {% trans "Total Movimentado" %}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in itens_movimentados %}
+            <tr>
+              <td>{{ item.item_name }}</td> <!-- Ajuste aqui -->
+              <td>{{ item.total_movimentado }}</td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="2">{% trans "Nenhum item movimentado." %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center">
+      <a href="{% url 'accountancy:dashboard' %}" class="btn btn-secondary mt-4">
+        ⬅️ {% trans "Voltar para Dashboard" %}
+      </a>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const labels = {{ labels|safe }};
+  const retirados = {{ retirados|safe }};
+  const inseridos = {{ inseridos|safe }};
+  const trocados = {{ trocados|safe }};
+  const recebidos = {{ recebidos|safe }};
+  const bag_para_inventario = {{ bag_para_inventario|safe }};
+
+  const ctx = document.getElementById('graficoMovimentacoes').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '❌ {% trans "Retirados" %}',
+          data: retirados,
+          backgroundColor: 'rgba(244, 67, 54, 0.7)'
+        },
+        {
+          label: '✅ {% trans "Inseridos" %}',
+          data: inseridos,
+          backgroundColor: 'rgba(0, 200, 83, 0.7)'
+        },
+        {
+          label: '🔄 {% trans "Trocados" %}',
+          data: trocados,
+          backgroundColor: 'rgba(33, 150, 243, 0.7)'
+        },
+        {
+          label: '🔁 {% trans "Recebidos" %}',
+          data: recebidos,
+          backgroundColor: 'rgba(255, 165, 0, 0.7)'
+        },
+        {
+          label: '📦 {% trans "Bag para Inventário" %}',
+          data: bag_para_inventario,
+          backgroundColor: 'rgba(255, 99, 132, 0.7)'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        title: {
+          display: true,
+          text: '{% trans "Movimentação de Itens nos Últimos Dias" %}',
+          color: 'white',
+          font: {
+            size: 18
+          }
+        },
+        legend: {
+          labels: {
+            color: 'white'
+          }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: 'white' }
+        },
+        y: {
+          beginAtZero: true,
+          ticks: { color: 'white' }
+        }
+      }
+    }
+  });
+</script>
+{% endblock %}

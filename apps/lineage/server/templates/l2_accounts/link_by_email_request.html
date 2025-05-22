@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 text-center">
+    <h2 class="mb-4 text-primary">{% trans "Vincular Conta Lineage via E-mail" %}</h2>
+
+    <div class="alert alert-info">
+      {% trans "Se você não lembra sua senha do jogo, informe o e-mail cadastrado na conta Lineage." %}<br>
+      {% trans "Você receberá um link para confirmar a vinculação com seu usuário atual." %}
+    </div>
+
+    <form method="post" class="mt-4">
+      {% csrf_token %}
+      <div class="mb-3 col-md-6 mx-auto">
+        <label for="email" class="form-label">{% trans "E-mail da Conta Lineage" %}</label>
+        <input type="email" name="email" class="form-control" required placeholder="{% trans 'exemplo@dominio.com' %}">
+      </div>
+
+      <div class="d-grid gap-2 col-6 mx-auto mt-4">
+        <button type="submit" class="btn btn-success btn-lg">
+          {% trans "Enviar Link de Vinculação" %}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

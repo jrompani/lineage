@@ -1,0 +1,91 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+{% load static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+
+  <!-- Header -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold text-primary">
+      <i class="bi bi-bag-fill me-2"></i>{% trans "Minha Bag" %}
+    </h2>
+  </div>
+
+  {% if bag %}
+    <div class="card bg-dark text-white border-0 shadow-lg rounded-4 mb-4">
+      <div class="card-header bg-primary rounded-top-4 p-3 d-flex justify-content-between align-items-center">
+        <div>
+          <i class="bi bi-person-circle me-2 text-secondary"></i>
+          <strong class="text-secondary">{{ request.user.username }}</strong>
+        </div>
+        <form method="post" action="{% url 'games:esvaziar_bag_para_inventario' %}" class="d-flex gap-2">
+          {% csrf_token %}
+          <select name="character_name_destino" class="form-select form-select-sm mb-2" required>
+            <option value="" disabled selected>{% trans "Selecione o personagem" %}</option>
+            {% for nome in personagens %}
+              <option value="{{ nome }}">{{ nome }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="btn btn-sm btn-warning">
+            <i class="bi bi-box-arrow-in-down me-1"></i> {% trans "Mover todos para inventário" %}
+          </button>
+        </form>
+      </div>
+
+      <div class="card-body">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+          {% for item in items %}
+            <div class="col">
+              <div class="card bg-dark border-0 shadow text-white rounded-4 overflow-hidden h-100">
+                <div class="card-body text-center py-4 d-flex flex-column justify-content-between h-100">
+                    <img src="{% item_image_url item.item_id %}" 
+                         alt="{{ item.item_name }}"
+                         class="mb-3 rounded border border-secondary d-block mx-auto"
+                         style="width: 32px; height: 32px;">
+                  <h5 class="fw-bold mb-2 text-primary">{{ item.item_name }}</h5>
+                  <p class="mb-3 small text-primary">
+                    <span class="fw-semibold">{% trans "Quantidade" %}:</span>
+                    <span class="fw-semibold text-primary me-3">{{ item.quantity }}</span>
+                    <span class="fw-semibold">{% trans "Encantamento" %}:</span>
+                    <span class="fw-semibold text-primary">+{{ item.enchant }}</span>
+                  </p>
+
+                  <!-- Formulário de transferência individual -->
+                  <form method="post" action="{% url 'games:transferir_item_bag' %}" class="d-grid gap-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ item.item_id }}">
+                    <input type="hidden" name="enchant" value="{{ item.enchant }}">
+                    <input type="number" name="quantity" value="{{ item.quantity }}" class="form-control form-control-sm mb-1" min="1" max="{{ item.quantity }}" required>
+                    <select name="character_name_destino" class="form-select form-select-sm mb-2" required>
+                      <option value="" disabled selected>{% trans "Selecione o personagem" %}</option>
+                      {% for nome in personagens %}
+                        <option value="{{ nome }}">{{ nome }}</option>
+                      {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-success">
+                      <i class="bi bi-box-arrow-in-down me-1"></i> {% trans "Mover para inventário" %}
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          {% empty %}
+            <div class="col">
+              <div class="alert alert-info rounded-4 text-center text-primary">
+                {% trans "Nenhum item na bag." %}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-warning text-center rounded-4">
+      {% trans "Você ainda não possui uma bag." %}
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

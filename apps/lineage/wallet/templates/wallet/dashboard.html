@@ -1,0 +1,186 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% load i18n %}
+
+{% block extrahead %}
+<style>
+  .card {
+    border-radius: 1.25rem !important;
+  }
+
+  .btn {
+    border-radius: 0.75rem;
+  }
+
+  .saldo-box {
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    border-radius: 1rem;
+    padding: 2rem;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .saldo-box:hover {
+    transform: scale(1.02);
+  }
+
+  .saldo-box h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .quick-actions .btn {
+    min-width: 100%;
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.1rem;
+  }
+
+  .list-group-item {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 12px rgba(0, 123, 255, 0.3);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <!-- Coluna principal -->
+  <div class="col-lg-8">
+    <div class="card shadow-lg border-0 rounded-4">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center rounded-top-4 px-4 py-3">
+        <h4 class="mb-0"><i class="bi bi-wallet2 me-2"></i>{% trans "Minha Carteira" %}</h4>
+      </div>
+
+      <div class="card-body px-4 py-4">
+        <!-- Saldo -->
+        <div class="mb-5">
+          <div class="saldo-box text-center">
+            <small class="text-light">{% trans "Saldo Atual" %}</small>
+            <h2>{{ wallet.saldo|floatformat:2 }}</h2>
+            <span class="text-light">{% trans "moedas disponíveis" %}</span>
+          </div>
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="row quick-actions mb-5">
+          <div class="col-md-6 mb-3">
+            <a href="{% url 'wallet:transfer_to_server' %}" class="btn btn-outline-primary shadow-glow">
+              <i class="bi bi-arrow-down-circle me-2"></i>{% trans "Transferir para o Servidor" %}
+            </a>
+          </div>
+          <div class="col-md-6 mb-3">
+            <a href="{% url 'wallet:transfer_to_player' %}" class="btn btn-outline-success shadow-glow">
+              <i class="bi bi-person-plus-fill me-2"></i>{% trans "Transferir para Outro Jogador" %}
+            </a>
+          </div>
+          <div class="col-md-6 mb-3">
+            <a href="{% url 'payment:novo_pedido' %}" class="btn btn-outline-warning shadow-glow">
+              <i class="bi bi-cart-plus-fill me-2"></i>{% trans "Comprar Moedas" %}
+            </a>
+          </div>
+          <div class="col-md-6 mb-3">
+            <a href="{% url 'solicitation:solicitation_list' %}" class="btn btn-outline-danger shadow-glow">
+              <i class="bi bi-life-preserver me-2"></i>{% trans "Abrir Solicitação" %}
+            </a>
+          </div>
+        </div>
+
+        <!-- Histórico de Transações -->
+        <div>
+          <h6 class="text-muted mb-3"><i class="bi bi-clock-history me-1"></i>{% trans "Últimas Transações" %}</h6>
+          <div class="list-group list-group-flush">
+            {% for transacao in transacoes %}
+              <div class="list-group-item d-flex justify-content-between align-items-start py-3 px-2">
+                <div class="me-3">
+                  <div class="fw-semibold">{{ transacao.descricao }}</div>
+                  <small class="text-muted d-block">{{ transacao.created_at|naturaltime }}</small>
+                  <span class="badge bg-light text-dark mt-1">
+                    {{ transacao.origem }} → {{ transacao.destino }}
+                  </span>
+                </div>
+                <div class="text-end">
+                  <span class="fs-6 fw-bold {% if transacao.tipo == 'ENTRADA' %}text-success{% else %}text-danger{% endif %}">
+                    {% if transacao.tipo == 'ENTRADA' %}+{% else %}-{% endif %}
+                    {{ transacao.valor|floatformat:2 }}
+                  </span>
+                  <div>
+                    <span class="badge {% if transacao.tipo == 'ENTRADA' %}bg-success{% else %}bg-danger{% endif %} text-white">
+                      {{ transacao.get_tipo_display }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            {% empty %}
+              <div class="text-center text-muted py-4">
+                {% trans "Nenhuma transação registrada ainda." %}
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- Paginação -->
+          {% if page_obj.has_other_pages %}
+            <nav class="mt-4">
+              <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                  <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                  <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                    <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                  </li>
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                  <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                {% endif %}
+              </ul>
+            </nav>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lateral informativa -->
+  <div class="col-lg-4">
+
+    <div class="card shadow-sm border-0 rounded-4 mt-4">
+      <div class="card-body text-center py-4 px-3">
+        <h5 class="fw-bold mb-3">{% trans "Sobre a Carteira" %}</h5>
+        <p class="text-muted">
+          {% trans "Gerencie seu saldo virtual e acompanhe suas transações recentes. Use as moedas para realizar compras, enviar presentes ou desbloquear recursos exclusivos dentro do servidor." %}
+        </p>
+        <a href="{% url 'wallet:dashboard' %}" class="btn btn-outline-secondary mt-3">
+          <i class="bi bi-arrow-clockwise me-1"></i>{% trans "Atualizar Carteira" %}
+        </a>
+      </div>
+    </div>
+
+    <div class="card shadow-sm border-0 rounded-4 mt-4">
+      <div class="card-body text-center py-4 px-3">
+        <h5 class="fw-bold mb-3">{% trans "Pedidos Pendentes" %}</h5>
+        <p class="text-muted">
+          {% trans "Visualize pedidos de compra de moedas que ainda não foram pagos ou processados. Evite criar novos pedidos repetidos e acompanhe o andamento dos seus pagamentos." %}
+        </p>
+        <a href="{% url 'payment:pedidos_pendentes' %}" class="btn btn-outline-primary mt-3">
+          <i class="bi bi-hourglass-split me-1"></i>{% trans "Ver Pedidos Pendentes" %}
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

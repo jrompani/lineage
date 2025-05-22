@@ -1,0 +1,91 @@
+]{% extends "layouts/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'roulette/style.css' %}">
+
+<style>
+    .roulette-bg {
+        background: linear-gradient(135deg, #1a1a1a, #3b3b3b);
+        color: #fff;
+    }
+
+    .card {
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
+        border-radius: 10px;
+        background: #2b2b2b;
+    }
+
+    .item-details {
+        background: #343a40;
+        border-radius: 10px;
+        padding: 20px;
+        font-weight: bold;
+        color: #f1f1f1;
+    }
+
+    .item-image {
+        max-width: 200px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        object-fit: cover;
+    }
+
+    .item-details h3 {
+        color: #17a2b8;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .item-details p {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+
+    .item-details strong {
+        color: #ffcb00;
+    }
+
+    .btn {
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 50px;
+        padding: 12px 25px;
+    }
+
+    @media (max-width: 576px) {
+        .item-image {
+            max-width: 150px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+        }
+    }
+</style>
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="roulette-bg py-5">
+  <div class="container text-center">
+    <h2 class="text-white fw-bold mb-4">🎁 {% trans "Você ganhou um item!" %}</h2>
+
+    <div class="card bg-dark text-white shadow-lg p-4 rounded-4 border border-purple d-inline-block w-100 w-sm-75 w-md-50">
+      <div class="item-details mb-3">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="item-image img-fluid mb-3 rounded-3">
+        <h3 class="text-info mb-2">
+          <i class="bi bi-gift me-2"></i>{{ item.name }} +{{ item.enchant }}
+        </h3>
+        <p class="mb-0">{% trans "O item foi adicionado à sua" %} <strong>{% trans "Bag" %}</strong> {% trans "com sucesso!" %}</p>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="{% url 'games:box_user_dashboard' %}" class="btn btn-primary rounded-pill px-4 py-2 mt-3">
+        <i class="bi bi-arrow-left-circle me-2"></i>{% trans "Voltar para o Dashboard" %}
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

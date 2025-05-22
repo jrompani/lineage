@@ -1,0 +1,127 @@
+{% extends "layouts/base.html" %}
+{% load humanize i18n %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 bg-white text-dark rounded-4">
+    <h2 class="text-center mb-4">📊 <strong>{% trans "Relatório de Compras" %}</strong></h2>
+
+    <!-- Resumo Geral de Compras -->
+    <div class="row text-center mb-4">
+      <div class="col-md-3 mb-3">
+        <div class="card shadow-sm p-3 bg-light rounded-3">
+          <h5>{% trans "Total de Compras" %}</h5>
+          <p class="display-4">{{ total_compras }}</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow-sm p-3 bg-light rounded-3">
+          <h5>{% trans "Total Gasto" %}</h5>
+          <p class="display-4">R$ {{ total_pago|floatformat:2 }}</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow-sm p-3 bg-light rounded-3">
+          <h5>{% trans "Carrinhos Abandonados" %}</h5>
+          <p class="display-4">{{ carrinhos_abandonados }}</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card shadow-sm p-3 bg-light rounded-3">
+          <h5>{% trans "Receita da Última Semana" %}</h5>
+          <p class="display-4">R$ {{ receita_periodo|floatformat:2 }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gráfico de Itens Mais Vendidos -->
+    <h3 class="text-center mt-4 mb-3">{% trans "Itens Mais Vendidos" %}</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="itensMaisVendidos" class="ct-bar ct-perfect-fourth"></div>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group">
+          {% for item in itens_mais_vendidos %}
+          <li class="list-group-item">{{ item.nome }} - {{ item.quantidade_vendida|default:"0" }} {% trans "unidades" %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Gráfico de Pacotes Populares -->
+    <h3 class="text-center mt-4 mb-3">{% trans "Pacotes Populares" %}</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="pacotesPopulares" class="ct-bar ct-perfect-fourth"></div>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group">
+          {% for pacote in pacotes_populares %}
+          <li class="list-group-item">{{ pacote.nome }} - {{ pacote.quantidade_vendida|default:"0" }} {% trans "pacotes" %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Gráfico de Promoções Utilizadas -->
+    <h3 class="text-center mt-4 mb-3">{% trans "Promoções Utilizadas" %}</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="promocoesUtilizadas" class="ct-pie"></div>
+      </div>
+      <div class="col-md-6">
+        <ul class="list-group">
+          {% for promocao in promocoes_utilizadas %}
+          <li class="list-group-item">{{ promocao.codigo }} - {{ promocao.quantidade_utilizada }} {% trans "vezes" %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Gráfico de Itens Mais Vendidos
+    new Chartist.Bar('#itensMaisVendidos', {
+      labels: [{% for item in itens_mais_vendidos %}'{{ item.nome }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+      series: [
+        [{% for item in itens_mais_vendidos %}{{ item.quantidade_vendida|default:"0" }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+      ]
+    }, {
+      plugins: [Chartist.plugins.tooltip()],
+      axisY: {
+        onlyInteger: true,
+        offset: 20
+      }
+    });
+
+    // Gráfico de Pacotes Populares
+    new Chartist.Bar('#pacotesPopulares', {
+      labels: [{% for pacote in pacotes_populares %}'{{ pacote.nome }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+      series: [
+        [{% for pacote in pacotes_populares %}{{ pacote.quantidade_vendida|default:"0" }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+      ]
+    }, {
+      plugins: [Chartist.plugins.tooltip()],
+      axisY: {
+        onlyInteger: true,
+        offset: 20
+      }
+    });
+
+    // Gráfico de Promoções Utilizadas
+    new Chartist.Pie('#promocoesUtilizadas', {
+      labels: [{% for promocao in promocoes_utilizadas %}'{{ promocao.codigo }}'{% if not forloop.last %}, {% endif %}{% endfor %}],
+      series: [{% for promocao in promocoes_utilizadas %}{{ promocao.quantidade_utilizada }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+    }, {
+      plugins: [Chartist.plugins.tooltip()],
+      donut: true
+    });
+  });
+</script>
+
+{% endblock %}

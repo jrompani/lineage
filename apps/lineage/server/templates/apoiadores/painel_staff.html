@@ -1,0 +1,96 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Painel de Staff" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">
+        {% trans "Pedidos Pendentes de Apoiadores" %}
+    </h2>
+
+    <div class="card shadow-sm border-0 rounded-3 mb-4">
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">{% trans "Nome Público" %}</th>
+                        <th scope="col">{% trans "Descrição" %}</th>
+                        <th scope="col">{% trans "Data de Solicitação" %}</th>
+                        <th scope="col">{% trans "Ação" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for apoiador in pedidos_pendentes %}
+                    <tr>
+                        <td>{{ apoiador.nome_publico }}</td>
+                        <td>{{ apoiador.descricao|default:_("Sem descrição") }}</td>
+                        <td>{{ apoiador.user.date_joined|date:"d/m/Y" }}</td>
+                        <td>
+                            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDetalhes{{ apoiador.id }}">
+                                {% trans "Detalhes" %}
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Modal de Detalhes -->
+                    <div class="modal fade" id="modalDetalhes{{ apoiador.id }}" tabindex="-1" aria-labelledby="modalDetalhesLabel{{ apoiador.id }}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalDetalhesLabel{{ apoiador.id }}">
+                                        {% trans "Detalhes do Apoiador" %}: {{ apoiador.nome_publico }}
+                                    </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="{% trans 'Fechar' %}"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>{% trans "Nome Público" %}:</strong> {{ apoiador.nome_publico }}</p>
+                                    <p><strong>{% trans "Descrição" %}:</strong> {{ apoiador.descricao|default:_("Sem descrição") }}</p>
+                                    <p><strong>{% trans "Data de Solicitação" %}:</strong> {{ apoiador.user.date_joined|date:"d/m/Y" }}</p>
+                                    <p><strong>{% trans "Status" %}:</strong> {{ apoiador.get_status_display }}</p>
+                                    <p><strong>{% trans "Link Twitch" %}:</strong> <a href="{{ apoiador.link_twitch }}" target="_blank">{{ apoiador.link_twitch|default:_("Nenhum link fornecido") }}</a></p>
+                                    <p><strong>{% trans "Link YouTube" %}:</strong> <a href="{{ apoiador.link_youtube }}" target="_blank">{{ apoiador.link_youtube|default:_("Nenhum link fornecido") }}</a></p>
+                                    <p><strong>{% trans "Imagem" %}:</strong> 
+                                        {% if apoiador.imagem %}
+                                            <img src="{{ apoiador.imagem.url }}" alt="{% trans 'Imagem do Apoiador' %}" class="img-fluid" style="max-width: 200px;">
+                                        {% else %}
+                                            {% trans "Nenhuma imagem fornecida." %}
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <form method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="apoiador_id" value="{{ apoiador.id }}">
+                                        <input type="hidden" name="acao" value="aceitar">
+                                        <input type="number" class="form-control" name="desconto_percentual" min="1" max="100" placeholder="{% trans 'Digite a porcentagem de desconto' %}">
+                                        <button type="submit" class="btn btn-success">
+                                            {% trans "Aceitar" %}
+                                        </button>
+                                    </form>
+                                    <form method="POST" class="d-inline">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="apoiador_id" value="{{ apoiador.id }}">
+                                        <input type="hidden" name="acao" value="rejeitar">
+                                        <button type="submit" class="btn btn-danger">
+                                            {% trans "Rejeitar" %}
+                                        </button>
+                                    </form>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{% trans "Fechar" %}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-muted">
+                            {% trans "Não há pedidos pendentes no momento." %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
