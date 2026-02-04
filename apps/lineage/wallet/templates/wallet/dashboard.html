@@ -1,0 +1,487 @@
+{% extends "layouts/base.html" %}
+{% load humanize %}
+{% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/wallet.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="wallet-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="wallet-header">
+      <h1 class="wallet-title">
+        <i class="fas fa-wallet me-3"></i>{% trans "Minha Carteira" %}
+      </h1>
+      <p class="wallet-subtitle">
+        {% trans "Gerencie seus saldos e transações de forma segura e eficiente" %}
+      </p>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <div class="wallet-breadcrumb">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">{% trans "Carteira" %}</li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Layout Principal Horizontal -->
+    <div class="wallet-main-content">
+      <!-- Saldos -->
+      <div class="wallet-card">
+        <div class="wallet-card-header">
+          <i class="fas fa-coins wallet-card-icon"></i>
+          <h2 class="wallet-card-title">{% trans "Saldos Disponíveis" %}</h2>
+          <p class="wallet-card-description">{% trans "Seus saldos atuais para uso no jogo" %}</p>
+        </div>
+        <div class="wallet-card-body">
+          <div class="balance-grid">
+            <!-- Saldo Principal -->
+            <div class="balance-card primary">
+              <div class="balance-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="balance-info">
+                <h3 class="balance-title">{% trans "Saldo Principal" %}</h3>
+                <div class="balance-amount">R$ {{ wallet.saldo|floatformat:2 }}</div>
+                <p class="balance-description">{% trans "moedas disponíveis" %}</p>
+              </div>
+            </div>
+            
+            <!-- Saldo Bônus -->
+            <div class="balance-card bonus">
+              <div class="balance-icon">
+                <i class="fas fa-gift"></i>
+              </div>
+              <div class="balance-info">
+                <h3 class="balance-title">{% trans "Saldo Bônus" %}</h3>
+                <div class="balance-amount">R$ {{ wallet.saldo_bonus|floatformat:2 }}</div>
+                <p class="balance-description">{% trans "bônus disponíveis" %}</p>
+              </div>
+            </div>
+            
+            <!-- Fichas -->
+            <div class="balance-card fichas">
+              <div class="balance-icon">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <div class="balance-info" style="flex: 1;">
+                <h3 class="balance-title">{% trans "Fichas" %}</h3>
+                <div class="balance-amount">{{ user.fichas|floatformat:0 }}</div>
+                <p class="balance-description">{% trans "fichas disponíveis" %}</p>
+              </div>
+              <div class="balance-action" style="margin-left: auto;">
+                <a href="{% url 'games:tokens_history' %}" class="btn btn-sm" style="white-space: nowrap; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                  <i class="fas fa-history me-1"></i>{% trans "Histórico" %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ações Rápidas -->
+      <div class="wallet-card">
+        <div class="wallet-card-header">
+          <i class="fas fa-bolt wallet-card-icon"></i>
+          <h2 class="wallet-card-title">{% trans "Ações Rápidas" %}</h2>
+          <p class="wallet-card-description">{% trans "Operações frequentes da sua carteira" %}</p>
+        </div>
+        <div class="wallet-card-body">
+          <div class="actions-grid">
+            <a href="{% url 'payment:novo_pedido' %}" class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Comprar Moedas" %}</h4>
+                <p class="action-description">{% trans "Adicione moedas à sua carteira" %}</p>
+              </div>
+            </a>
+
+            <a href="{% url 'payment:pedidos_pendentes' %}" class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-list"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Pagamentos Pendentes" %}</h4>
+                <p class="action-description">{% trans "Acompanhe pedidos em processamento" %}</p>
+              </div>
+            </a>
+            
+            <a href="{% url 'wallet:transfer_to_server' %}" class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-server"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Transferir para Servidor" %}</h4>
+                <p class="action-description">{% trans "Envie moedas para o servidor" %}</p>
+              </div>
+            </a>
+            
+            <a href="{% url 'wallet:transfer_from_server' %}" class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Retirar do Servidor" %}</h4>
+                <p class="action-description">{% trans "Retire moedas do servidor para sua carteira" %}</p>
+              </div>
+            </a>
+            
+            <a href="{% url 'wallet:transfer_to_player' %}" class="action-card">
+              <div class="action-icon">
+                <i class="fas fa-user-friends"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Transferir para Jogador" %}</h4>
+                <p class="action-description">{% trans "Envie moedas para outro jogador" %}</p>
+              </div>
+            </a>
+
+            <button type="button" class="action-card" data-bs-toggle="modal" data-bs-target="#buyTokensModal" style="border: none; background: none; cursor: pointer; text-align: left; width: 100%;">
+              <div class="action-icon">
+                <i class="fas fa-coins"></i>
+              </div>
+              <div class="action-content">
+                <h4 class="action-title">{% trans "Comprar Fichas" %}</h4>
+                <p class="action-description">{% trans "Compre fichas usando seu saldo ou saldo bônus" %}</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Histórico de Transações -->
+    <div class="wallet-card">
+      <div class="wallet-card-header">
+        <i class="fas fa-history wallet-card-icon"></i>
+        <h2 class="wallet-card-title">{% trans "Histórico de Transações" %}</h2>
+        <p class="wallet-card-description">{% trans "Suas transações recentes e detalhadas" %}</p>
+      </div>
+      <div class="wallet-card-body">
+        {% if transacoes %}
+        <div class="transactions-list">
+          {% for transacao in transacoes %}
+          <div class="transaction-item {% if transacao.tipo == 'SAIDA' %}negative{% else %}positive{% endif %} {% if transacao.tipo_transacao == 'bonus' %}bonus{% endif %}">
+            <div class="transaction-icon">
+              {% if transacao.tipo == 'SAIDA' %}
+                <i class="fas fa-arrow-down"></i>
+              {% elif transacao.tipo_transacao == 'bonus' %}
+                <i class="fas fa-gift"></i>
+              {% else %}
+                <i class="fas fa-arrow-up"></i>
+              {% endif %}
+            </div>
+            <div class="transaction-content">
+              <div class="transaction-header">
+                <h5 class="transaction-title">{{ transacao.descricao }}</h5>
+                <div class="transaction-meta">
+                  <span class="transaction-date">{{ transacao.data|date:"d/m/Y H:i" }}</span>
+                  {% if transacao.tipo_transacao == 'bonus' %}
+                    <span class="transaction-status bonus">
+                      <i class="fas fa-gift"></i> BÔNUS
+                    </span>
+                  {% elif transacao.tipo == 'SAIDA' %}
+                    <span class="transaction-status pending">
+                      <i class="fas fa-arrow-down"></i> SAÍDA
+                    </span>
+                  {% else %}
+                    <span class="transaction-status completed">
+                      <i class="fas fa-arrow-up"></i> ENTRADA
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+              <p class="transaction-description">
+                {% if transacao.origem and transacao.destino %}
+                  {% trans "Transferência realizada" %} - {% trans "De" %} <strong>{{ transacao.origem }}</strong> {% trans "para" %} <strong>{{ transacao.destino }}</strong>
+                {% elif transacao.origem %}
+                  {% trans "Origem" %}: <strong>{{ transacao.origem }}</strong>
+                {% elif transacao.destino %}
+                  {% trans "Destino" %}: <strong>{{ transacao.destino }}</strong>
+                {% else %}
+                  {{ transacao.descricao }}
+                {% endif %}
+              </p>
+              
+              <!-- Informações adicionais -->
+              <div class="transaction-info">
+                <div class="transaction-details">
+                  {% if transacao.origem %}
+                  <div class="transaction-detail origin">
+                    <i class="fas fa-user"></i>
+                    <span>{% trans "Origem" %}: {{ transacao.origem }}</span>
+                  </div>
+                  {% endif %}
+                  
+                  {% if transacao.destino %}
+                  <div class="transaction-detail destination">
+                    <i class="fas fa-user-friends"></i>
+                    <span>{% trans "Destino" %}: {{ transacao.destino }}</span>
+                  </div>
+                  {% endif %}
+                  
+                  <div class="transaction-detail type">
+                    <i class="fas fa-tag"></i>
+                    <span>{% trans "Tipo" %}: 
+                      {% if transacao.tipo_transacao == 'bonus' %}
+                        {% trans "Bônus" %}
+                      {% elif transacao.tipo == 'SAIDA' %}
+                        {% trans "Saída" %}
+                      {% else %}
+                        {% trans "Entrada" %}
+                      {% endif %}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transaction-amount">
+              <span class="amount-value {% if transacao.tipo == 'SAIDA' %}negative{% elif transacao.tipo_transacao == 'bonus' %}bonus{% else %}positive{% endif %}">
+                {% if transacao.tipo == 'SAIDA' %}-{% else %}+{% endif %}R$ {{ transacao.valor|floatformat:2 }}
+              </span>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        
+        <!-- Paginação -->
+        {% if page_obj.has_other_pages %}
+        <div class="mt-4">
+          {% with query_params=request.GET.urlencode %}
+            {% include 'includes/pagination.html' %}
+          {% endwith %}
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="empty-state">
+          <i class="fas fa-history"></i>
+          <h3>{% trans "Nenhuma transação encontrada" %}</h3>
+          <p>{% trans "Você ainda não realizou nenhuma transação. Comece comprando moedas ou fazendo transferências!" %}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Botão Voltar -->
+    <div class="text-center mt-4">
+      <a href="{% url 'dashboard' %}" class="wallet-back-button">
+        <i class="fas fa-arrow-left"></i>{% trans "Voltar ao Dashboard Principal" %}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de Compra de Fichas -->
+<div class="modal fade" id="buyTokensModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-2">
+        <h5 class="modal-title">💰 {% trans "Comprar Fichas" %}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p class="mb-4">{% trans "Escolha a quantidade de fichas que deseja comprar." %}</p>
+        <p class="mb-4 text-warning">
+          <strong>💵 {% trans "Valor" %}: R$0,10 {% trans "por ficha" %}</strong>
+        </p>
+        
+        <!-- Seleção de Saldo -->
+        <div class="mb-4">
+          <label class="form-label fw-bold">{% trans "Usar saldo:" %}</label>
+          <div class="btn-group w-100" role="group" aria-label="Escolha de saldo">
+            <input type="radio" class="btn-check" name="balanceType" id="balanceNormal" value="normal" checked>
+            <label class="btn btn-outline-primary" for="balanceNormal">
+              <i class="fas fa-coins me-2"></i>{% trans "Saldo Principal" %}
+              <br><small>R$ <span id="saldo-display">{{ wallet.saldo|floatformat:2 }}</span></small>
+            </label>
+
+            <input type="radio" class="btn-check" name="balanceType" id="balanceBonus" value="bonus">
+            <label class="btn btn-outline-warning" for="balanceBonus">
+              <i class="fas fa-gift me-2"></i>{% trans "Saldo Bônus" %}
+              <br><small>R$ <span id="saldo-bonus-display">{{ wallet.saldo_bonus|floatformat:2 }}</span></small>
+            </label>
+          </div>
+        </div>
+
+        <input type="number" id="buyQuantity" class="form-control mb-4" min="1" value="1" placeholder="{% trans 'Quantidade' %}">
+        
+        <div class="alert alert-info mb-3" id="total-cost" style="display: none;">
+          <strong>{% trans "Total" %}: R$<span id="total-value">0.00</span></strong>
+        </div>
+
+        <button class="btn btn-success w-100" onclick="buyFichasWallet()">
+          <i class="bi bi-cart-check me-2"></i>{% trans "Confirmar Compra" %}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #buyTokensModal {
+    z-index: 9999 !important;
+  }
+
+  #buyTokensModal .modal-dialog {
+    z-index: 10000 !important;
+    position: relative;
+  }
+
+  #buyTokensModal .modal-content {
+    z-index: 10001 !important;
+    position: relative;
+    background: linear-gradient(to bottom right, #1a1a2e, #121220);
+    border: 2px solid #6f42c1;
+    border-radius: 20px;
+    color: white;
+  }
+
+  #buyTokensModal .modal-header {
+    border-bottom: 2px solid #6f42c1;
+  }
+
+  #buyTokensModal .modal-title {
+    color: white;
+    font-weight: bold;
+  }
+
+  #buyTokensModal .form-control {
+    background: rgba(111, 66, 193, 0.2);
+    border: 2px solid rgba(111, 66, 193, 0.5);
+    color: white;
+  }
+
+  #buyTokensModal .form-control:focus {
+    background: rgba(111, 66, 193, 0.3);
+    border-color: #6f42c1;
+    color: white;
+  }
+
+  #buyTokensModal .btn-check:checked + .btn-outline-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+  }
+
+  #buyTokensModal .btn-check:checked + .btn-outline-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+  }
+
+  .modal-backdrop.show {
+    z-index: 9998 !important;
+  }
+</style>
+
+<script>
+  const FICHAS_WALLET_URL = "{% url 'wallet:comprar_fichas_wallet' %}";
+
+  // Helper function to get CSRF token from cookie
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + "=")) {
+          cookieValue = decodeURIComponent(cookie.slice(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
+  // Calculate total cost
+  document.getElementById('buyQuantity').addEventListener('input', function() {
+    const quantity = parseInt(this.value) || 0;
+    const total = (quantity * 0.10).toFixed(2);
+    document.getElementById('total-value').textContent = total;
+    document.getElementById('total-cost').style.display = quantity > 0 ? 'block' : 'none';
+  });
+
+  // Function to buy fichas
+  function buyFichasWallet() {
+    const quantity = parseInt(document.getElementById("buyQuantity").value);
+    const balanceType = document.querySelector('input[name="balanceType"]:checked').value;
+    const csrfToken = getCookie('csrftoken');
+
+    if (!quantity || quantity <= 0) {
+      alert('{% trans "Por favor, informe uma quantidade válida." %}');
+      return;
+    }
+
+    const total = (quantity * 0.10).toFixed(2);
+    
+    // Confirmação
+    const balanceTypeText = balanceType === 'bonus' ? '{% trans "saldo bônus" %}' : '{% trans "saldo principal" %}';
+    if (!confirm(`{% trans "Confirmar compra de" %} ${quantity} {% trans "ficha(s) por R$" %}${total} {% trans "usando" %} ${balanceTypeText}?`)) {
+      return;
+    }
+
+    fetch(FICHAS_WALLET_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-CSRFToken": csrfToken
+      },
+      body: `quantidade=${quantity}&origem_saldo=${balanceType}`
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(`{% trans "Compra realizada com sucesso! Você agora tem" %} ${data.fichas} {% trans "fichas." %}`);
+        // Atualiza os saldos exibidos
+        document.getElementById('saldo-display').textContent = parseFloat(data.saldo).toFixed(2);
+        document.getElementById('saldo-bonus-display').textContent = parseFloat(data.saldo_bonus).toFixed(2);
+        // Fecha o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('buyTokensModal'));
+        modal.hide();
+        // Recarrega a página para atualizar os saldos no card
+        location.reload();
+      } else {
+        alert('{% trans "Erro" %}: ' + (data.error || '{% trans "Erro desconhecido" %}'));
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('{% trans "Erro ao processar a compra. Tente novamente." %}');
+    });
+  }
+  
+  // Verifica se há mensagem de sucesso na query string (após transferência)
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const transferSuccess = urlParams.get('transfer_success');
+    
+    if (transferSuccess) {
+      // Decodifica a mensagem
+      const message = decodeURIComponent(transferSuccess);
+      
+      // Mostra notificação de sucesso usando o sistema de notificações flutuantes
+      if (window.floatingNotifications) {
+        window.floatingNotifications.success(message, {
+          autoClose: true,
+          autoCloseDelay: 5000
+        });
+      }
+      
+      // Remove o parâmetro da URL para não mostrar novamente ao recarregar
+      const newUrl = window.location.pathname;
+      window.history.replaceState({}, document.title, newUrl);
+    }
+  });
+</script>
+{% endblock content %}

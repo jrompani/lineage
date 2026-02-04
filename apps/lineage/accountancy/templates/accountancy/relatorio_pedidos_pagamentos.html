@@ -1,0 +1,628 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/accountancy.css' %}">
+<style>
+  /* Fallback styles for summary cards */
+  .report-container .summary-card {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    border: 1px solid #e9ecef !important;
+    margin-bottom: 0 !important;
+    min-height: 80px !important;
+    overflow: hidden !important;
+  }
+  .report-container .summary-icon {
+    width: 55px !important;
+    height: 55px !important;
+    min-width: 55px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    color: white !important;
+    flex-shrink: 0 !important;
+  }
+  .report-container .summary-icon.bg-primary { background: linear-gradient(135deg, #007bff, #0056b3) !important; }
+  .report-container .summary-icon.bg-success { background: linear-gradient(135deg, #28a745, #1e7e34) !important; }
+  .report-container .summary-icon.bg-info { background: linear-gradient(135deg, #17a2b8, #117a8b) !important; }
+  .report-container .summary-icon.bg-warning { background: linear-gradient(135deg, #ffc107, #e0a800) !important; }
+  .report-container .summary-icon.bg-danger { background: linear-gradient(135deg, #dc3545, #c82333) !important; }
+  .report-container .summary-icon.bg-secondary { background: linear-gradient(135deg, #6c757d, #545b62) !important; }
+  .report-container .summary-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  .report-container .summary-label {
+    font-size: 0.65rem !important;
+    color: #6c757d !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.35rem !important;
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    letter-spacing: 0.3px !important;
+  }
+  .report-container .summary-value {
+    font-size: clamp(0.95rem, 1.5vw, 1.25rem) !important;
+    font-weight: 700 !important;
+    color: #212529 !important;
+    display: block !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    line-height: 1.2 !important;
+    max-width: 100% !important;
+  }
+  
+  /* Pagination Styles */
+  .report-container .pagination {
+    margin-top: 2rem !important;
+  }
+  .report-container .pagination .page-link {
+    color: #28a745 !important;
+    border-color: #e9ecef !important;
+    padding: 0.75rem 1rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+  }
+  .report-container .pagination .page-link:hover {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3) !important;
+  }
+  .report-container .pagination .page-item.active .page-link {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+    font-weight: 600 !important;
+  }
+  .report-container .pagination .page-item.disabled .page-link {
+    color: #6c757d !important;
+    background-color: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+  }
+  
+  /* Filter Styles */
+  .report-container .report-filters {
+    padding: 0 2.5rem;
+  }
+  .report-container .report-filters .card {
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+  .report-container .report-filters .card-header {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef) !important;
+    border-bottom: 2px solid #dee2e6 !important;
+    padding: 1rem 1.5rem !important;
+  }
+  .report-container .report-filters .card-body {
+    padding: 1.5rem !important;
+  }
+  .report-container .report-filters label {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: #495057 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .report-container .report-filters .form-control {
+    border-radius: 8px !important;
+    border: 1px solid #ced4da !important;
+    padding: 0.625rem 0.875rem !important;
+    font-size: 0.9rem !important;
+    transition: all 0.3s ease !important;
+  }
+  .report-container .report-filters .form-control:focus {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;
+  }
+  .report-container .report-filters .btn-primary {
+    background: linear-gradient(135deg, #28a745, #20c997) !important;
+    border: none !important;
+    padding: 0.625rem 1.5rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+  .report-container .report-filters .btn-primary:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4) !important;
+  }
+  .report-container .report-filters .btn-outline-secondary {
+    border: 1px solid #6c757d !important;
+    color: #6c757d !important;
+    padding: 0.625rem 1.5rem !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+  .report-container .report-filters .btn-outline-secondary:hover {
+    background-color: #6c757d !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+  }
+</style>
+{% endblock extrastyle %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a href="{% url 'accountancy:dashboard' %}">{% trans "Contabilidade" %}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{% trans "Pedidos e Pagamentos" %}</li>
+{% endblock breadcrumbs %}
+
+{% block page_header %}
+<h5 class="display-5">{% trans "Relatório de Pedidos e Pagamentos" %}</h5>
+{% endblock page_header %}
+
+{% block content %}
+<div class="accountancy-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="report-container">
+          <div class="report-header">
+            <h1 class="report-title">
+              <i class="fas fa-credit-card me-3"></i>
+              {% trans "Relatório de Pedidos e Pagamentos" %}
+            </h1>
+            <p class="accountancy-subtitle">
+              {% trans "Analise todos os pedidos e status de pagamentos dos usuários do servidor" %}
+            </p>
+          </div>
+          
+          {% if resumo %}
+          <div class="report-summary">
+            <div class="row g-3">
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-primary">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total de Pedidos" %}</div>
+                    <div class="summary-value">{{ resumo.total_pedidos }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-success">
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total Pago" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_valor_pago|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-warning">
+                    <i class="fas fa-gift"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total Bônus" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_bonus|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-info">
+                    <i class="fas fa-coins"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total Creditado" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_creditado|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-secondary">
+                    <i class="fas fa-coins"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total Moedas" %}</div>
+                    <div class="summary-value">{{ resumo.total_moedas|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-info">
+                    <i class="fas fa-chart-bar"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Média por Pedido" %}</div>
+                    <div class="summary-value">R$ {{ resumo.media_valor|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-success">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Aprovados" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.aprovado }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-warning">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "% Bônus Geral" %}</div>
+                    <div class="summary-value">{{ resumo.percentual_bonus_geral|floatformat:2 }}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-warning">
+                    <i class="fas fa-clock"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Pendentes" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.pendente }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-danger">
+                    <i class="fas fa-times-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Cancelados" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.cancelado }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-info">
+                    <i class="fas fa-spinner"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Processando" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.processando }}</div>
+                  </div>
+                </div>
+              </div>
+              {% if resumo.status_contador.outros > 0 %}
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-secondary">
+                    <i class="fas fa-question-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Outros Status" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.outros }}</div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% if resumo.origem_contador %}
+            <div class="row g-3 mt-2">
+              <div class="col-md-4">
+                <div class="summary-card">
+                  <div class="summary-icon bg-success">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Via Serviço" %}</div>
+                    <div class="summary-value">{{ resumo.origem_contador.servico }}</div>
+                    <small class="text-muted">{% trans "Webhook/Callback" %}</small>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="summary-card">
+                  <div class="summary-icon bg-warning">
+                    <i class="fas fa-user-shield"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Manual (Staff)" %}</div>
+                    <div class="summary-value">{{ resumo.origem_contador.manual }}</div>
+                    <small class="text-muted">{% trans "Confirmado no Admin" %}</small>
+                  </div>
+                </div>
+              </div>
+              {% if resumo.origem_contador.indeterminado > 0 %}
+              <div class="col-md-4">
+                <div class="summary-card">
+                  <div class="summary-icon bg-secondary">
+                    <i class="fas fa-question-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Indeterminado" %}</div>
+                    <div class="summary-value">{{ resumo.origem_contador.indeterminado }}</div>
+                    <small class="text-muted">{% trans "Origem não determinada" %}</small>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endif %}
+          </div>
+          {% endif %}
+          
+          <!-- Filtros -->
+          <div class="report-filters mt-4 mb-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-light">
+                <h6 class="mb-0">
+                  <i class="fas fa-filter me-2"></i>
+                  {% trans "Filtros" %}
+                </h6>
+              </div>
+              <div class="card-body">
+                <form method="get" class="row g-3">
+                  {% if filter_form %}
+                    <div class="col-md-3">
+                      {{ filter_form.status.label_tag }}
+                      {{ filter_form.status }}
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter_form.metodo.label_tag }}
+                      {{ filter_form.metodo }}
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter_form.data_inicio.label_tag }}
+                      {{ filter_form.data_inicio }}
+                    </div>
+                    <div class="col-md-3">
+                      {{ filter_form.data_fim.label_tag }}
+                      {{ filter_form.data_fim }}
+                    </div>
+                    <div class="col-md-4">
+                      {{ filter_form.usuario.label_tag }}
+                      {{ filter_form.usuario }}
+                    </div>
+                    <div class="col-md-4">
+                      {{ filter_form.valor_minimo.label_tag }}
+                      {{ filter_form.valor_minimo }}
+                    </div>
+                    <div class="col-md-4">
+                      {{ filter_form.valor_maximo.label_tag }}
+                      {{ filter_form.valor_maximo }}
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search me-2"></i>
+                        {% trans "Filtrar" %}
+                      </button>
+                      <a href="{% url 'accountancy:relatorio_pedidos_pagamentos' %}" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-2"></i>
+                        {% trans "Limpar Filtros" %}
+                      </a>
+                    </div>
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
+          
+          <div class="report-body">
+            <div class="table-responsive">
+              <table class="table report-table">
+                <thead>
+                  <tr>
+                    <th><i class="fas fa-hashtag me-2"></i>{% trans "ID do Pedido" %}</th>
+                    <th><i class="fas fa-user me-2"></i>{% trans "Usuário" %}</th>
+                    <th><i class="fas fa-dollar-sign me-2"></i>{% trans "Valor Pago" %}</th>
+                    <th><i class="fas fa-gift me-2"></i>{% trans "Bônus" %}</th>
+                    <th><i class="fas fa-percent me-2"></i>{% trans "% Bônus" %}</th>
+                    <th><i class="fas fa-coins me-2"></i>{% trans "Total Creditado" %}</th>
+                    <th><i class="fas fa-coins me-2"></i>{% trans "Moedas Geradas" %}</th>
+                    <th><i class="fas fa-calendar me-2"></i>{% trans "Data" %}</th>
+                    <th><i class="fas fa-info-circle me-2"></i>{% trans "Status" %}</th>
+                    <th><i class="fas fa-shield-alt me-2"></i>{% trans "Origem" %}</th>
+                    <th><i class="fas fa-credit-card me-2"></i>{% trans "Método de Pagamento" %}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in relatorio %}
+                  <tr>
+                    <td>
+                      <span class="badge bg-primary">
+                        <i class="fas fa-hashtag me-1"></i>
+                        #{{ item.id_pedido }}
+                      </span>
+                    </td>
+                    <td>
+                      <i class="fas fa-user-circle me-2 text-primary"></i>
+                      <strong>{{ item.usuario }}</strong>
+                    </td>
+                    <td>
+                      <span class="badge bg-success">
+                        <i class="fas fa-dollar-sign me-1"></i>
+                        R$ {{ item.valor|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      {% if item.bonus_aplicado > 0 %}
+                        <span class="badge bg-warning">
+                          <i class="fas fa-gift me-1"></i>
+                          R$ {{ item.bonus_aplicado|floatformat:2 }}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary">
+                          <i class="fas fa-minus me-1"></i>
+                          R$ 0,00
+                        </span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if item.percentual_bonus > 0 %}
+                        <span class="badge bg-info">
+                          <i class="fas fa-percent me-1"></i>
+                          {{ item.percentual_bonus|floatformat:2 }}%
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary">0%</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <span class="badge bg-info">
+                        <i class="fas fa-coins me-1"></i>
+                        R$ {{ item.total_creditado|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-secondary">
+                        <i class="fas fa-coins me-1"></i>
+                        {{ item.moedas_geradas|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <small>
+                        <i class="fas fa-calendar-day me-1 text-info"></i>
+                        {{ item.data|date:"d/m/Y H:i" }}
+                      </small>
+                    </td>
+                    <td>
+                      {% if item.status == 'aprovado' %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-check me-1"></i>
+                          {% trans "Aprovado" %}
+                        </span>
+                      {% elif item.status == 'pendente' %}
+                        <span class="badge bg-warning">
+                          <i class="fas fa-clock me-1"></i>
+                          {% trans "Pendente" %}
+                        </span>
+                      {% elif item.status == 'cancelado' %}
+                        <span class="badge bg-danger">
+                          <i class="fas fa-times me-1"></i>
+                          {% trans "Cancelado" %}
+                        </span>
+                      {% elif item.status == 'processando' %}
+                        <span class="badge bg-info">
+                          <i class="fas fa-spinner me-1"></i>
+                          {% trans "Processando" %}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary">
+                          <i class="fas fa-question me-1"></i>
+                          {{ item.status|title }}
+                        </span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if item.origem_pagamento == 'manual' %}
+                        <span class="badge bg-warning" title="{% trans 'Confirmado manualmente por staff no admin' %}">
+                          <i class="fas fa-user-shield me-1"></i>
+                          {% trans "Manual" %}
+                        </span>
+                      {% elif item.origem_pagamento == 'servico' %}
+                        <span class="badge bg-success" title="{% trans 'Processado via serviço de pagamento (webhook/callback)' %}">
+                          <i class="fas fa-check-circle me-1"></i>
+                          {% trans "Serviço" %}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary" title="{% trans 'Origem não determinada' %}">
+                          <i class="fas fa-question-circle me-1"></i>
+                          {% trans "Indeterminado" %}
+                        </span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if item.metodo_pagamento == 'Mercado Pago' %}
+                        <span class="badge bg-info">
+                          <i class="fas fa-wallet me-1"></i>
+                          Mercado Pago
+                        </span>
+                      {% elif item.metodo_pagamento == 'Stripe' %}
+                        <span class="badge bg-primary">
+                          <i class="fab fa-stripe me-1"></i>
+                          Stripe
+                        </span>
+                      {% elif item.metodo_pagamento == 'PIX' %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-qrcode me-1"></i>
+                          PIX
+                        </span>
+                      {% elif item.metodo_pagamento == 'Cartão' %}
+                        <span class="badge bg-primary">
+                          <i class="fas fa-credit-card me-1"></i>
+                          {% trans "Cartão" %}
+                        </span>
+                      {% elif item.metodo_pagamento == 'Boleto' %}
+                        <span class="badge bg-warning">
+                          <i class="fas fa-barcode me-1"></i>
+                          {% trans "Boleto" %}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary">
+                          <i class="fas fa-money-bill me-1"></i>
+                          {{ item.metodo_pagamento|title }}
+                        </span>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="10" class="text-center py-4">
+                      <i class="fas fa-credit-card fa-3x text-muted mb-3"></i>
+                      <p class="text-muted">{% trans "Nenhum pedido ou pagamento encontrado" %}</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Paginação -->
+            {% if page_obj.has_other_pages %}
+            <div class="mt-4">
+              {% with query_params=request.GET.urlencode %}
+                {% include 'includes/pagination.html' %}
+              {% endwith %}
+              <div class="text-center mt-2">
+                <small class="text-muted">
+                  {% trans "Mostrando" %} {{ page_obj.start_index }} {% trans "até" %} {{ page_obj.end_index }} {% trans "de" %} {{ page_obj.paginator.count }} {% trans "pedidos" %}
+                </small>
+              </div>
+            </div>
+            {% endif %}
+
+            <div class="text-center mt-4">
+              <a href="{% url 'accountancy:dashboard' %}" class="report-back-button">
+                <i class="fas fa-arrow-left me-2"></i>
+                {% trans "Voltar para o Dashboard" %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

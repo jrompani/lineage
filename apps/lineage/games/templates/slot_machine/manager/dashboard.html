@@ -1,0 +1,1124 @@
+{% extends "layouts/base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Slot Machine Manager" %}{% endblock %}
+
+{% block extrastyle %}
+<style>
+.mgr-bg { 
+    background: radial-gradient(ellipse at center, #1a1a2e 0%, #121220 100%); 
+    min-height: 100vh; 
+    padding: 30px 0; 
+}
+.card-glow { 
+    background: linear-gradient(to bottom right, #1a1a2e, #121220); 
+    border: 2px solid #6f42c1; 
+    border-radius: 12px; 
+    box-shadow: 0 0 15px rgba(111,66,193,.5), 0 0 25px rgba(13,202,240,.3); 
+}
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    margin-bottom: 20px;
+}
+.stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+.form-dark {
+    background: rgba(255,255,255,0.05) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    color: white !important;
+}
+.form-dark:focus {
+    background: rgba(255,255,255,0.08) !important;
+    border-color: #6f42c1 !important;
+    color: white !important;
+    box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.25) !important;
+}
+.form-select.form-dark,
+select.form-dark {
+    background: rgba(30, 30, 50, 0.95) !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+    color: white !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.75rem center !important;
+    background-size: 16px 12px !important;
+}
+.form-select.form-dark option,
+select.form-dark option {
+    background: #1a1a2e !important;
+    color: white !important;
+}
+.form-check-input {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    width: 3em;
+    height: 1.5em;
+    cursor: pointer;
+}
+.form-check-input:checked {
+    background-color: #198754;
+    border-color: #198754;
+}
+.form-check-input:focus {
+    border-color: #6f42c1;
+    box-shadow: 0 0 0 0.25rem rgba(111, 66, 193, 0.25);
+}
+.btn-delete {
+    background: #dc3545;
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+.btn-delete:hover {
+    background: #c82333;
+}
+.btn-sm {
+    font-size: 0.875rem;
+    padding: 5px 10px;
+}
+.badge {
+    font-size: 0.875rem;
+    padding: 0.35em 0.65em;
+}
+
+/* Melhorias na Configuração */
+.config-card {
+    border: 2px solid #f59e0b !important;
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.5) !important;
+}
+
+.config-card-header {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    padding: 1rem 1.5rem;
+}
+
+.config-card-body {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(217, 119, 6, 0.05) 100%);
+    padding: 1.5rem;
+}
+
+.config-info-row {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.config-label {
+    color: #cbd5e0;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.config-value {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.config-value .badge {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+}
+
+/* Legenda */
+.legend-box-slot {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-top: 1.5rem;
+  border: 2px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.legend-title-slot {
+  color: #f59e0b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.legend-content-slot {
+  color: #cbd5e0;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.legend-item-slot {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.legend-item-slot:before {
+  content: "🎰";
+  position: absolute;
+  left: 0;
+  font-size: 1rem;
+}
+
+.legend-item-slot strong {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.legend-divider-slot {
+  border-top: 1px solid rgba(245, 158, 11, 0.3);
+  margin: 1rem 0;
+}
+
+/* Melhoria nas tabelas e cards */
+.card-glow .card-header {
+    color: #e2e8f0 !important;
+    font-weight: 600;
+    background: rgba(111, 66, 193, 0.15);
+    border-bottom: 1px solid rgba(111, 66, 193, 0.3);
+}
+
+.table-dark thead th {
+    color: #e2e8f0 !important;
+    font-weight: 600;
+    background: rgba(13, 202, 240, 0.1) !important;
+    border-bottom: 2px solid #0dcaf0 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.85rem;
+}
+
+.table-dark tbody td {
+    color: #cbd5e0 !important;
+    font-weight: 500;
+}
+
+.form-dark option {
+    padding: 0.5rem;
+}
+
+label.text-white {
+    color: #cbd5e0 !important;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.card-body label.text-white {
+    margin-bottom: 0.4rem;
+}
+
+.card-glow .card-body {
+    padding: 1.25rem;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+
+.btn-outline-info {
+    border: 2px solid #0dcaf0 !important;
+    color: #0dcaf0 !important;
+    font-weight: 600 !important;
+}
+
+.btn-outline-info:hover {
+    background: #0dcaf0 !important;
+    color: #0b132b !important;
+}
+
+.btn-edit-config {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    border: none !important;
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    padding: 0.5rem 1.25rem !important;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-edit-config:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.6) !important;
+    color: #ffffff !important;
+}
+
+/* Legenda Símbolos */
+.legend-box-symbols {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(111, 66, 193, 0.3);
+}
+
+.legend-title-symbols {
+    color: #a855f7;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.legend-content-symbols {
+    color: #cbd5e0;
+    line-height: 1.6;
+    font-size: 0.85rem;
+}
+
+.legend-content-symbols strong {
+    color: #e2e8f0;
+}
+
+.legend-content-symbols p {
+    margin-bottom: 0.5rem;
+}
+
+.legend-example-symbols {
+    background: rgba(168, 85, 247, 0.15);
+    border-left: 3px solid #a855f7;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    color: #e2e8f0;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.legend-example-symbols strong {
+    color: #a855f7;
+    font-size: 0.9rem;
+}
+
+/* Legenda Prêmios */
+.legend-box-prizes {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.legend-title-prizes {
+    color: #10b981;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.legend-content-prizes {
+    color: #cbd5e0;
+    line-height: 1.6;
+    font-size: 0.85rem;
+}
+
+.legend-content-prizes strong {
+    color: #e2e8f0;
+}
+
+.legend-content-prizes p {
+    margin-bottom: 0.5rem;
+}
+
+.legend-item-prizes {
+    margin-bottom: 0.6rem;
+    padding-left: 1.25rem;
+    position: relative;
+}
+
+.legend-item-prizes:before {
+    content: "🏆";
+    position: absolute;
+    left: 0;
+    font-size: 0.9rem;
+}
+
+.legend-item-prizes strong {
+    color: #10b981;
+}
+
+.legend-divider-prizes {
+    border-top: 1px solid rgba(16, 185, 129, 0.3);
+    margin: 0.75rem 0;
+}
+
+.legend-example-prizes {
+    background: rgba(16, 185, 129, 0.15);
+    border-left: 3px solid #10b981;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    color: #e2e8f0;
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.legend-example-prizes strong {
+    color: #10b981;
+    font-size: 0.9rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="mgr-bg">
+    <div class="container-fluid" style="max-width: 1600px; padding: 0 2rem;">
+        <div class="d-flex justify-content-between align-items-center mb-4 text-white">
+            <h3 class="m-0" style="color: #e2e8f0; font-weight: 700;">
+                <i class="fas fa-gamepad me-2" style="color: #f59e0b;"></i>{% trans "Gerenciar Slot Machine" %}
+            </h3>
+            <div>
+                {% if not active_config or total_symbols == 0 %}
+                <form method="post" style="display: inline;" class="me-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="quick_setup">
+                    <button type="submit" class="btn btn-success rounded-pill">
+                        <i class="fas fa-bolt me-1"></i>{% trans "Setup Rápido Completo" %}
+                    </button>
+                </form>
+                {% endif %}
+                <a href="{% url 'games:slot_machine_page' %}" class="btn btn-outline-info rounded-pill">
+                    <i class="fas fa-eye me-1"></i>{% trans "Ver Slot Machine" %}
+                </a>
+            </div>
+        </div>
+
+        <!-- Alerta se não tiver configuração -->
+        {% if not active_config %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading">🚨 {% trans "Configuração não encontrada!" %}</h5>
+            <p>{% trans "Você precisa criar uma configuração primeiro." %}</p>
+            <hr>
+            <div class="d-flex gap-2">
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="create_default_config">
+                    <button type="submit" class="btn btn-success">
+                        ✨ {% trans "Criar Configuração Padrão" %}
+                    </button>
+                </form>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Alerta se não tiver símbolos -->
+        {% if active_config and total_symbols == 0 %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading">⚠️ {% trans "Símbolos não configurados!" %}</h5>
+            <p>{% trans "Você precisa adicionar símbolos antes de usar o Slot Machine." %}</p>
+            <hr>
+            <div class="d-flex gap-2">
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="auto_populate_symbols">
+                    <button type="submit" class="btn btn-success">
+                        ✨ {% trans "Popular Símbolos Automaticamente" %}
+                    </button>
+                </form>
+                <small class="text-muted align-self-center">
+                    {% trans "Ou adicione manualmente abaixo" %}
+                </small>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Alerta se não tiver prêmios -->
+        {% if total_symbols > 0 and total_prizes == 0 %}
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <h5 class="alert-heading">💡 {% trans "Prêmios não configurados!" %}</h5>
+            <p>{% trans "Configure os prêmios para cada combinação de símbolos." %}</p>
+            <hr>
+            <div class="d-flex gap-2">
+                <form method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="auto_populate_prizes">
+                    <button type="submit" class="btn btn-success">
+                        ✨ {% trans "Popular Prêmios Automaticamente" %}
+                    </button>
+                </form>
+                <small class="text-muted align-self-center">
+                    {% trans "Ou adicione manualmente abaixo" %}
+                </small>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+
+        <!-- Estatísticas Principais -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div>{% trans "Total de Giros" %}</div>
+                    <div class="stat-value">{{ total_spins }}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div>{% trans "Vitórias" %}</div>
+                    <div class="stat-value">{{ total_wins }}</div>
+                    <small>{{ win_rate }}% win rate</small>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div>{% trans "Jackpots" %}</div>
+                    <div class="stat-value">{{ total_jackpots }}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div>{% trans "Fichas Distribuídas" %}</div>
+                    <div class="stat-value">{{ total_fichas_distributed }}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configuração Ativa -->
+        {% if active_config %}
+        <div class="card card-glow config-card mb-4">
+            <div class="card-header config-card-header d-flex justify-content-between align-items-center">
+                <strong style="font-size: 1.2rem;">
+                    <i class="fas fa-cog me-2"></i>{% trans "CONFIGURAÇÃO DO JOGO" %}
+                </strong>
+                <button class="btn btn-sm btn-edit-config" data-bs-toggle="collapse" data-bs-target="#editConfig">
+                    <i class="fas fa-edit me-1"></i>{% trans "Editar" %}
+                </button>
+            </div>
+            <div class="card-body config-card-body">
+                <div class="config-info-row">
+                    <div class="config-item">
+                        <span class="config-label">
+                            <i class="fas fa-power-off me-1"></i>{% trans "Status" %}
+                        </span>
+                        <span class="config-value">
+                            {% if active_config.is_active %}
+                                <span class="badge bg-success">
+                                    <i class="fas fa-check-circle me-1"></i>{% trans "Ativo" %}
+                                </span>
+                            {% else %}
+                                <span class="badge bg-danger">
+                                    <i class="fas fa-times-circle me-1"></i>{% trans "Inativo" %}
+                                </span>
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <div class="config-item">
+                        <span class="config-label">
+                            <i class="fas fa-tag me-1"></i>{% trans "Nome" %}
+                        </span>
+                        <span class="config-value">{{ active_config.name }}</span>
+                    </div>
+                    
+                    <div class="config-item">
+                        <span class="config-label">
+                            <i class="fas fa-coins me-1"></i>{% trans "Custo/Giro" %}
+                        </span>
+                        <span class="config-value" style="color: #fbbf24;">{{ active_config.cost_per_spin }} fichas</span>
+                    </div>
+                    
+                    <div class="config-item">
+                        <span class="config-label">
+                            <i class="fas fa-trophy me-1"></i>{% trans "Jackpot" %}
+                        </span>
+                        <span class="config-value" style="color: #10b981;">{{ active_config.jackpot_amount }}</span>
+                    </div>
+                    
+                    <div class="config-item">
+                        <span class="config-label">
+                            <i class="fas fa-percentage me-1"></i>{% trans "Chance Jackpot" %}
+                        </span>
+                        <span class="config-value" style="color: #3b82f6;">{{ active_config.jackpot_chance }}%</span>
+                    </div>
+                </div>
+                
+                <!-- Formulário de Edição (colapsável) -->
+                <div class="collapse mt-3" id="editConfig">
+                    <hr class="bg-secondary">
+                    <form method="post" class="row g-3">
+                        {% csrf_token %}
+                        <input type="hidden" name="action" value="update_config">
+                        <input type="hidden" name="config_id" value="{{ active_config.id }}">
+                        
+                        <div class="col-md-3">
+                            <label class="text-white"><strong>{% trans "Nome" %}</strong></label>
+                            <input type="text" name="name" class="form-control form-dark" value="{{ active_config.name }}" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-white"><strong>{% trans "Custo por Giro" %}</strong></label>
+                            <input type="number" name="cost_per_spin" class="form-control form-dark" value="{{ active_config.cost_per_spin }}" min="1" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-white"><strong>{% trans "Jackpot Atual" %}</strong></label>
+                            <input type="number" name="jackpot_amount" class="form-control form-dark" value="{{ active_config.jackpot_amount }}" min="0" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-white"><strong>{% trans "Chance Jackpot (%)" %}</strong></label>
+                            <input type="number" name="jackpot_chance" class="form-control form-dark" value="{{ active_config.jackpot_chance }}" min="0" max="100" step="0.01" required>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-white"><strong>{% trans "Status" %}</strong></label>
+                            <div class="form-check form-switch mt-2">
+                                <input class="form-check-input" type="checkbox" name="is_active" id="id_is_active" {% if active_config.is_active %}checked{% endif %}>
+                                <label class="form-check-label text-white ms-2" for="id_is_active">
+                                    {% trans "Jogo Ativo" %}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-1 d-flex align-items-end">
+                            <button type="submit" class="btn btn-success w-100">💾 {% trans "Salvar" %}</button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-3 p-3 bg-dark bg-opacity-25 rounded">
+                        <small class="text-muted">
+                            <strong>{% trans "Status:" %}</strong>
+                            {% if active_config.is_active %}
+                                <span class="text-success">✅ {% trans "O jogo está disponível para os jogadores" %}</span>
+                            {% else %}
+                                <span class="text-danger">❌ {% trans "O jogo está desativado e não aparecerá para os jogadores" %}</span>
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>
+                
+                <!-- Legenda Explicativa -->
+                <div class="legend-box-slot">
+                    <div class="legend-title-slot">
+                        <i class="fas fa-book-open"></i>
+                        {% trans "Guia de Parâmetros" %}
+                    </div>
+                    <div class="legend-content-slot">
+                        <div class="legend-item-slot">
+                            <strong>{% trans "Status:" %}</strong> {% trans "Define se o Slot Machine está ativo e disponível para os jogadores. Quando inativo, o jogo não aparece no menu." %}
+                        </div>
+                        
+                        <div class="legend-item-slot">
+                            <strong>{% trans "Nome:" %}</strong> {% trans "Identificação da configuração do jogo. Útil para gerenciar múltiplas configurações." %}
+                        </div>
+                        
+                        <div class="legend-divider-slot"></div>
+                        
+                        <div class="legend-item-slot">
+                            <strong>{% trans "Custo por Giro:" %}</strong> {% trans "Quantidade de fichas que o jogador precisa gastar para dar uma rodada no Slot Machine. Cada giro consome essa quantidade." %}
+                        </div>
+                        
+                        <div class="legend-item-slot">
+                            <strong>{% trans "Jackpot Atual:" %}</strong> {% trans "Valor total do jackpot acumulado. Este é o prêmio máximo que um jogador pode ganhar ao acertar o jackpot. O valor aumenta progressivamente." %}
+                        </div>
+                        
+                        <div class="legend-item-slot">
+                            <strong>{% trans "Chance de Jackpot:" %}</strong> {% trans "Probabilidade percentual de ganhar o jackpot em cada rodada. Exemplo: 0,1% significa 1 chance em 1000 giros. Quanto menor o valor, mais raro é o jackpot." %}
+                        </div>
+                        
+                        <div class="legend-divider-slot"></div>
+                        
+                        <div class="legend-item-slot" style="color: #e2e8f0;">
+                            <strong style="color: #fbbf24;">{% trans "Dica:" %}</strong> {% trans "Configure os prêmios e símbolos nas seções abaixo para completar a configuração do jogo. Os prêmios definem o que os jogadores ganham ao combinar símbolos." %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <!-- GERENCIAR SÍMBOLOS -->
+            <div class="col-lg-6 mb-4">
+                <div class="card card-glow">
+                    <div class="card-header text-white d-flex justify-content-between align-items-center">
+                        <strong>🎰 {% trans "Gerenciar Símbolos" %} ({{ total_symbols }})</strong>
+                        <div>
+                            {% if total_symbols == 0 %}
+                            <form method="post" style="display: inline;" class="me-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="auto_populate_symbols">
+                                <button type="submit" class="btn btn-sm btn-warning">
+                                    ✨ {% trans "Popular Auto" %}
+                                </button>
+                            </form>
+                            {% endif %}
+                            <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#addSymbol">
+                                ➕ {% trans "Adicionar" %}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Formulário Adicionar Símbolo -->
+                    <div class="collapse" id="addSymbol">
+                        <div class="card-body border-bottom border-secondary">
+                            <form method="post" class="row g-3">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="add_symbol">
+                                
+                                <div class="col-md-4">
+                                    <label class="text-white">{% trans "Símbolo" %}</label>
+                                    {{ symbol_form.symbol }}
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="text-white">{% trans "Ícone/Emoji" %}</label>
+                                    {{ symbol_form.icon }}
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="text-white">{% trans "Peso" %}</label>
+                                    {{ symbol_form.weight }}
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-success w-100">➕</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Lista de Símbolos -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans "Símbolo" %}</th>
+                                        <th>{% trans "Nome" %}</th>
+                                        <th>{% trans "Peso" %}</th>
+                                        <th class="text-end">{% trans "Ações" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for symbol in symbols %}
+                                    <tr>
+                                        <td style="font-size: 2rem;">{{ symbol.icon }}</td>
+                                        <td>{{ symbol.get_symbol_display }}</td>
+                                        <td>{{ symbol.weight }}</td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-warning me-2" data-bs-toggle="collapse" data-bs-target="#editSymbol{{ symbol.id }}">
+                                                ✏️ {% trans "Editar" %}
+                                            </button>
+                                            <form method="post" style="display:inline;" onsubmit="return confirm('{% trans "Tem certeza que deseja remover este símbolo?" %}');">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="delete_symbol">
+                                                <input type="hidden" name="symbol_id" value="{{ symbol.id }}">
+                                                <button type="submit" class="btn-delete">🗑️</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <!-- Formulário de Edição -->
+                                    <tr class="collapse" id="editSymbol{{ symbol.id }}">
+                                        <td colspan="4" style="background: rgba(255, 193, 7, 0.1); padding: 20px;">
+                                            <form method="post" class="row g-3">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="edit_symbol">
+                                                <input type="hidden" name="symbol_id" value="{{ symbol.id }}">
+                                                
+                                                <div class="col-12 mb-2">
+                                                    <strong class="text-warning">✏️ {% trans "Editando:" %} {{ symbol.get_symbol_display }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-md-4">
+                                                    <label class="text-white">{% trans "Símbolo" %}</label>
+                                                    <input type="text" name="symbol" class="form-control form-dark" value="{{ symbol.symbol }}" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="text-white">{% trans "Ícone/Emoji" %}</label>
+                                                    <input type="text" name="icon" class="form-control form-dark" value="{{ symbol.icon }}" maxlength="10">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="text-white">{% trans "Peso (Probabilidade)" %}</label>
+                                                    <input type="number" name="weight" class="form-control form-dark" value="{{ symbol.weight }}" min="1" required>
+                                                </div>
+                                                <div class="col-md-2 d-flex align-items-end gap-2">
+                                                    <button type="submit" class="btn btn-success">💾 {% trans "Salvar" %}</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#editSymbol{{ symbol.id }}">❌</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">
+                                            {% trans "Nenhum símbolo configurado. Adicione símbolos antes de criar prêmios!" %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Legenda Peso dos Símbolos -->
+                    <div class="card-footer" style="background: rgba(111, 66, 193, 0.05); border-top: 1px solid rgba(111, 66, 193, 0.2);">
+                        <div class="legend-box-symbols">
+                            <div class="legend-title-symbols">
+                                <i class="fas fa-info-circle"></i>
+                                {% trans "Como funciona o Peso dos Símbolos?" %}
+                            </div>
+                            <div class="legend-content-symbols">
+                                <p class="mb-2">
+                                    {% trans "O <strong>peso</strong> determina a probabilidade de cada símbolo aparecer nos rolos do Slot Machine." %}
+                                </p>
+                                <p class="mb-2">
+                                    {% trans "Quanto maior o peso, maior a chance do símbolo aparecer. A probabilidade é calculada proporcionalmente em relação ao peso total de todos os símbolos." %}
+                                </p>
+                                <div class="legend-example-symbols">
+                                    <strong>{% trans "Exemplo:" %}</strong><br>
+                                    {% trans "• Símbolo 🍒 (peso 50) = 50/(50+30+20) = 50% de chance" %}<br>
+                                    {% trans "• Símbolo 💎 (peso 30) = 30/(50+30+20) = 30% de chance" %}<br>
+                                    {% trans "• Símbolo 🎰 (peso 20) = 20/(50+30+20) = 20% de chance" %}
+                                </div>
+                                <p class="mt-2 mb-0" style="color: #fbbf24; font-style: italic;">
+                                    <i class="fas fa-lightbulb me-1"></i>
+                                    <strong>{% trans "Dica:" %}</strong> {% trans "Use pesos menores para símbolos mais raros e valiosos!" %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GERENCIAR PRÊMIOS -->
+            <div class="col-lg-6 mb-4">
+                <div class="card card-glow">
+                    <div class="card-header text-white d-flex justify-content-between align-items-center">
+                        <strong>🏆 {% trans "Gerenciar Prêmios" %} ({{ total_prizes }})</strong>
+                        <div>
+                            {% if total_symbols > 0 and total_prizes == 0 %}
+                            <form method="post" style="display: inline;" class="me-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="auto_populate_prizes">
+                                <button type="submit" class="btn btn-sm btn-warning">
+                                    ✨ {% trans "Popular Auto" %}
+                                </button>
+                            </form>
+                            {% endif %}
+                            <button class="btn btn-sm btn-success" data-bs-toggle="collapse" data-bs-target="#addPrize">
+                                ➕ {% trans "Adicionar" %}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Formulário Adicionar Prêmio -->
+                    <div class="collapse" id="addPrize">
+                        <div class="card-body border-bottom border-secondary">
+                            <form method="post" class="row g-3">
+                                {% csrf_token %}
+                                <input type="hidden" name="action" value="add_prize">
+                                <input type="hidden" name="config_id" value="{{ active_config.id }}">
+                                
+                                <div class="col-md-3">
+                                    <label class="text-white">{% trans "Símbolo" %}</label>
+                                    {{ prize_form.symbol }}
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="text-white">{% trans "Combinações" %}</label>
+                                    {{ prize_form.matches_required }}
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="text-white">{% trans "Item (opcional)" %}</label>
+                                    {{ prize_form.item }}
+                                </div>
+                                <div class="col-md-2">
+                                    <label class="text-white">{% trans "Fichas" %}</label>
+                                    {{ prize_form.fichas_prize }}
+                                </div>
+                                <div class="col-md-2 d-flex align-items-end">
+                                    <button type="submit" class="btn btn-success w-100">➕ {% trans "Adicionar" %}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Lista de Prêmios -->
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans "Combinação" %}</th>
+                                        <th>{% trans "Prêmio Fichas" %}</th>
+                                        <th>{% trans "Item" %}</th>
+                                        <th class="text-end">{% trans "Ações" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for prize in prizes %}
+                                    <tr>
+                                        <td>{{ prize.matches_required }}x {{ prize.symbol.icon }} {{ prize.symbol.get_symbol_display }}</td>
+                                        <td>{{ prize.fichas_prize }} fichas</td>
+                                        <td>
+                                            {% if prize.item %}
+                                                {{ prize.item.name }} +{{ prize.item.enchant }}
+                                            {% else %}
+                                                -
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-end">
+                                            <button class="btn btn-sm btn-warning me-2" data-bs-toggle="collapse" data-bs-target="#editPrize{{ prize.id }}">
+                                                ✏️ {% trans "Editar" %}
+                                            </button>
+                                            <form method="post" style="display:inline;" onsubmit="return confirm('{% trans "Tem certeza que deseja remover este prêmio?" %}');">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="delete_prize">
+                                                <input type="hidden" name="prize_id" value="{{ prize.id }}">
+                                                <button type="submit" class="btn-delete">🗑️</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    <!-- Formulário de Edição -->
+                                    <tr class="collapse" id="editPrize{{ prize.id }}">
+                                        <td colspan="4" style="background: rgba(255, 193, 7, 0.1); padding: 20px;">
+                                            <form method="post" class="row g-3">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="action" value="edit_prize">
+                                                <input type="hidden" name="prize_id" value="{{ prize.id }}">
+                                                
+                                                <div class="col-12 mb-2">
+                                                    <strong class="text-warning">✏️ {% trans "Editando prêmio:" %} {{ prize.symbol.get_symbol_display }}</strong>
+                                                </div>
+                                                
+                                                <div class="col-md-3">
+                                                    <label class="text-white">{% trans "Símbolo" %}</label>
+                                                    <select name="symbol" class="form-select form-dark" required>
+                                                        {% for sym in symbols %}
+                                                        <option value="{{ sym.id }}" {% if prize.symbol.id == sym.id %}selected{% endif %}>
+                                                            {{ sym.icon }} {{ sym.get_symbol_display }}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="text-white">{% trans "Combinações" %}</label>
+                                                    <input type="number" name="matches_required" class="form-control form-dark" value="{{ prize.matches_required }}" min="1" max="3" required>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="text-white">{% trans "Item (opcional)" %}</label>
+                                                    <select name="item" class="form-select form-dark">
+                                                        <option value="">-- {% trans "Nenhum" %} --</option>
+                                                        {% for item in items %}
+                                                        <option value="{{ item.id }}" {% if prize.item and prize.item.id == item.id %}selected{% endif %}>{{ item.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <label class="text-white">{% trans "Fichas" %}</label>
+                                                    <input type="number" name="fichas_prize" class="form-control form-dark" value="{{ prize.fichas_prize }}" min="0" required>
+                                                </div>
+                                                <div class="col-md-2 d-flex align-items-end gap-2">
+                                                    <button type="submit" class="btn btn-success">💾 {% trans "Salvar" %}</button>
+                                                    <button type="button" class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#editPrize{{ prize.id }}">❌</button>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr>
+                                        <td colspan="4" class="text-center text-muted">{% trans "Nenhum prêmio configurado" %}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Legenda Prêmios -->
+                    <div class="card-footer" style="background: rgba(111, 66, 193, 0.05); border-top: 1px solid rgba(111, 66, 193, 0.2);">
+                        <div class="legend-box-prizes">
+                            <div class="legend-title-prizes">
+                                <i class="fas fa-trophy"></i>
+                                {% trans "Como funcionam os Prêmios?" %}
+                            </div>
+                            <div class="legend-content-prizes">
+                                <p class="mb-2">
+                                    {% trans "Os prêmios são ganhos quando o jogador consegue <strong>combinar símbolos iguais</strong> nos 3 rolos do Slot Machine." %}
+                                </p>
+                                
+                                <div class="legend-divider-prizes"></div>
+                                
+                                <div class="legend-item-prizes">
+                                    <strong>{% trans "Combinação:" %}</strong> {% trans "Define quantos símbolos iguais são necessários (1x, 2x ou 3x) e qual símbolo precisa aparecer para ganhar o prêmio." %}
+                                </div>
+                                
+                                <div class="legend-item-prizes">
+                                    <strong>{% trans "Prêmio Fichas:" %}</strong> {% trans "Quantidade de fichas que o jogador ganha ao acertar a combinação. Este valor é creditado automaticamente." %}
+                                </div>
+                                
+                                <div class="legend-item-prizes">
+                                    <strong>{% trans "Item (Opcional):" %}</strong> {% trans "Item adicional que o jogador recebe junto com as fichas. Deixe vazio se quiser dar apenas fichas como prêmio." %}
+                                </div>
+                                
+                                <div class="legend-divider-prizes"></div>
+                                
+                                <div class="legend-example-prizes">
+                                    <strong>{% trans "Exemplos de Configuração:" %}</strong><br>
+                                    {% trans "• 3x 💎 = 1000 fichas + Sword +5 (prêmio raro)" %}<br>
+                                    {% trans "• 3x 🍒 = 500 fichas (prêmio médio)" %}<br>
+                                    {% trans "• 2x 🎰 = 100 fichas (prêmio comum)" %}
+                                </div>
+                                
+                                <p class="mt-2 mb-0" style="color: #10b981; font-style: italic;">
+                                    <i class="fas fa-lightbulb me-1"></i>
+                                    <strong>{% trans "Dica:" %}</strong> {% trans "Configure prêmios maiores para combinações de 3 símbolos raros e menores para 2 símbolos comuns!" %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Top Ganhadores e Estatísticas -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card card-glow">
+                    <div class="card-header text-white-50">
+                        <strong>🏆 {% trans "Top 10 Ganhadores" %}</strong>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-dark table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>{% trans "Jogador" %}</th>
+                                        <th>{% trans "Total Ganho" %}</th>
+                                        <th>{% trans "Jogadas" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for winner in top_winners %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>{{ winner.user__username }}</td>
+                                        <td class="text-success">{{ winner.total_won }}</td>
+                                        <td>{{ winner.total_plays }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card card-glow">
+                    <div class="card-header text-white-50">
+                        <strong>📊 {% trans "Estatísticas Gerais" %}</strong>
+                    </div>
+                    <div class="card-body text-white">
+                        <div class="row text-center">
+                            <div class="col-6 mb-3">
+                                <h4>{{ total_symbols }}</h4>
+                                <small>{% trans "Símbolos" %}</small>
+                            </div>
+                            <div class="col-6 mb-3">
+                                <h4>{{ total_prizes }}</h4>
+                                <small>{% trans "Prêmios" %}</small>
+                            </div>
+                            <div class="col-6">
+                                <h4>{{ win_rate }}%</h4>
+                                <small>{% trans "Taxa de Vitória" %}</small>
+                            </div>
+                            <div class="col-6">
+                                <h4>{{ total_jackpots }}</h4>
+                                <small>{% trans "Jackpots" %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Últimas Jogadas -->
+        <div class="card card-glow">
+            <div class="card-header text-white-50">
+                <strong>📊 {% trans "Últimas 20 Jogadas" %}</strong>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped mb-0">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Data" %}</th>
+                                <th>{% trans "Jogador" %}</th>
+                                <th>{% trans "Resultado" %}</th>
+                                <th>{% trans "Prêmio" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for play in recent_plays %}
+                            <tr>
+                                <td>{{ play.created_at|date:"d/m/Y H:i" }}</td>
+                                <td>{{ play.user.username }}</td>
+                                <td>
+                                    {% if play.is_jackpot %}
+                                        <span class="badge bg-warning">💎 JACKPOT!</span>
+                                    {% elif play.prize_won %}
+                                        <span class="badge bg-success">Ganhou</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">Perdeu</span>
+                                    {% endif %}
+                                </td>
+                                <td class="{% if play.fichas_won > 0 %}text-success{% else %}text-muted{% endif %}">
+                                    {% if play.fichas_won > 0 %}
+                                        +{{ play.fichas_won }} fichas
+                                    {% else %}
+                                        -
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-white-50">
+                💡 {% trans "Dica: Use itens do sistema existente para prêmios!" %}
+            </p>
+        </div>
+    </div>
+</div>
+
+<script>
+// Aplicar classes aos forms
+document.querySelectorAll('.form-control, .form-select').forEach(el => {
+    el.classList.add('form-dark');
+});
+</script>
+{% endblock %}

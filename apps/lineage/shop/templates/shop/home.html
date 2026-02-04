@@ -1,0 +1,659 @@
+{% extends "layouts/base.html" %}
+{% load i18n static l10n %}
+{% load itens_extras %}
+{% load resource_tags %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/reports.css' %}?v=1.1">
+<style>
+  /* Modal customizado para pacotes - classes completamente isoladas */
+  
+  /* Overlay do modal customizado */
+  .custom-package-modal-overlay {
+    display: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    z-index: 99990 !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    overflow: hidden !important;
+  }
+  
+  .custom-package-modal-overlay.active {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    animation: fadeIn 0.3s ease !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  @keyframes fadeIn {
+    from { 
+      opacity: 0; 
+    }
+    to { 
+      opacity: 1; 
+    }
+  }
+  
+  /* Container do modal customizado */
+  .custom-package-modal-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    max-height: calc(100vh - 40px);
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+    z-index: 99991;
+    display: flex;
+    flex-direction: column;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    margin: auto;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(30px) scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+  }
+  
+  /* Header do modal customizado */
+  .custom-package-modal-header {
+    background: linear-gradient(135deg, #6f42c1 0%, #8b5cf6 50%, #e83e8c 100%);
+    color: #ffffff;
+    padding: 1.75rem 2rem;
+    border-radius: 24px 24px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .custom-package-modal-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  
+  .custom-package-modal-header h5 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-package-modal-header h5 i {
+    font-size: 1.75rem;
+  }
+  
+  .custom-package-modal-close {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 1.5rem;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    font-weight: 300;
+  }
+  
+  .custom-package-modal-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: rotate(90deg) scale(1.1);
+  }
+  
+  .custom-package-modal-close:active {
+    transform: rotate(90deg) scale(0.95);
+  }
+  
+  /* Body do modal customizado - com scroll melhorado */
+  .custom-package-modal-body {
+    padding: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    min-height: 0;
+    background: #ffffff;
+    color: #000000;
+    position: relative;
+    z-index: 1;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(111, 66, 193, 0.5) rgba(111, 66, 193, 0.1);
+  }
+  
+  /* Custom scrollbar para webkit browsers */
+  .custom-package-modal-body::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-package-modal-body::-webkit-scrollbar-track {
+    background: rgba(111, 66, 193, 0.05);
+    border-radius: 10px;
+  }
+  
+  .custom-package-modal-body::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #6f42c1, #e83e8c);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .custom-package-modal-body::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #8b5cf6, #f06292);
+  }
+  
+  /* Footer do modal customizado */
+  .custom-package-modal-footer {
+    padding: 1.5rem 2rem;
+    background: linear-gradient(to bottom, rgba(111, 66, 193, 0.03), rgba(111, 66, 193, 0.08));
+    border-top: 1px solid rgba(111, 66, 193, 0.15);
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    position: relative;
+    z-index: 10;
+    flex-shrink: 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  }
+  
+  .custom-package-modal-footer .btn {
+    padding: 0.875rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .custom-package-modal-footer .btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  .custom-package-modal-footer .btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .custom-package-modal-footer .btn-secondary {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .custom-package-modal-footer .btn-secondary:hover {
+    background: linear-gradient(135deg, #5a6268, #495057);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+  }
+  
+  .custom-package-modal-footer .btn-primary {
+    background: linear-gradient(135deg, #6f42c1, #e83e8c);
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .custom-package-modal-footer .btn-primary:hover {
+    background: linear-gradient(135deg, #8b5cf6, #f06292);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(111, 66, 193, 0.5);
+  }
+  
+  .custom-package-modal-footer .btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Melhorias no package-items-list */
+  .custom-package-modal-body .package-items-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+  }
+  
+  .custom-package-modal-body .package-item {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(111, 66, 193, 0.05), rgba(232, 62, 140, 0.05));
+    border: 2px solid rgba(111, 66, 193, 0.15);
+    border-radius: 12px;
+    padding: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 1rem;
+  }
+  
+  .custom-package-modal-body .package-item:hover {
+    background: linear-gradient(135deg, rgba(111, 66, 193, 0.1), rgba(232, 62, 140, 0.1));
+    border-color: rgba(111, 66, 193, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(111, 66, 193, 0.2);
+  }
+  
+  .custom-package-modal-body .package-item-image {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 4px;
+    flex-shrink: 0;
+    border: 1px solid rgba(111, 66, 193, 0.1);
+  }
+  
+  .custom-package-modal-body .package-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .custom-package-modal-body .package-item-info h6 {
+    margin: 0 0 0.25rem 0;
+    color: #1a1a2e;
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .custom-package-modal-body .package-item-quantity {
+    color: #6f42c1;
+    font-size: 0.875rem;
+    font-weight: 600;
+    background: rgba(111, 66, 193, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    display: inline-block;
+  }
+  
+  /* Empty state melhorado */
+  .custom-package-modal-body .empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #6c757d;
+  }
+  
+  .custom-package-modal-body .empty-state i {
+    font-size: 3rem;
+    color: #dee2e6;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .custom-package-modal-overlay.active {
+      padding: 10px;
+    }
+    
+    .custom-package-modal-container {
+      max-width: 100%;
+      max-height: calc(100vh - 20px);
+      border-radius: 16px;
+    }
+    
+    .custom-package-modal-header {
+      padding: 1.25rem 1.5rem;
+      border-radius: 16px 16px 0 0;
+    }
+    
+    .custom-package-modal-header h5 {
+      font-size: 1.25rem;
+    }
+    
+    .custom-package-modal-body {
+      padding: 1.5rem;
+    }
+    
+    .custom-package-modal-body .package-items-list {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .custom-package-modal-footer {
+      padding: 1.25rem 1.5rem;
+      flex-direction: column;
+      border-radius: 0 0 16px 16px;
+    }
+    
+    .custom-package-modal-footer .btn {
+      width: 100%;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="reports-container">
+  <div class="container">
+    <!-- Header -->
+    <div class="reports-header">
+      <h1 class="reports-title">
+        <i class="fas fa-shopping-bag me-3"></i>{% trans "Loja Online" %}
+      </h1>
+      <p class="reports-subtitle">
+        {% trans "Descubra itens exclusivos e pacotes especiais para seu personagem" %}
+      </p>
+    </div>
+
+    <!-- Breadcrumbs -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">{% trans "Loja" %}</li>
+      </ol>
+    </nav>
+
+    <!-- Cart Button -->
+    {% if 'shop_cart'|resource_is_active %}
+    <div class="text-end mb-4">
+      <a href="{% url 'shop:view_cart' %}" class="reports-button">
+        <i class="fas fa-shopping-cart me-2"></i>{% trans "Ver Carrinho" %}
+      </a>
+    </div>
+    {% endif %}
+
+    <!-- Itens Section -->
+    <div class="reports-card">
+      <div class="reports-card-header">
+        <i class="fas fa-gem reports-icon"></i>
+        <h2 class="reports-card-title">{% trans "Itens Disponíveis" %}</h2>
+        <p class="reports-card-description">{% trans "Itens individuais para personalizar seu personagem" %}</p>
+      </div>
+      <div class="reports-card-body">
+        {% if items %}
+        <div class="items-grid">
+          {% for item in items %}
+          <div class="item-card">
+            <div class="item-header">
+              <div class="item-info">
+                <img src="{% item_image_url item.item_id %}" alt="{{ item.item_name }}" class="item-image">
+                <div>
+                  <h4 class="item-name">{{ item.nome }}</h4>
+                  <span class="item-type-badge item">{% trans "Item" %}</span>
+                </div>
+              </div>
+              <div class="item-price">
+                <span class="currency">R$</span>
+                <span class="amount">{{ item.preco }}</span>
+              </div>
+            </div>
+            <div class="item-details">
+              <div>
+                <span>{% trans "Quantidade" %}:</span>
+                <strong>{{ item.quantidade }}</strong>
+              </div>
+              <div>
+                <span>{% trans "ID do Item" %}:</span>
+                <strong>{{ item.item_id }}</strong>
+              </div>
+            </div>
+            <div class="item-actions">
+              <a href="{% url 'shop:add_item_to_cart' item.id %}" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus me-1"></i>{% trans "Adicionar ao Carrinho" %}
+              </a>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination for Items -->
+        {% if items.has_other_pages %}
+        <div class="mt-4">
+          {% with page_param='items_page' current_page=items_current_page total_pages=items_total_pages has_previous=items_has_previous has_next=items_has_next previous_page_number=items_previous_page_number next_page_number=items_next_page_number page_range=items_page_range show_first=items_show_first show_last=items_show_last show_first_ellipsis=items_show_first_ellipsis show_last_ellipsis=items_show_last_ellipsis %}
+            {% if packages.number %}
+              {% with query_params='packages_page='|add:packages.number %}
+                {% include 'includes/pagination_custom.html' %}
+              {% endwith %}
+            {% else %}
+              {% with query_params='' %}
+                {% include 'includes/pagination_custom.html' %}
+              {% endwith %}
+            {% endif %}
+          {% endwith %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="empty-state">
+          <i class="fas fa-box-open fa-3x"></i>
+          <p>{% trans "Nenhum item disponível no momento." %}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Pacotes Section -->
+    <div class="reports-card">
+      <div class="reports-card-header">
+        <i class="fas fa-box-open reports-icon"></i>
+        <h2 class="reports-card-title">{% trans "Pacotes Especiais" %}</h2>
+        <p class="reports-card-description">{% trans "Coleções completas com desconto especial" %}</p>
+      </div>
+      <div class="reports-card-body">
+        {% if packages %}
+        <div class="items-grid">
+          {% for package in packages %}
+          <div class="item-card">
+            <div class="item-header">
+              <div class="item-info">
+                <div class="package-icon">
+                  <i class="fas fa-gift"></i>
+                </div>
+                <div>
+                  <h4 class="item-name">{{ package.nome }}</h4>
+                  <span class="item-type-badge pacote">{% trans "Pacote" %}</span>
+                </div>
+              </div>
+              <div class="item-price">
+                <span class="currency">R$</span>
+                <span class="amount">{{ package.preco_total }}</span>
+              </div>
+            </div>
+            <div class="item-details">
+              <div>
+                <span>{% trans "Itens inclusos" %}:</span>
+                <strong>{{ package.itens.count }}</strong>
+              </div>
+              <div>
+                <span>{% trans "Desconto" %}:</span>
+                <strong class="text-success">{{ package.desconto|default:"0" }}%</strong>
+              </div>
+            </div>
+            <div class="item-actions">
+              <a href="{% url 'shop:add_package_to_cart' package.id %}" class="btn btn-primary btn-sm me-2">
+                <i class="fas fa-plus me-1"></i>{% trans "Adicionar Pacote" %}
+              </a>
+              <button type="button" class="btn btn-outline-info btn-sm" onclick="openCustomPackageModal('customModalPackage{{ package.id }}')">
+                <i class="fas fa-eye me-1"></i>{% trans "Ver Itens" %}
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- Pagination for Packages -->
+        {% if packages.has_other_pages %}
+        <div class="mt-4">
+          {% with page_param='packages_page' current_page=packages_current_page total_pages=packages_total_pages has_previous=packages_has_previous has_next=packages_has_next previous_page_number=packages_previous_page_number next_page_number=packages_next_page_number page_range=packages_page_range show_first=packages_show_first show_last=packages_show_last show_first_ellipsis=packages_show_first_ellipsis show_last_ellipsis=packages_show_last_ellipsis %}
+            {% if items.number %}
+              {% with query_params='items_page='|add:items.number %}
+                {% include 'includes/pagination_custom.html' %}
+              {% endwith %}
+            {% else %}
+              {% with query_params='' %}
+                {% include 'includes/pagination_custom.html' %}
+              {% endwith %}
+            {% endif %}
+          {% endwith %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="empty-state">
+          <i class="fas fa-box-open fa-3x"></i>
+          <p>{% trans "Nenhum pacote disponível no momento." %}</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Modais Customizados de Itens do Pacote - Fora do loop, no nível principal -->
+    {% if packages %}
+      {% for package in packages %}
+      <!-- Modal Customizado de Itens do Pacote -->
+      <div class="custom-package-modal-overlay" id="customModalPackage{{ package.id }}" onclick="closeCustomPackageModalOnOverlay(event, 'customModalPackage{{ package.id }}')" style="display: none;">
+        <div class="custom-package-modal-container" onclick="event.stopPropagation()">
+          <div class="custom-package-modal-header">
+            <h5>
+              <i class="fas fa-box-seam"></i>
+              {{ package.nome }} - {% trans "Itens do Pacote" %}
+            </h5>
+            <button type="button" class="custom-package-modal-close" onclick="closeCustomPackageModal('customModalPackage{{ package.id }}')" aria-label="Fechar">
+              ×
+            </button>
+          </div>
+          <div class="custom-package-modal-body">
+            <div class="package-items-list">
+              {% for item in package.itens.all %}
+              <div class="package-item">
+                <img src="{% item_image_url item.item_id %}" alt="{{ item.item_name }}" class="package-item-image">
+                <div class="package-item-info">
+                  <h6>{{ item.nome }}</h6>
+                  <span class="package-item-quantity">x{{ item.quantidade }}</span>
+                </div>
+              </div>
+              {% empty %}
+              <div class="empty-state">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>{% trans "Este pacote não contém itens." %}</p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="custom-package-modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeCustomPackageModal('customModalPackage{{ package.id }}')">
+              {% trans "Fechar" %}
+            </button>
+            <a href="{% url 'shop:add_package_to_cart' package.id %}" class="btn btn-primary">
+              <i class="fas fa-plus me-1"></i>{% trans "Adicionar ao Carrinho" %}
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    <!-- Return Button -->
+    <div class="text-center mt-4">
+      <a href="{% url 'dashboard' %}" class="report-back-button">
+        <i class="fas fa-arrow-left me-2"></i>{% trans "Voltar ao Dashboard Principal" %}
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Script para controlar o modal customizado -->
+<script>
+function openCustomPackageModal(modalId) {
+  console.log('Abrindo modal:', modalId);
+  const modal = document.getElementById(modalId);
+  console.log('Modal encontrado:', modal);
+  if (modal) {
+    modal.classList.add('active');
+    modal.style.display = 'flex';
+    modal.style.zIndex = '99990';
+    document.body.style.overflow = 'hidden'; // Previne scroll do body
+    console.log('Modal ativado');
+  } else {
+    console.error('Modal não encontrado:', modalId);
+  }
+}
+
+function closeCustomPackageModal(modalId) {
+  console.log('Fechando modal:', modalId);
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+    modal.style.display = 'none';
+    document.body.style.overflow = ''; // Restaura scroll do body
+  }
+}
+
+function closeCustomPackageModalOnOverlay(event, modalId) {
+  // Fecha apenas se clicou no overlay (não no container)
+  if (event.target.classList.contains('custom-package-modal-overlay')) {
+    closeCustomPackageModal(modalId);
+  }
+}
+
+// Fechar modal com ESC
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    const activeModal = document.querySelector('.custom-package-modal-overlay.active');
+    if (activeModal) {
+      closeCustomPackageModal(activeModal.id);
+    }
+  }
+});
+
+// Debug: verificar se os modais foram renderizados
+document.addEventListener('DOMContentLoaded', function() {
+  const modals = document.querySelectorAll('.custom-package-modal-overlay');
+  console.log('Modais encontrados:', modals.length);
+  modals.forEach(function(modal) {
+    console.log('Modal ID:', modal.id);
+  });
+});
+</script>
+{% endblock %}

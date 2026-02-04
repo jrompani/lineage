@@ -1,0 +1,472 @@
+{% extends "layouts/base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/accountancy.css' %}">
+<style>
+  /* Fallback styles for summary cards */
+  .report-container .summary-card {
+    background: #ffffff !important;
+    border-radius: 12px !important;
+    padding: 1rem 1.25rem !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    border: 1px solid #e9ecef !important;
+    margin-bottom: 0 !important;
+    min-height: 80px !important;
+    overflow: hidden !important;
+  }
+  .report-container .summary-icon {
+    width: 55px !important;
+    height: 55px !important;
+    min-width: 55px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.35rem !important;
+    color: white !important;
+    flex-shrink: 0 !important;
+  }
+  .report-container .summary-icon.bg-primary { background: linear-gradient(135deg, #007bff, #0056b3) !important; }
+  .report-container .summary-icon.bg-success { background: linear-gradient(135deg, #28a745, #1e7e34) !important; }
+  .report-container .summary-icon.bg-info { background: linear-gradient(135deg, #17a2b8, #117a8b) !important; }
+  .report-container .summary-icon.bg-warning { background: linear-gradient(135deg, #ffc107, #e0a800) !important; }
+  .report-container .summary-icon.bg-danger { background: linear-gradient(135deg, #dc3545, #c82333) !important; }
+  .report-container .summary-icon.bg-secondary { background: linear-gradient(135deg, #6c757d, #545b62) !important; }
+  .report-container .summary-content {
+    flex: 1 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  .report-container .summary-label {
+    font-size: 0.65rem !important;
+    color: #6c757d !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    margin-bottom: 0.35rem !important;
+    display: block !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    letter-spacing: 0.3px !important;
+  }
+  .report-container .summary-value {
+    font-size: clamp(0.95rem, 1.5vw, 1.25rem) !important;
+    font-weight: 700 !important;
+    color: #212529 !important;
+    display: block !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+    line-height: 1.2 !important;
+    max-width: 100% !important;
+  }
+  
+  /* Pagination Styles */
+  .report-container .pagination {
+    margin-top: 2rem !important;
+  }
+  .report-container .pagination .page-link {
+    color: #28a745 !important;
+    border-color: #e9ecef !important;
+    padding: 0.75rem 1rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s ease !important;
+  }
+  .report-container .pagination .page-link:hover {
+    background-color: #28a745 !important;
+    color: white !important;
+    border-color: #28a745 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3) !important;
+  }
+  .report-container .pagination .page-item.active .page-link {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+    font-weight: 600 !important;
+  }
+  .report-container .pagination .page-item.disabled .page-link {
+    color: #6c757d !important;
+    background-color: #f8f9fa !important;
+    border-color: #e9ecef !important;
+    cursor: not-allowed !important;
+    opacity: 0.6 !important;
+  }
+  
+  /* Filter Styles */
+  .report-container .report-filters {
+    padding: 0 2.5rem;
+  }
+  .report-container .report-filters .card {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+  .report-container .report-filters .card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    border-bottom: 2px solid #dee2e6 !important;
+    padding: 1rem 1.5rem !important;
+  }
+  .report-container .report-filters .card-header h6 {
+    margin: 0 !important;
+    font-weight: 600 !important;
+    color: #495057 !important;
+  }
+  .report-container .report-filters .card-body {
+    padding: 1.5rem !important;
+  }
+  .report-container .report-filters label {
+    font-weight: 500 !important;
+    color: #495057 !important;
+    margin-bottom: 0.5rem !important;
+    font-size: 0.875rem !important;
+  }
+</style>
+{% endblock extrastyle %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a href="{% url 'accountancy:dashboard' %}">{% trans "Contabilidade" %}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{% trans "Reconciliação de Carteiras" %}</li>
+{% endblock breadcrumbs %}
+
+{% block page_header %}
+<h5 class="display-5">{% trans "Relatório de Reconciliação de Carteiras" %}</h5>
+{% endblock page_header %}
+
+{% block content %}
+<div class="accountancy-container">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="report-container">
+          <div class="report-header">
+            <h1 class="report-title">
+              <i class="fas fa-balance-scale me-3"></i>
+              {% trans "Relatório de Reconciliação de Carteiras" %}
+            </h1>
+            <p class="accountancy-subtitle">
+              {% trans "Verifique a consistência entre as carteiras dos usuários e identifique possíveis discrepâncias" %}
+            </p>
+          </div>
+          
+          {% if resumo %}
+          <div class="report-summary">
+            <div class="row g-3">
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-primary">
+                    <i class="fas fa-wallet"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Total Carteiras" %}</div>
+                    <div class="summary-value">{{ resumo.total_carteiras }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-info">
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Saldo Total Wallet" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_saldo_wallet|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-secondary">
+                    <i class="fas fa-database"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Saldo Total Banco" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_saldo_banco|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon {% if resumo.total_diferenca == 0 %}bg-success{% else %}bg-warning{% endif %}">
+                    <i class="fas fa-balance-scale"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Diferença Total" %}</div>
+                    <div class="summary-value">R$ {{ resumo.total_diferenca|floatformat:2 }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row g-3 mt-2">
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-success">
+                    <i class="fas fa-check-circle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Reconciliadas" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.reconciliado }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-info">
+                    <i class="fas fa-search"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Em Análise" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.em_analise }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-danger">
+                    <i class="fas fa-exclamation-triangle"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "Discrepâncias" %}</div>
+                    <div class="summary-value">{{ resumo.status_contador.discrepancia }}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="summary-card">
+                  <div class="summary-icon bg-warning">
+                    <i class="fas fa-percent"></i>
+                  </div>
+                  <div class="summary-content">
+                    <div class="summary-label">{% trans "% Diferença Geral" %}</div>
+                    <div class="summary-value">{{ resumo.percentual_diferenca_geral|floatformat:2 }}%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          <!-- Filtros -->
+          {% if filter_form %}
+          <div class="report-filters mt-4 mb-4">
+            <div class="card border-0 shadow-sm">
+              <div class="card-header bg-light">
+                <h6 class="mb-0">
+                  <i class="fas fa-filter me-2"></i>
+                  {% trans "Filtros" %}
+                </h6>
+              </div>
+              <div class="card-body">
+                <form method="get" class="row g-3">
+                  <div class="col-md-4">
+                    {{ filter_form.usuario.label_tag }}
+                    {{ filter_form.usuario }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ filter_form.status.label_tag }}
+                    {{ filter_form.status }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ filter_form.diferenca_minima.label_tag }}
+                    {{ filter_form.diferenca_minima }}
+                  </div>
+                  <div class="col-md-4">
+                    {{ filter_form.diferenca_maxima.label_tag }}
+                    {{ filter_form.diferenca_maxima }}
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="fas fa-search me-2"></i>
+                      {% trans "Filtrar" %}
+                    </button>
+                    <a href="{% url 'accountancy:relatorio_reconciliacao_wallet' %}" class="btn btn-outline-secondary">
+                      <i class="fas fa-times me-2"></i>
+                      {% trans "Limpar Filtros" %}
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          <div class="report-body">
+            <div class="table-responsive">
+              <table class="table report-table">
+                <thead>
+                  <tr>
+                    <th><i class="fas fa-user me-2"></i>{% trans "Usuário" %}</th>
+                    <th><i class="fas fa-wallet me-2"></i>{% trans "Saldo Wallet" %}</th>
+                    <th><i class="fas fa-gift me-2"></i>{% trans "Saldo Bônus" %}</th>
+                    <th><i class="fas fa-coins me-2"></i>{% trans "Saldo Total" %}</th>
+                    <th><i class="fas fa-database me-2"></i>{% trans "Saldo Calculado" %}</th>
+                    <th><i class="fas fa-arrow-up me-2"></i>{% trans "Total Entradas" %}</th>
+                    <th><i class="fas fa-arrow-down me-2"></i>{% trans "Total Saídas" %}</th>
+                    <th><i class="fas fa-balance-scale me-2"></i>{% trans "Diferença" %}</th>
+                    <th><i class="fas fa-percent me-2"></i>{% trans "% Diferença" %}</th>
+                    <th><i class="fas fa-exchange-alt me-2"></i>{% trans "Transações" %}</th>
+                    <th><i class="fas fa-check-circle me-2"></i>{% trans "Status" %}</th>
+                    <th><i class="fas fa-calendar me-2"></i>{% trans "Última Verificação" %}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in relatorio %}
+                  <tr>
+                    <td>
+                      <i class="fas fa-user-circle me-2 text-primary"></i>
+                      <strong>{{ item.usuario }}</strong>
+                    </td>
+                    <td>
+                      <span class="badge bg-info">
+                        <i class="fas fa-dollar-sign me-1"></i>
+                        R$ {{ item.saldo_wallet|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-warning">
+                        <i class="fas fa-gift me-1"></i>
+                        R$ {{ item.saldo_bonus|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-success">
+                        <i class="fas fa-coins me-1"></i>
+                        R$ {{ item.saldo_total|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-secondary">
+                        <i class="fas fa-database me-1"></i>
+                        R$ {{ item.saldo_banco|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-success">
+                        <i class="fas fa-arrow-up me-1"></i>
+                        R$ {{ item.total_entradas|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      <span class="badge bg-danger">
+                        <i class="fas fa-arrow-down me-1"></i>
+                        R$ {{ item.total_saidas|floatformat:2 }}
+                      </span>
+                    </td>
+                    <td>
+                      {% if item.diferenca == 0 %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-check me-1"></i>
+                          R$ {{ item.diferenca|floatformat:2 }}
+                        </span>
+                      {% elif item.diferenca > 0 %}
+                        <span class="badge bg-warning">
+                          <i class="fas fa-arrow-up me-1"></i>
+                          +R$ {{ item.diferenca|floatformat:2 }}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-danger">
+                          <i class="fas fa-arrow-down me-1"></i>
+                          R$ {{ item.diferenca|floatformat:2 }}
+                        </span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      {% if item.percentual_diferenca == 0 %}
+                        <span class="badge bg-success">{{ item.percentual_diferenca|floatformat:2 }}%</span>
+                      {% elif item.percentual_diferenca <= 1 and item.percentual_diferenca >= -1 %}
+                        <span class="badge bg-warning">{{ item.percentual_diferenca|floatformat:2 }}%</span>
+                      {% else %}
+                        <span class="badge bg-danger">{{ item.percentual_diferenca|floatformat:2 }}%</span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <span class="badge bg-secondary">
+                        <i class="fas fa-exchange-alt me-1"></i>
+                        {{ item.num_transacoes }}
+                      </span>
+                      <br>
+                      <small class="text-muted">
+                        <i class="fas fa-arrow-up me-1"></i>{{ item.num_entradas }} / 
+                        <i class="fas fa-arrow-down me-1"></i>{{ item.num_saidas }}
+                      </small>
+                    </td>
+                    <td>
+                      {% if item.status == 'reconciliado' %}
+                        <span class="badge bg-success">
+                          <i class="fas fa-check-circle me-1"></i>
+                          {% trans "Reconciliado" %}
+                        </span>
+                      {% elif item.status == 'discrepancia' %}
+                        <span class="badge bg-danger">
+                          <i class="fas fa-exclamation-triangle me-1"></i>
+                          {% trans "Discrepância" %}
+                        </span>
+                      {% elif item.status == 'pendente' %}
+                        <span class="badge bg-warning">
+                          <i class="fas fa-clock me-1"></i>
+                          {% trans "Pendente" %}
+                        </span>
+                      {% elif item.status == 'em_analise' %}
+                        <span class="badge bg-info">
+                          <i class="fas fa-search me-1"></i>
+                          {% trans "Em Análise" %}
+                        </span>
+                      {% else %}
+                        <span class="badge bg-secondary">
+                          <i class="fas fa-question me-1"></i>
+                          {{ item.status|title }}
+                        </span>
+                      {% endif %}
+                    </td>
+                    <td>
+                      <small>
+                        <i class="fas fa-calendar-day me-1 text-info"></i>
+                        {{ item.ultima_verificacao|date:"d/m/Y H:i" }}
+                      </small>
+                    </td>
+                  </tr>
+                  {% empty %}
+                  <tr>
+                    <td colspan="12" class="text-center py-4">
+                      <i class="fas fa-balance-scale fa-3x text-muted mb-3"></i>
+                      <p class="text-muted">{% trans "Nenhum dado de reconciliação disponível" %}</p>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            
+            <!-- Paginação -->
+            {% if page_obj.has_other_pages %}
+            <div class="mt-4">
+              {% with query_params=request.GET.urlencode %}
+                {% include 'includes/pagination.html' %}
+              {% endwith %}
+              <div class="text-center mt-2">
+                <small class="text-muted">
+                  {% trans "Mostrando" %} {{ page_obj.start_index }} {% trans "até" %} {{ page_obj.end_index }} {% trans "de" %} {{ page_obj.paginator.count }} {% trans "carteiras" %}
+                </small>
+              </div>
+            </div>
+            {% endif %}
+
+            <div class="text-center mt-4">
+              <a href="{% url 'accountancy:dashboard' %}" class="report-back-button">
+                <i class="fas fa-arrow-left me-2"></i>
+                {% trans "Voltar para o Dashboard" %}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

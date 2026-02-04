@@ -1,0 +1,377 @@
+{% extends "layouts/base.html" %}
+{% load static i18n itens_extras %}
+
+{% block title %}{% trans "Criar Notificação" %} - {% trans "Gerenciador" %}{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/notifications.css' %}">
+<style>
+.manager-bg { 
+    background: radial-gradient(ellipse at center, #0f172a 0%, #1a1a2e 50%, #0f0f1e 100%); 
+    min-height: 100vh; 
+    padding: 40px 0; 
+}
+.card-glow { 
+    background: linear-gradient(145deg, rgba(26, 26, 46, 0.95) 0%, rgba(18, 18, 32, 0.95) 100%); 
+    border: 1px solid rgba(111, 66, 193, 0.3); 
+    border-radius: 16px; 
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.reward-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+.reward-item-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="manager-bg">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-white">
+                <i class="bi bi-plus-circle me-2"></i>{% trans "Criar Nova Notificação" %}
+            </h2>
+            <a href="{% url 'notification:manager_dashboard' %}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>{% trans "Voltar" %}
+            </a>
+        </div>
+
+        <form method="post" id="notificationForm">
+            {% csrf_token %}
+            
+            <div class="card card-glow mb-4">
+                <div class="card-header bg-transparent border-bottom">
+                    <h5 class="text-white mb-0">{% trans "Informações Básicas" %}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="text-white">{% trans "Tipo de Notificação" %}</label>
+                            <select name="notification_type" class="form-control" required>
+                                <option value="user">{% trans "Usuário" %}</option>
+                                <option value="system">{% trans "Sistema" %}</option>
+                                <option value="staff">{% trans "Staff" %}</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-white">
+                                <input type="checkbox" name="is_public" id="is_public" onchange="toggleUserField()">
+                                {% trans "Notificação Pública" %}
+                            </label>
+                            <small class="text-white-50 d-block">{% trans "Se marcado, será enviada para todos os usuários" %}</small>
+                        </div>
+                        <div class="col-md-6" id="user_field">
+                            <label class="text-white">{% trans "ID do Usuário (opcional)" %}</label>
+                            <input type="number" name="user_id" class="form-control" placeholder="{% trans 'Deixe vazio para notificação pública' %}">
+                            <small class="text-white-50">{% trans "Deixe vazio se for notificação pública" %}</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-white">{% trans "Link (opcional)" %}</label>
+                            <input type="url" name="link" class="form-control" placeholder="https://...">
+                        </div>
+                        <div class="col-12">
+                            <label class="text-white">{% trans "Mensagem" %} *</label>
+                            <textarea name="message" class="form-control" rows="4" required placeholder="{% trans 'Digite a mensagem da notificação...' %}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Prêmios -->
+            <div class="card card-glow mb-4">
+                <div class="card-header bg-transparent border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="text-white mb-0">{% trans "Prêmios (Opcional)" %}</h5>
+                    <button type="button" class="btn btn-sm btn-success" onclick="addReward()">
+                        <i class="bi bi-plus-circle me-1"></i>{% trans "Adicionar Prêmio" %}
+                    </button>
+                </div>
+                <div class="card-body" id="rewards-container">
+                    <p class="text-white-50">{% trans "Clique em 'Adicionar Prêmio' para adicionar itens ou fichas que serão entregues junto com a notificação." %}</p>
+                </div>
+                <div class="card-footer bg-transparent border-top">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="text-white">
+                                <i class="bi bi-calendar-x me-2"></i>{% trans "Data de Expiração dos Prêmios (Opcional)" %}
+                            </label>
+                            <input type="date" name="rewards_expires_date" id="rewards_expires_date" 
+                                   class="form-control" onchange="updateExpirationInfo()">
+                            <small class="text-white-50">{% trans "Deixe em branco para prêmios sem expiração" %}</small>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="text-white">
+                                <i class="bi bi-clock me-2"></i>{% trans "Hora de Expiração (Opcional)" %}
+                            </label>
+                            <input type="time" name="rewards_expires_time" id="rewards_expires_time" 
+                                   class="form-control" onchange="updateExpirationInfo()">
+                            <small class="text-white-50">{% trans "Hora limite para reivindicar os prêmios" %}</small>
+                        </div>
+                        <div class="col-12">
+                            <div id="expiration-info" class="alert alert-info" style="display: none;">
+                                <i class="bi bi-info-circle me-2"></i>
+                                <span id="expiration-text"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-check-circle me-2"></i>{% trans "Criar Notificação" %}
+                </button>
+                <a href="{% url 'notification:manager_dashboard' %}" class="btn btn-secondary">
+                    <i class="bi bi-x-circle me-2"></i>{% trans "Cancelar" %}
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+let rewardCount = 0;
+
+function toggleUserField() {
+    const isPublic = document.getElementById('is_public').checked;
+    const userField = document.getElementById('user_field');
+    if (isPublic) {
+        userField.style.display = 'none';
+        document.querySelector('input[name="user_id"]').value = '';
+    } else {
+        userField.style.display = 'block';
+    }
+}
+
+function addReward() {
+    const container = document.getElementById('rewards-container');
+    const rewardDiv = document.createElement('div');
+    rewardDiv.className = 'reward-item';
+    rewardDiv.id = `reward_${rewardCount}`;
+    
+    rewardDiv.innerHTML = `
+        <div class="row g-3 align-items-end">
+            <div class="col-12 mb-2">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="reward_${rewardCount}_type" id="reward_${rewardCount}_type_item" value="item" checked onchange="toggleRewardType(${rewardCount})">
+                    <label class="form-check-label text-white" for="reward_${rewardCount}_type_item">
+                        {% trans "Item" %}
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="reward_${rewardCount}_type" id="reward_${rewardCount}_type_fichas" value="fichas" onchange="toggleRewardType(${rewardCount})">
+                    <label class="form-check-label text-white" for="reward_${rewardCount}_type_fichas">
+                        {% trans "Fichas" %}
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3 reward-item-fields">
+                <label class="text-white">{% trans "Item ID" %} *</label>
+                <input type="number" name="reward_${rewardCount}_item_id" class="form-control" 
+                       onchange="loadItemInfo(${rewardCount}, this.value)">
+            </div>
+            <div class="col-md-4 reward-item-fields">
+                <label class="text-white">{% trans "Nome do Item" %} *</label>
+                <input type="text" name="reward_${rewardCount}_item_name" class="form-control">
+            </div>
+            <div class="col-md-2 reward-item-fields">
+                <label class="text-white">{% trans "Encantamento" %}</label>
+                <input type="number" name="reward_${rewardCount}_item_enchant" class="form-control" value="0" min="0">
+            </div>
+            <div class="col-md-2 reward-item-fields">
+                <label class="text-white">{% trans "Quantidade" %}</label>
+                <input type="number" name="reward_${rewardCount}_item_amount" class="form-control" value="1" min="1">
+            </div>
+            <div class="col-md-8 reward-fichas-fields" style="display: none;">
+                <label class="text-white">{% trans "Quantidade de Fichas" %} *</label>
+                <input type="number" name="reward_${rewardCount}_fichas_amount" class="form-control" value="" min="1" disabled>
+            </div>
+            <div class="col-md-1">
+                <button type="button" class="btn btn-danger w-100" onclick="removeReward(${rewardCount})">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="mt-2" id="reward_${rewardCount}_preview"></div>
+    `;
+    
+    container.appendChild(rewardDiv);
+    rewardCount++;
+    updateRewardCount();
+}
+
+function toggleRewardType(rewardIndex) {
+    const type = document.querySelector(`input[name="reward_${rewardIndex}_type"]:checked`).value;
+    const itemFields = document.querySelectorAll(`#reward_${rewardIndex} .reward-item-fields`);
+    const fichasFields = document.querySelectorAll(`#reward_${rewardIndex} .reward-fichas-fields`);
+    
+    if (type === 'item') {
+        itemFields.forEach(field => field.style.display = '');
+        fichasFields.forEach(field => {
+            field.style.display = 'none';
+            // Ocultar e desabilitar campos de fichas
+            const input = field.querySelector('input');
+            if (input) {
+                input.style.display = 'none';
+                input.removeAttribute('required');
+                input.disabled = true;
+                input.value = '';
+            }
+        });
+        // Tornar campos de item obrigatórios
+        const itemIdInput = document.querySelector(`input[name="reward_${rewardIndex}_item_id"]`);
+        const itemNameInput = document.querySelector(`input[name="reward_${rewardIndex}_item_name"]`);
+        if (itemIdInput) {
+            itemIdInput.required = true;
+            itemIdInput.style.display = '';
+        }
+        if (itemNameInput) {
+            itemNameInput.required = true;
+            itemNameInput.style.display = '';
+        }
+    } else {
+        itemFields.forEach(field => {
+            field.style.display = 'none';
+            // Ocultar e desabilitar campos de item
+            const inputs = field.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.style.display = 'none';
+                input.removeAttribute('required');
+                if (input.type === 'number') input.value = '';
+                else if (input.type === 'text') input.value = '';
+            });
+        });
+        fichasFields.forEach(field => {
+            field.style.display = '';
+            // Mostrar e habilitar campo de fichas
+            const input = field.querySelector('input');
+            if (input) {
+                input.style.display = '';
+                input.required = true;
+                input.disabled = false;
+            }
+        });
+        // Remover obrigatoriedade de item
+        const itemIdInput = document.querySelector(`input[name="reward_${rewardIndex}_item_id"]`);
+        const itemNameInput = document.querySelector(`input[name="reward_${rewardIndex}_item_name"]`);
+        if (itemIdInput) {
+            itemIdInput.removeAttribute('required');
+            itemIdInput.style.display = 'none';
+        }
+        if (itemNameInput) {
+            itemNameInput.removeAttribute('required');
+            itemNameInput.style.display = 'none';
+        }
+    }
+}
+
+function removeReward(id) {
+    const rewardDiv = document.getElementById(`reward_${id}`);
+    if (rewardDiv) {
+        rewardDiv.remove();
+        updateRewardCount();
+    }
+}
+
+function updateRewardCount() {
+    document.querySelector('input[name="reward_count"]')?.remove();
+    const form = document.getElementById('notificationForm');
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'reward_count';
+    input.value = rewardCount;
+    form.appendChild(input);
+}
+
+async function loadItemInfo(rewardIndex, itemId) {
+    if (!itemId) return;
+    
+    try {
+        const response = await fetch(`/app/notification/manager/api/item-info/?item_id=${itemId}`);
+        const data = await response.json();
+        
+        const nameInput = document.querySelector(`input[name="reward_${rewardIndex}_item_name"]`);
+        if (nameInput && data.item_name) {
+            nameInput.value = data.item_name;
+        }
+        
+        // Mostrar preview do item
+        const previewDiv = document.getElementById(`reward_${rewardIndex}_preview`);
+        if (previewDiv) {
+            const itemImageUrl = `/static/assets/img/l2/icons/5-${itemId}.jpg`;
+            previewDiv.innerHTML = `
+                <div class="d-flex align-items-center gap-2">
+                    <img src="${itemImageUrl}" 
+                         alt="${data.item_name}" 
+                         class="reward-item-icon"
+                         onerror="this.src='{% static 'assets/img/l2/icons/default.jpg' %}'">
+                    <span class="text-white">${data.item_name}</span>
+                </div>
+            `;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar informações do item:', error);
+    }
+}
+
+function updateExpirationInfo() {
+    const dateInput = document.getElementById('rewards_expires_date');
+    const timeInput = document.getElementById('rewards_expires_time');
+    const infoDiv = document.getElementById('expiration-info');
+    const textSpan = document.getElementById('expiration-text');
+    
+    if (dateInput && dateInput.value) {
+        const timeValue = timeInput && timeInput.value ? timeInput.value : '23:59';
+        const dateStr = dateInput.value + 'T' + timeValue;
+        const date = new Date(dateStr + ':00');
+        const now = new Date();
+        
+        if (date < now) {
+            infoDiv.className = 'alert alert-warning';
+            textSpan.innerHTML = '⚠️ Data de expiração está no passado. Os prêmios já estarão expirados!';
+            infoDiv.style.display = 'block';
+        } else {
+            infoDiv.className = 'alert alert-info';
+            const formattedDate = date.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            textSpan.innerHTML = `ℹ️ Os prêmios poderão ser reivindicados até: <strong>${formattedDate}</strong>`;
+            infoDiv.style.display = 'block';
+        }
+    } else {
+        if (infoDiv) {
+            infoDiv.style.display = 'none';
+        }
+    }
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', function() {
+    updateRewardCount();
+    updateExpirationInfo();
+    
+    // Definir data mínima como hoje
+    const dateInput = document.getElementById('rewards_expires_date');
+    if (dateInput) {
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    }
+});
+</script>
+{% endblock %}
+

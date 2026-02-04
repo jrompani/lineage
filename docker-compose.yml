@@ -1,0 +1,167 @@
+services:
+  site_base:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: site:latest
+    command: ["sh", "-c", "echo 'Base image built' && exit 0"]
+    restart: "no"
+
+  site_http:
+    container_name: site_http
+    restart: always
+    image: site:latest
+    env_file:
+      - .env
+    networks:
+      - lineage_network
+    volumes:
+      - logs_data:/usr/src/app/logs
+      - static_data:/usr/src/app/staticfiles
+      - media_data:/usr/src/app/media
+      - ./themes:/usr/src/app/themes/installed/
+    command: gunicorn core.wsgi:application -c gunicorn-cfg.py
+    init: true
+    stop_grace_period: 60s
+    environment:
+      - RUNNING_IN_DOCKER=true
+    depends_on:
+      - site_base
+      - redis
+      - postgres
+
+  site_asgi:
+    container_name: site_asgi
+    restart: always
+    image: site:latest
+    env_file:
+      - .env
+    networks:
+      - lineage_network
+    volumes:
+      - logs_data:/usr/src/app/logs
+      - static_data:/usr/src/app/staticfiles
+      - media_data:/usr/src/app/media
+      - ./themes:/usr/src/app/themes/installed/
+    command: daphne -b 0.0.0.0 -p 5005 --application-close-timeout 60 core.asgi:application
+    init: true
+    stop_grace_period: 60s
+    environment:
+      - RUNNING_IN_DOCKER=true
+    depends_on:
+      - site_base
+      - redis
+      - postgres
+
+  celery:
+    container_name: celery
+    restart: always
+    image: site:latest
+    env_file:
+      - .env
+    networks:
+      - lineage_network
+    volumes:
+      - logs_data:/usr/src/app/logs
+    command: celery -A core worker
+    init: true
+    stop_grace_period: 60s
+    depends_on:
+      - site_base
+      - redis
+      - site_http
+    hostname: celery-worker
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    environment:
+      - HOSTNAME=celery-worker
+      - CELERY_HOSTNAME=celery-worker
+
+  celery-beat:
+    container_name: celery_beat
+    restart: always
+    image: site:latest
+    env_file:
+      - .env
+    networks:
+      - lineage_network
+    volumes:
+      - logs_data:/usr/src/app/logs
+    command: celery -A core beat
+    init: true
+    stop_grace_period: 60s
+    depends_on:
+      - site_base
+      - redis
+      - site_http
+
+  flower:
+    container_name: flower
+    restart: always 
+    image: site:latest
+    env_file:
+      - .env
+    networks:
+      - lineage_network
+    volumes:
+      - logs_data:/usr/src/app/logs
+    command: celery -A core.celery flower --persistent=True --db="flower_db" --url-prefix=flower
+    init: true
+    stop_grace_period: 60s
+    depends_on:
+      - site_base
+      - redis
+      - site_http
+      - celery
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: "nginx:latest"
+    ports:
+      - "6085:6085"
+    volumes:
+      - ./nginx/django.conf:/etc/nginx/conf.d/django.conf
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
+      - ./nginx/custom_401.html:/usr/share/nginx/html/custom_401.html
+      - static_data:/usr/share/nginx/html/static
+      - media_data:/usr/share/nginx/html/media
+      - ./themes:/usr/share/nginx/html/themes
+    networks:
+      - lineage_network
+    depends_on: 
+      - site_http
+      - site_asgi
+
+  redis:
+    container_name: redis
+    image: "redis:latest"
+    restart: always
+    networks:
+      - lineage_network
+
+  postgres:
+    container_name: postgres
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - lineage_network
+    ports:
+      - "5432:5432"
+
+networks:
+  lineage_network:
+    driver: bridge
+ 
+volumes:
+  static_data:
+  media_data:
+  logs_data:
+  postgres_data:

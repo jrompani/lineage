@@ -1,0 +1,104 @@
+{
+    "classes": [
+        {
+            "name": "elf",
+            "slug": "elf",
+            "descricao": "Ágeis e com alta velocidade de ataque, os Elfos são especialistas em magias de cura, arco e flecha e combate corpo a corpo leve. Têm menos ataque que outras raças, mas compensam com velocidade e precisão.",
+            "image": "{{ path_theme }}/assets/images/characters/elf.png",
+            "badge": {
+                "class": "badge--magic",
+                "label": "Mágico"
+            },
+            "difficulty": {
+                "level": 3,
+                "label": "Intermediário"
+            },
+            "stats": [
+                {"label": "Força", "value": 45},
+                {"label": "Agilidade", "value": 85},
+                {"label": "Inteligência", "value": 90}
+            ],
+            "skills": ["Arco", "Magia Elemental", "Cura"]
+        },
+        {
+            "name": "human",
+            "slug": "human",
+            "descricao": "Versáteis e equilibrados, os Humanos têm um bom desempenho em todas as áreas: melee, magia e suporte. São o 'padrão' do jogo, com boa curva de crescimento.",
+            "image": "{{ path_theme }}/assets/images/characters/human.png",
+            "badge": {
+                "class": "badge--balanced",
+                "label": "Equilibrado"
+            },
+            "difficulty": {
+                "level": 2,
+                "label": "Iniciante"
+            },
+            "stats": [
+                {"label": "Força", "value": 70},
+                {"label": "Agilidade", "value": 65},
+                {"label": "Inteligência", "value": 60}
+            ],
+            "skills": ["Espada", "Escudo", "Magia Básica"]
+        },
+        {
+            "name": "dark_elf",
+            "slug": "dark_elf",
+            "descricao": "Especialistas em dano explosivo, tanto físico quanto mágico. São mais frágeis, mas causam muito dano em pouco tempo. Ótimos assassinos e magos ofensivos.",
+            "image": "{{ path_theme }}/assets/images/characters/dark_elf.png",
+            "badge": {
+                "class": "badge--shadow",
+                "label": "Sombrio"
+            },
+            "difficulty": {
+                "level": 4,
+                "label": "Avançado"
+            },
+            "stats": [
+                {"label": "Força", "value": 55},
+                {"label": "Agilidade", "value": 95},
+                {"label": "Inteligência", "value": 80}
+            ],
+            "skills": ["Adaga", "Magia Sombria", "Furtividade"]
+        },
+        {
+            "name": "dwarfs",
+            "slug": "dwarfs",
+            "descricao": "Fortes e resistentes, os Anões são mestres em criação de itens (Crafting) e coleta de loot. Também têm grande poder físico e usam armaduras pesadas. Podem invocar autômatos (golems) para ajudar em guerras e caçadas.",
+            "image": "{{ path_theme }}/assets/images/characters/dwarfs.png",
+            "badge": {
+                "class": "badge--craft",
+                "label": "Artesão"
+            },
+            "difficulty": {
+                "level": 3,
+                "label": "Intermediário"
+            },
+            "stats": [
+                {"label": "Força", "value": 85},
+                {"label": "Agilidade", "value": 40},
+                {"label": "Inteligência", "value": 75}
+            ],
+            "skills": ["Martelo", "Forja", "Resistência"]
+        },
+        {
+            "name": "orcs",
+            "slug": "orcs",
+            "descricao": "Possuem o maior poder físico e mágico bruto entre as raças, com grande resistência. São devotados a espíritos e têm habilidades únicas de suporte e ataque. Seus magos focam em buffs de força e resistência.",
+            "image": "{{ path_theme }}/assets/images/characters/orcs.png",
+            "badge": {
+                "class": "badge--warrior",
+                "label": "Guerreiro"
+            },
+            "difficulty": {
+                "level": 2,
+                "label": "Iniciante"
+            },
+            "stats": [
+                {"label": "Força", "value": 95},
+                {"label": "Agilidade", "value": 50},
+                {"label": "Inteligência", "value": 65}
+            ],
+            "skills": ["Machado", "Xamanismo", "Berserker"]
+        }
+    ]
+}

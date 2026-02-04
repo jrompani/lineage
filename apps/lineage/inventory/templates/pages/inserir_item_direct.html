@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+{% load i18n l10n %}
+{% load static %}
+{% load itens_extras %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card border-0 shadow-lg rounded-4">
+    <div class="card-header bg-primary text-white rounded-top-4 py-3 px-4">
+      <h4 class="mb-0 fw-bold">
+        <i class="bi bi-gamepad me-2"></i>{% trans "Enviar Item para Personagem" %}
+      </h4>
+    </div>
+    <div class="card-body px-5 py-4">
+      <h5 class="fw-bold mb-3">
+        <i class="bi bi-person-circle me-2"></i>{{ personagem.char_name }}
+      </h5>
+
+      <div class="d-flex align-items-center mb-4">
+        <img src="{% item_image_url item.item_id %}" 
+          alt="{{ item.item_name }}"
+          class="rounded border border-secondary me-3"
+          style="width: 32px; height: 32px;">
+        <p class="mb-0">
+          <strong>{{ item.item_name }}</strong> — {% trans "Disponível" %}: {{ item.quantity }}
+        </p>
+      </div>
+
+      {% if is_non_stackable %}
+      <div class="alert alert-warning d-flex align-items-start mb-4" role="alert">
+        <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+        <div>
+          <strong>{% trans "Atenção!" %}</strong>
+          <p class="mb-0 mt-1">
+            {% trans "Este item não é acumulativo. Por precaução, recomendamos enviar 1 unidade por vez para evitar problemas." %}
+          </p>
+        </div>
+      </div>
+      {% else %}
+      <div class="alert alert-info d-flex align-items-start mb-4" role="alert">
+        <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+        <div>
+          <strong>{% trans "Dica:" %}</strong>
+          <p class="mb-0 mt-1">
+            {% trans "Se você não tiver certeza se o item é acumulativo, recomendamos enviar 1 unidade por vez por precaução." %}
+          </p>
+        </div>
+      </div>
+      {% endif %}     
+
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label class="form-label fw-semibold">{% trans "Quantidade" %}</label>
+          <input type="number" name="quantity" min="1" max="{{ item.quantity|unlocalize }}" class="form-control rounded-3" required>
+        </div>
+        <div class="mb-4">
+          <label class="form-label fw-semibold">{% trans "Senha" %}</label>
+          <input type="password" name="senha" class="form-control rounded-3" required>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-success rounded-pill px-4 shadow-sm">
+            <i class="bi bi-check-circle me-2"></i>{% trans "Enviar para o Jogo" %}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

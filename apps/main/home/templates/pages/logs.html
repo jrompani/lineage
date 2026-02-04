@@ -1,0 +1,58 @@
+{% extends 'layouts/base.html' %}
+{% load static i18n %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/reports.css' %}?v=1.1">
+{% endblock extrastyle %}
+
+{% block breadcrumbs %}
+<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">{% trans "Dashboard" %}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{% trans "Logs" %}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="reports-container">
+    <div class="container">
+        <!-- Header -->
+        <div class="reports-header">
+            <h1 class="reports-title">{% trans 'Dashboard de Logs' %}</h1>
+            <p class="reports-subtitle">{% trans 'Monitoramento e análise dos logs do sistema' %}</p>
+        </div>
+
+        <!-- Content -->
+        <div class="reports-card">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logs-content">
+                        <ul class="logs-list">
+                            {% for log in page_logs %}
+                            <li class="log-item">
+                                <div class="log-content">{{ log|linebreaks }}</div>
+                            </li>
+                            {% empty %}
+                            <li class="log-item empty-state">{% trans 'Nenhum log encontrado.' %}</li>
+                            {% endfor %}
+                        </ul>
+
+                        {% if page_logs.has_other_pages %}
+                        <div class="mt-4">
+                          {% with query_params=request.GET.urlencode %}
+                            {% include 'includes/pagination.html' %}
+                          {% endwith %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão de Volta -->
+        <div class="text-center mt-5">
+            <a href="{% url 'dashboard' %}" class="report-back-button">
+                <i class="fas fa-arrow-left me-2"></i>
+                {% trans "Voltar ao Dashboard Principal" %}
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
